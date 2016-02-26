@@ -3,6 +3,7 @@ from datetime import datetime
 
 from app import db
 
+
 class Kitten(db.Model):
     __tablename__ = 'kittens'
 
