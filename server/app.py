@@ -6,6 +6,7 @@ from flask import Flask
 
 db = SQLAlchemy()
 
+
 def create_app():
     from api.kittens import kittens_api
     from views.index import index_view
