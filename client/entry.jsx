@@ -15,6 +15,7 @@ import reducers from './reducers';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
+import './stylesheets/main.scss';
 
 jss.use(jssVendorPrefixer());
 jss.use(jssPx());
