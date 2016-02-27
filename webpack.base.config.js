@@ -20,11 +20,22 @@ module.exports = {
 
   module: {
     preLoaders: [
-      { test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/ }
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      }
     ],
 
     loaders: [
-      { test: /\.svg$/, loaders: ['babel', 'react-svg'] }
+      {
+        test: /\.svg$/,
+        loaders: ['babel', 'react-svg']
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      }
     ],
 
     noParse: /\.min\.js/
