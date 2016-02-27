@@ -1,3 +1,4 @@
+var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 
 module.exports = {
@@ -34,11 +35,15 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style", "css", "postcss-loader", "sass"]
       }
     ],
 
     noParse: /\.min\.js/
+  },
+
+  postcss: function() {
+    return [autoprefixer];
   }
 
 };

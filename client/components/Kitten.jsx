@@ -6,7 +6,7 @@ const COLORS = [
   '#339933', '#333399', '#993399', '#339999'
 ];
 
-const Kitten = ({ sheet, onDeleteKitten, kitten }) => (
+const Kitten = ({ onDeleteKitten, kitten }) => (
   <div>
     <div>
       <div style={{ color: COLORS[kitten.id % 8] }}><KittenIcon /></div>

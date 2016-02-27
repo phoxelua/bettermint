@@ -1,35 +1,30 @@
 @charset 'UTF-8';
 
-// 1. Configuration and helpers
+// Base
 @import
-  'utils/variables',
-  'utils/functions',
-  'utils/mixins';
+  'variables',
+  'functions',
+  'mixins',
+  'base',
+  'fonts',
+  'typography',
+  'helpers';
 
-// 2. Vendors
+// Vendor
 @import
   'vendor/normalize';
 
-// 3. Base stuff
+// Components
 @import
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers';
+  './../containers/header',
+  './../containers/footer';
 
-// 4. Layout-related sections
+// Containers
 @import
-  'layout/header',
-  'layout/footer';
+  './../components/kitten',
+  './../components/kittens';
 
-// 5. Components
+// Page-specific
 @import
-  'components/button';
-
-// 6. Page-specific styles
-@import
-  'pages/home';
-
-// 7. Themes
-@import
-  'themes/default';
+  './../pages/kittens',
+  './../pages/transactions';

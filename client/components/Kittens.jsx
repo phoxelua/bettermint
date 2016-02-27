@@ -4,7 +4,7 @@ import Kitten from './Kitten';
 import { connect } from 'react-redux';
 import { addKitten, deleteKitten } from '../actions/kittens';
 
-const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
+const Kittens = ({ kittens, addKitten, deleteKitten }) =>
   <div>
     {!!kittens.length &&
       <h1>Look, there are kittens in this basket:</h1>
