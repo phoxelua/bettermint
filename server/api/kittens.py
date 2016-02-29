@@ -1,7 +1,8 @@
-# -*- coding: utf-8 -*-
 from flask import Blueprint
 from flask_restful import Api, Resource
-from models import Kitten
+
+from server.models import Kitten
+from server.app import db
 
 kittens_api = Api(Blueprint('kittens_api', __name__))
 
@@ -19,8 +20,6 @@ class KittensAPI(Resource):
 
     @staticmethod
     def post():
-        from app import db
-
         count = Kitten.query.count()
 
         if count >= 9:
@@ -41,7 +40,6 @@ class KittenAPI(Resource):
 
     @staticmethod
     def delete(kitten_id):
-        from app import db
         kitten = Kitten.query.get_or_404(kitten_id)
         db.session.delete(kitten)
         db.session.commit()
