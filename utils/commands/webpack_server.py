@@ -1,6 +1,6 @@
 import signal
 import subprocess
-from flask.ext.script import Command
+from flask_script import Command
 
 
 class WebpackServer(Command):
@@ -8,9 +8,8 @@ class WebpackServer(Command):
 
     def run(self):
         subprocess.Popen([
-            './node_modules/babel-cli/bin/babel-node.js ' +
-            './node_modules/webpack-dev-server/bin/webpack-dev-server.js ' +
-            '--config=build/webpack.config.js'
+            './node_modules/babel-cli/bin/babel-node.js',
+            './node_modules/webpack-dev-server/bin/webpack-dev-server.js'
         ])
         try:
             signal.pause()
