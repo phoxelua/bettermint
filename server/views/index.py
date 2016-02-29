@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from flask import render_template, Blueprint
 
 index_view = Blueprint('index', __name__)

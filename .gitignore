@@ -5,6 +5,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Ignore swap files
+*.swp
+
 # Distribution / packaging
 .Python
 env/
@@ -85,7 +88,6 @@ build/Release
 node_modules
 
 venv/
-.env
 
 server/static/scripts/
 server/templates/
