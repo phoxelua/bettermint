@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../containers/Header';
-import Footer from '../containers/Footer';
 import Kittens from '../components/Kittens';
 import { connect } from 'react-redux';
 import { requestKittens } from '../actions/kittens';
@@ -14,10 +13,9 @@ export default class KittensPage extends Component {
     const { sheet } = this.props;
 
     return (
-      <div className="index">
+      <div className="page kittens-page">
         <Header />
         <Kittens />
-        <Footer />
       </div>
     );
   }

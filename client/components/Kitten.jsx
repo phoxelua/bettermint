@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import KittenIcon from '../svg/kitten.svg';
+import './kitten.scss';
 
 const COLORS = [
   '#FFAAAA', '#FFAAFF', '#AAAAFF', '#FFFFAA',
@@ -7,14 +8,22 @@ const COLORS = [
 ];
 
 const Kitten = ({ onDeleteKitten, kitten }) => (
-  <div>
-    <div>
-      <div style={{ color: COLORS[kitten.id % 8] }}><KittenIcon /></div>
-      <div>Kitten #{kitten.id}</div>
+  <div className="card teal accent-4">
+    <div className="card-content white-text">
+      <span className="card-title">Kitten #{kitten.id}</span>
+      <div
+        className="center-align kitten-icon-container"
+        style={{ color: COLORS[kitten.id % 8] }}>
+        <KittenIcon />
+      </div>
     </div>
-    <a onClick={onDeleteKitten.bind(this, kitten.id)}>
-      Remove kitten
-    </a>
+    <div className="card-action">
+      <a
+        className="white-text"
+        onClick={onDeleteKitten.bind(this, kitten.id)}>
+        Remove kitten
+      </a>
+    </div>
   </div>
 );
 

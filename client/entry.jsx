@@ -18,7 +18,7 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
-import './stylesheets/main.scss';
+import './styles/sass/main.scss';
 
 jss.use(jssVendorPrefixer());
 jss.use(jssPx());
