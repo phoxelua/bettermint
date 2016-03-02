@@ -1,1 +1,1 @@
-from utils.commands.webpack import Webpack
+from utils.commands.webpack_server import WebpackServer
