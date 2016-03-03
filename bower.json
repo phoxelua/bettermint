@@ -1,0 +1,24 @@
+{
+  "name": "bettermint",
+  "description": "TODO",
+  "main": "",
+  "authors": [
+    "todo"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/phoxelua/bettermint",
+  "moduleType": [
+    "es6"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.5"
+  }
+}

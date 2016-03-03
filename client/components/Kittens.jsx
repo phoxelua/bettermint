@@ -4,17 +4,20 @@ import Kitten from './Kitten';
 import { connect } from 'react-redux';
 import { addKitten, deleteKitten } from '../actions/kittens';
 
-const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
-  <div>
+const Kittens = ({ kittens, addKitten, deleteKitten }) =>
+  <div className="container">
     {!!kittens.length &&
       <h1>Look, there are kittens in this basket:</h1>
     }
     {!!kittens.length &&
-      <div>
+      <div className="row">
         {kittens.map(kitten => (
-          <Kitten key={`kitten-${kitten.id}`}
-                  kitten={kitten}
-                  onDeleteKitten={deleteKitten} />
+          <div className="col s12 m6">
+            <Kitten
+              key={`kitten-${kitten.id}`}
+              kitten={kitten}
+              onDeleteKitten={deleteKitten} />
+          </div>
         ))}
       </div>
     }
