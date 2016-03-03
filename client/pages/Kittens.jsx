@@ -13,7 +13,7 @@ export default class KittensPage extends Component {
     const { sheet } = this.props;
 
     return (
-      <div className="page kittens-page">
+      <div>
         <Header />
         <Kittens />
       </div>

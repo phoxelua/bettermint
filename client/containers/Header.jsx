@@ -18,7 +18,7 @@ export default class Header extends Component {
         </ul>
         <nav className="teal accent-4">
           <div className="nav-wrapper container">
-            <a href="#!" className="brand-logo">$$$</a>
+            <a href="/" className="brand-logo">$$$</a>
             <ul className="right hide-on-med-and-down">
               <li><a href="/transactions">Transactions</a></li>
               <li><a href="/goals">Goals</a></li>

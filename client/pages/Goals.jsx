@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Header from '../containers/Header';
 
-export default class TransactionsPage extends Component {
+export default class GoalsPage extends Component {
   render() {
     return (
       <div>
         <Header />
-        <div>Transactions</div>
+        <div>Goals</div>
       </div>
     );
   }
 };
 
-export default TransactionsPage;
+export default GoalsPage;
