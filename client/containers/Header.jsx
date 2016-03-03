@@ -24,7 +24,12 @@ export default class Header extends Component {
               <li><a href="/goals">Goals</a></li>
               <li><a href="/profile">Profile</a></li>
             </ul>
-            <a href="#" data-activates="mobile-nav-dropdown" className="dropdown-button right hide-on-large-only"><i className="material-icons">menu</i></a>
+            <a
+              href="#"
+              data-activates="mobile-nav-dropdown"
+              className="dropdown-button right hide-on-large-only">
+              <i className="material-icons">menu</i>
+            </a>
           </div>
         </nav>
       </header>
