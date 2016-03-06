@@ -1,7 +1,7 @@
 import os
 import signal
 import subprocess
-from flask.ext.script import Command
+from flask_script import Command
 
 
 class WebpackServer(Command):

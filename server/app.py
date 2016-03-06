@@ -1,12 +1,12 @@
-from flask.ext.sqlalchemy import SQLAlchemy
 from logging import StreamHandler
 from sys import stdout
+
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-db = SQLAlchemy()
 
-
-def create_app():
+def create_app(db):
     from server.api.kittens import kittens_api
     from server.views.index import index_view
 
@@ -21,3 +21,7 @@ def create_app():
     handler = StreamHandler(stdout)
     app.logger.addHandler(handler)
     return app
+
+db = SQLAlchemy()
+app = create_app(db)
+migrate = Migrate(app, db, directory='server/migrations')
