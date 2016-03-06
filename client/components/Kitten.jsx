@@ -9,10 +9,7 @@ const Kitten = ({ onDeleteKitten, kitten }) => (
   <div className="card teal accent-4">
     <div className="card-content white-text">
       <span className="card-title">Kitten #{kitten.id}</span>
-      <div
-        className="center-align kitten-icon-container"
-        style={{ color: COLORS[kitten.id % 8] }}>
-        <KittenIcon />
+      <div className="center-align">
       </div>
     </div>
     <div className="card-action">
