@@ -1,31 +1,24 @@
 'use strict';
+
 import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router'
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger';
+import promise from 'redux-promise';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import thunk from 'redux-thunk';
+
 import IndexPage from './pages/Index';
 import TransactionsPage from './pages/Transactions';
 import GoalsPage from './pages/Goals';
 import ProfilePage from './pages/Profile';
-import jss from 'jss';
-import jssVendorPrefixer from 'jss-vendor-prefixer';
-import jssPx from 'jss-px';
-import jssNested from 'jss-nested';
-import jssCamelCase from 'jss-camel-case';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import reducers from './reducers';
-import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
-import promise from 'redux-promise';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
-import './styles/sass/main.scss';
 
-jss.use(jssVendorPrefixer());
-jss.use(jssPx());
-jss.use(jssNested());
-jss.use(jssCamelCase());
+import reducers from './reducers';
+import './styles/sass/main.scss';
 
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
@@ -34,8 +27,9 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
 
-
 const history = syncHistoryWithStore(browserHistory, store);
+
+const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
@@ -46,5 +40,5 @@ ReactDOM.render(
       <Route path="/profile" component={ProfilePage}/>
     </Router>
   </Provider>,
-  document.getElementById('root')
+  rootElement
 );
