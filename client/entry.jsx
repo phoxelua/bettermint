@@ -12,6 +12,7 @@ import IndexPage from 'layouts/Index';
 import TransactionsPage from 'layouts/Transactions';
 import GoalsPage from 'layouts/Goals';
 import ProfilePage from 'layouts/Profile';
+import KittensPage from 'layouts/Kittens';
 
 import reducers from 'redux/reducers';
 import 'styles/sass/main.scss';
@@ -34,6 +35,7 @@ ReactDOM.render(
       <Route path="/transactions" component={TransactionsPage}/>
       <Route path="/goals" component={GoalsPage}/>
       <Route path="/profile" component={ProfilePage}/>
+      <Route path="/kittens" component={KittensPage}/>
     </Router>
   </Provider>,
   rootElement

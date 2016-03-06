@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from 'components/Header';
-import Kittens from 'components/Kittens';
+import Kittens from 'containers/Kittens';
 import { connect } from 'react-redux';
-import { requestKittens } from 'actions/kittens';
+import { requestKittens } from 'redux/actions/kittens';
 
 export default class KittensPage extends Component {
   componentDidMount() {
