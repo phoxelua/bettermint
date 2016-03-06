@@ -1,5 +1,3 @@
-require('babel-polyfill');
-
 var isProduction = process.env.NODE_ENV === 'production';
 var config = isProduction ?
   require('./webpack.prod.config.js') :

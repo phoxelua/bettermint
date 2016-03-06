@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../containers/Header';
-import Footer from '../containers/Footer';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 export default class IndexPage extends Component {
   render() {

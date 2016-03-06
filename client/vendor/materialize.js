@@ -526,7 +526,7 @@ if ($) {
       var offsetLeft = origin.offset().left;
       var offsetTop = origin.offset().top - $(window).scrollTop();
       var currAlignment = options.alignment;
-      var activatesLeft, gutterSpacing;
+      var activatesLeft, gutterSpacing, leftPosition;
 
       // Below Origin
       var verticalOffset = 0;

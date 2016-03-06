@@ -1,7 +1,3 @@
-'use strict';
-
-import 'babel-polyfill';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router'
@@ -12,13 +8,13 @@ import promise from 'redux-promise';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import IndexPage from './pages/Index';
-import TransactionsPage from './pages/Transactions';
-import GoalsPage from './pages/Goals';
-import ProfilePage from './pages/Profile';
+import IndexPage from 'layouts/Index';
+import TransactionsPage from 'layouts/Transactions';
+import GoalsPage from 'layouts/Goals';
+import ProfilePage from 'layouts/Profile';
 
-import reducers from './reducers';
-import './styles/sass/main.scss';
+import reducers from 'redux/reducers';
+import 'styles/sass/main.scss';
 
 let createStoreWithMiddleware = applyMiddleware(
   thunk,

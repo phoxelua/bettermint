@@ -14,7 +14,8 @@ module.exports = {
       'node_modules',
       'client'
     ],
-    extensions: ['', '.js', '.jsx', '.css', '.scss']
+    extensions: ['', '.js', '.jsx', '.css', '.scss'],
+    root: path.resolve(__dirname, 'client')
   },
 
   plugins: [

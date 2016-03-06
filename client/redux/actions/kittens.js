@@ -1,5 +1,5 @@
-import * as actionTypes from '../actionTypes/kittens';
-import { get, post, del } from '../utils/api';
+import * as actionTypes from 'redux/actionTypes/kittens';
+import { get, post, del } from 'redux/utils/api';
 
 export function addKitten() {
   return async dispatch => {
