@@ -23,12 +23,6 @@ function InstallDependencies {
     pip install -r requirements.txt
 }
 
-function CreateDB {
-    echo "Creating db..."
-    isInCorrectEnv
-    heroku local initdb
-}
-
 function CreatePrePushHooks {
     echo "Creating pre-push hooks..."
     isInCorrectEnv
@@ -36,5 +30,4 @@ function CreatePrePushHooks {
 }
 
 InstallDependencies
-CreateDB
 CreatePrePushHooks
