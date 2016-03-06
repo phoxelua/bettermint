@@ -38,7 +38,7 @@ config = update(config, {
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../templates/index.html',
-        template: 'client/views/index.tpl'
+        template: 'client/index.html'
       })
     ]
   },

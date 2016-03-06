@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Header from 'components/Header';
 import Kittens from 'containers/Kittens';
 import { connect } from 'react-redux';
 import { requestKittens } from 'redux/actions/kittens';
 
-export default class KittensPage extends Component {
+export default class KittensView extends Component {
   componentDidMount() {
     this.props.requestKittens();
   }
@@ -14,7 +13,6 @@ export default class KittensPage extends Component {
 
     return (
       <div>
-        <Header />
         <Kittens />
       </div>
     );
@@ -24,4 +22,4 @@ export default class KittensPage extends Component {
 export default connect(
   () => ({}),
   { requestKittens }
-)(KittensPage);
+)(KittensView);

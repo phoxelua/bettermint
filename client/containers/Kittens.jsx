@@ -49,7 +49,13 @@ const Kittens = ({ kittens, addKitten, deleteKitten }) =>
     </div>
   </div>;
 
+const mapStateToProps = function(state) {
+  return {
+    kittens: state.kittens
+  };
+};
+
 export default connect(
-  state => ({ kittens: state.kittens }),
+  mapStateToProps,
   { addKitten, deleteKitten }
 )(Kittens);

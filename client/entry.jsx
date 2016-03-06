@@ -1,41 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import { Provider } from 'react-redux';
+import { syncHistoryWithStore, routerReducer, replace } from 'react-router-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import IndexPage from 'layouts/Index';
-import TransactionsPage from 'layouts/Transactions';
-import GoalsPage from 'layouts/Goals';
-import ProfilePage from 'layouts/Profile';
-import KittensPage from 'layouts/Kittens';
+import CoreLayout from 'layouts/CoreLayout';
+import {
+  IndexView,
+  TransactionsView,
+  GoalsView,
+  ProfileView,
+  KittensView,
+  LoginView
+} from 'views';
 
 import reducers from 'redux/reducers';
+import { requireAuthentication } from 'redux/utils';
 import 'styles/sass/main.scss';
 
-let createStoreWithMiddleware = applyMiddleware(
+const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
   createLogger()
 )(createStore);
-let store = createStoreWithMiddleware(reducers);
+const store = createStoreWithMiddleware(reducers);
 
-let history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
-let rootElement = document.getElementById('root');
+const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={IndexPage}/>
-      <Route path="/transactions" component={TransactionsPage}/>
-      <Route path="/goals" component={GoalsPage}/>
-      <Route path="/profile" component={ProfilePage}/>
-      <Route path="/kittens" component={KittensPage}/>
+      <Route path="/" component={CoreLayout}>
+        <IndexRoute component={IndexView} />
+        <Route path="transactions" component={TransactionsView} />
+        <Route path="goals" component={GoalsView} />
+        <Route path="profile" component={requireAuthentication(ProfileView)} />
+        <Route path="kittens" component={KittensView} />
+        <Route path="login" component={LoginView} />
+      </Route>
     </Router>
   </Provider>,
   rootElement
