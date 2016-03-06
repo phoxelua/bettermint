@@ -1,4 +1,3 @@
-var autoprefixer = require('autoprefixer');
 var BowerWebpackPlugin = require("bower-webpack-plugin");
 var path = require('path');
 var webpack = require('webpack');
@@ -59,9 +58,5 @@ module.exports = {
     ],
 
     noParse: /\.min\.js/
-  },
-
-  postcss: function() {
-    return [autoprefixer];
-  },
+  }
 };

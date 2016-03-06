@@ -20,16 +20,16 @@ import ProfilePage from './pages/Profile';
 import reducers from './reducers';
 import './styles/sass/main.scss';
 
-const createStoreWithMiddleware = applyMiddleware(
+let createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
   createLogger()
 )(createStore);
-const store = createStoreWithMiddleware(reducers);
+let store = createStoreWithMiddleware(reducers);
 
-const history = syncHistoryWithStore(browserHistory, store);
+let history = syncHistoryWithStore(browserHistory, store);
 
-const rootElement = document.getElementById('root');
+let rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
