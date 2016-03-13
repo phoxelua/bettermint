@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Ignore configuration file
+server/config.py
+
 # C extensions
 *.so
 
