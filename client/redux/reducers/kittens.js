@@ -3,19 +3,27 @@ import { createReducer } from 'redux/utils';
 
 
 const initialState = {
-  kittens: []
+  activeKittens: []
 };
 
 export default createReducer(initialState, {
   [kittenConstants.ADD_KITTEN_SUCCESS]: (state, payload) => {
-    var newState = state.slice();
-    newState.push(payload.kitten);
-    return newState;
+    let activeKittens = state.activeKittens.slice();
+    activeKittens.push(payload.kitten);
+    return Object.assign({}, state, {
+      activeKittens
+    });
   },
   [kittenConstants.REQUEST_KITTENS_SUCCESS]: (state, payload) => {
-    return payload.kittens || [];
+    return Object.assign({}, state, {
+      activeKittens: payload.kittens
+    });
   },
   [kittenConstants.DELETE_KITTEN_SUCCESS]: (state, payload) => {
-    return state.filter(kitten => kitten.id !== payload.kittenId);
+    let activeKittens = state.activeKittens.slice();
+    activeKittens = activeKittens.filter(kitten => kitten.id !== payload.kittenId);
+    return Object.assign({}, state, {
+      activeKittens
+    });
   }
 });

@@ -17,34 +17,31 @@ const isAuthenticated = (state) => {
 export class CoreLayout extends Component {
 
   componentDidMount() {
-    $(".dropdown-button").dropdown();
+    $('.dropdown-button').dropdown();
   }
 
   render () {
-
-    const { dispatch } = this.props;
-
     return (
       <div>
         <header>
-          <ul className="dropdown-content" id="mobile-nav-dropdown">
-            <li><Link to="transactions">Transactions</Link></li>
-            <li><Link to="goals">Goals</Link></li>
-            <li><Link to="profile">Profile</Link></li>
+          <ul className='dropdown-content' id='mobile-nav-dropdown'>
+            <li><Link to='transactions'>Transactions</Link></li>
+            <li><Link to='goals'>Goals</Link></li>
+            <li><Link to='profile'>Profile</Link></li>
           </ul>
-          <nav className="teal accent-4">
-            <div className="nav-wrapper container">
-              <Link to="/" className="brand-logo">$$$</Link>
-              <ul className="right hide-on-med-and-down">
-                <li><Link to="transactions">Transactions</Link></li>
-                <li><Link to="goals">Goals</Link></li>
-                <li><Link to="profile">Profile</Link></li>
+          <nav className='teal accent-4'>
+            <div className='nav-wrapper container'>
+              <Link to='/' className='brand-logo'>$$$</Link>
+              <ul className='right hide-on-med-and-down'>
+                <li><Link to='transactions'>Transactions</Link></li>
+                <li><Link to='goals'>Goals</Link></li>
+                <li><Link to='profile'>Profile</Link></li>
               </ul>
               <Link
-                to="#"
-                data-activates="mobile-nav-dropdown"
-                className="dropdown-button right hide-on-large-only">
-                <i className="material-icons">menu</i>
+                to='#'
+                data-activates='mobile-nav-dropdown'
+                className='dropdown-button right hide-on-large-only'>
+                <i className='material-icons'>menu</i>
               </Link>
             </div>
           </nav>
@@ -56,17 +53,16 @@ export class CoreLayout extends Component {
           </div>
         </main>
 
-        <footer className="teal accent-4">
-          <div className="container">
-            <ul className="links">
-              <li><Link to="/about" className="grey-text text-lighten-4">About</Link></li>
-              <li><Link to="/privacy" className="grey-text text-lighten-4">Privacy</Link></li>
-              <li className="flex-right grey-text text-lighten-3"><span>© 2016 Bettermint</span></li>
+        <footer className='teal accent-4'>
+          <div className='container'>
+            <ul className='links'>
+              <li><Link to='/about' className='grey-text text-lighten-4'>About</Link></li>
+              <li><Link to='/privacy' className='grey-text text-lighten-4'>Privacy</Link></li>
+              <li className='flex-right grey-text text-lighten-3'><span>© 2016 Bettermint</span></li>
             </ul>
           </div>
         </footer>
       </div>
-
     );
   }
 }

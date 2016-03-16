@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
 
-export function loginUserSuccess(token) {
+function loginUserSuccess(token) {
   localStorage.setItem('token', token);
   return {
     type: userConstants.LOGIN_USER_SUCCESS,
@@ -14,7 +14,7 @@ export function loginUserSuccess(token) {
   }
 }
 
-export function loginUserFailure(error) {
+function loginUserFailure(error) {
   localStorage.removeItem('token');
   return {
     type: userConstants.LOGIN_USER_FAILURE,
@@ -25,13 +25,13 @@ export function loginUserFailure(error) {
   }
 }
 
-export function loginUserRequest() {
+function loginUserRequest() {
   return {
     type: userConstants.LOGIN_USER_REQUEST
   }
 }
 
-export function logout() {
+function logout() {
   localStorage.removeItem('token');
   return {
     type: userConstants.LOGOUT_USER

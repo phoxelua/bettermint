@@ -20,8 +20,6 @@ export default createReducer(initialState, {
     });
   },
   [userConstants.LOGIN_USER_SUCCESS]: (state, payload) => {
-    console.log(state);
-    console.log(payload);
     return Object.assign({}, state, {
       isAuthenticating: false,
       isAuthenticated: true,
@@ -29,7 +27,6 @@ export default createReducer(initialState, {
       userName: jwtDecode(payload.token).userName,
       statusText: 'You have been successfully logged in.'
     });
-
   },
   [userConstants.LOGIN_USER_FAILURE]: (state, payload) => {
     return Object.assign({}, state, {

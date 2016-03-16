@@ -6,15 +6,15 @@ const COLORS = [
 ];
 
 const Kitten = ({ onDeleteKitten, kitten }) => (
-  <div className="card teal accent-4">
-    <div className="card-content white-text">
-      <span className="card-title">Kitten #{kitten.id}</span>
-      <div className="center-align">
+  <div className='card teal accent-4'>
+    <div className='card-content white-text'>
+      <span className='card-title'>Kitten #{kitten.id}</span>
+      <div className='center-align'>
       </div>
     </div>
-    <div className="card-action">
+    <div className='card-action'>
       <a
-        className="white-text"
+        className='white-text'
         onClick={onDeleteKitten.bind(this, kitten.id)}>
         Remove kitten
       </a>

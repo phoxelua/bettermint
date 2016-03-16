@@ -1,5 +1,4 @@
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-import { push, replace } from 'react-router-redux';
 
 export function createConstants(...constants) {
   return constants.reduce((acc, constant) => {
