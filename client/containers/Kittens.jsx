@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { addKitten, deleteKitten } from 'redux/actions/kittens';
 
 const Kittens = ({ kittens, addKitten, deleteKitten }) =>
-  <div className="container">
+  <div className='container'>
     {!!kittens.length &&
       <h1>Look, there are kittens in this basket:</h1>
     }
     {!!kittens.length &&
-      <div className="row">
+      <div className='row'>
         {kittens.map(kitten => (
-          <div className="col s12 m6">
+          <div className='col s12 m6'>
             <Kitten
               key={`kitten-${kitten.id}`}
               kitten={kitten}
@@ -49,7 +49,18 @@ const Kittens = ({ kittens, addKitten, deleteKitten }) =>
     </div>
   </div>;
 
+const mapStateToProps = function(state) {
+  return {
+    kittens: state.kittens.activeKittens
+  };
+};
+
+const mapDispatchToProps = {
+  addKitten,
+  deleteKitten
+};
+
 export default connect(
-  state => ({ kittens: state.kittens }),
-  { addKitten, deleteKitten }
+  mapStateToProps,
+  mapDispatchToProps
 )(Kittens);

@@ -1,42 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import { Provider } from 'react-redux';
+import { syncHistoryWithStore, routerReducer, replace } from 'react-router-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import IndexPage from 'layouts/Index';
-import TransactionsPage from 'layouts/Transactions';
-import GoalsPage from 'layouts/Goals';
-import ProfilePage from 'layouts/Profile';
-import KittensPage from 'layouts/Kittens';
-
+import Root from 'containers/Root';
+import makeRoutes from 'routes';
 import reducers from 'redux/reducers';
 import 'styles/sass/main.scss';
 
-let createStoreWithMiddleware = applyMiddleware(
+
+const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
   createLogger()
 )(createStore);
-let store = createStoreWithMiddleware(reducers);
 
-let history = syncHistoryWithStore(browserHistory, store);
+const store = createStoreWithMiddleware(reducers);
 
-let rootElement = document.getElementById('root');
+const history = syncHistoryWithStore(browserHistory, store);
+
+const routes = makeRoutes(store);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={IndexPage}/>
-      <Route path="/transactions" component={TransactionsPage}/>
-      <Route path="/goals" component={GoalsPage}/>
-      <Route path="/profile" component={ProfilePage}/>
-      <Route path="/kittens" component={KittensPage}/>
-    </Router>
-  </Provider>,
-  rootElement
+  <Root history={history} routes={routes} store={store} />,
+  document.getElementById('root')
 );

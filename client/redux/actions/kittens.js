@@ -1,43 +1,49 @@
-import * as actionTypes from 'redux/actionTypes/kittens';
+import { kittenConstants } from 'redux/constants/kittens';
 import { get, post, del } from 'redux/utils/api';
+
 
 export function addKitten() {
   return async dispatch => {
     dispatch({
-      type: actionTypes.ADD_KITTEN
+      type: kittenConstants.ADD_KITTEN
     });
 
     try {
-      const result = await post('/api/kittens');
+      const result = await post('/api/kittens/');
 
       dispatch({
-        type: actionTypes.ADD_KITTEN_SUCCESS,
-        kitten: result
+        type: kittenConstants.ADD_KITTEN_SUCCESS,
+        payload: {
+          kitten: result
+        }
       });
     } catch(e) {
       dispatch({
-        type: actionTypes.ADD_KITTEN_ERROR
+        type: kittenConstants.ADD_KITTEN_ERROR
       });
     }
   }
 }
 
 export function requestKittens() {
+
   return async dispatch => {
     dispatch({
-      type: actionTypes.REQUEST_KITTENS
+      type: kittenConstants.REQUEST_KITTENS
     });
 
     try {
-      const result = await get('/api/kittens');
+      const result = await get('/api/kittens/');
 
       dispatch({
-        type: actionTypes.REQUEST_KITTENS_SUCCESS,
-        kittens: result
+        type: kittenConstants.REQUEST_KITTENS_SUCCESS,
+        payload: {
+          kittens: result.kittens
+        }
       });
     } catch(e) {
       dispatch({
-        type: actionTypes.REQUEST_KITTENS_ERROR
+        type: kittenConstants.REQUEST_KITTENS_ERROR
       });
     }
   }
@@ -46,21 +52,23 @@ export function requestKittens() {
 export function deleteKitten(kittenId) {
   return async dispatch => {
     dispatch({
-      type: actionTypes.DELETE_KITTEN,
+      type: kittenConstants.DELETE_KITTEN,
       kittenId
     });
 
     try {
-      await del(`/api/kittens/${kittenId}`);
+      await del(`/api/kittens/${kittenId}/`);
 
       dispatch({
-        type: actionTypes.DELETE_KITTEN_SUCCESS,
-        kittenId
+        type: kittenConstants.DELETE_KITTEN_SUCCESS,
+        payload: {
+          kittenId
+        }
       });
     } catch(e) {
       dispatch({
-        type: actionTypes.DELETE_KITTEN_ERROR,
-        kittenId
+        type: kittenConstants.DELETE_KITTEN_ERROR,
+        payload: kittenId
       });
     }
   }
