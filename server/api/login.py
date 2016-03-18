@@ -1,17 +1,34 @@
+import datetime
+
 import flask
+import jwt
+
+from server.config import SECRET_KEY
+from server.utilities.web import write_success_data, snake_to_camel_case_dict
+
 
 login_api = flask.Blueprint('login_api', __name__, url_prefix='/api/login')
 
 
-@login_api.route('/', methods=['GET'])
-def login_get():
-    return flask.jsonify({
-        'hello': 'world'
-    })
-
-
 @login_api.route('/token/', methods=['POST'])
 def generate_token():
-    return flask.jsonify({
-        'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3QgVXNlciJ9.J6n4-v0I85zk9MkxBHroZ9ZPZEES-IKeul9ozxYnoZ8'
+    """
+    If the provided email and password combination is valid, generates a JWT for client-use which expires in 7 days.
+    """
+
+    # TODO: Ensure that these parameters are valid and won't throw an error.
+    request_json = flask.request.get_json()
+    email = request_json['email']
+    password = request_json['password']
+
+    # TODO: Check that the email and password combination are valid for a particular user before emitting this token.
+    token = jwt.encode({
+        'secret_key': SECRET_KEY,
+        'email': email,
+        'password': password,
+        'expiration_time': datetime.datetime.utcnow() + datetime.timedelta(days=7)
     })
+
+    return write_success_data(snake_to_camel_case_dict({
+        'token': token
+    }))
