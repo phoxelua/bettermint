@@ -19,16 +19,14 @@ def generate_token():
     # TODO: Ensure that these parameters are valid and won't throw an error.
     request_json = flask.request.get_json()
     email = request_json['email']
-    password = request_json['password']
+    # password = request_json['password']
 
     # TODO: Check that the email and password combination are valid for a particular user before emitting this token.
     token = jwt.encode({
-        'secret_key': SECRET_KEY,
         'email': email,
-        'password': password,
-        'expiration_time': datetime.datetime.utcnow() + datetime.timedelta(days=7)
-    })
+        'expiration': (datetime.datetime.utcnow() + datetime.timedelta(days=7)).timestamp()
+    }, SECRET_KEY, algorithm='HS256')
 
     return write_success_data(snake_to_camel_case_dict({
-        'token': token
+        'token': token.decode("utf-8")
     }))

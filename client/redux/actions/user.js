@@ -64,10 +64,11 @@ export function loginUser(email, password, redirect='/') {
     .then(parseJSON)
     .then(response => {
       try {
-        let decoded = jwtDecode(response.token);
-        dispatch(loginUserSuccess(response.token));
+        let decoded = jwtDecode(response.data.token);
+        dispatch(loginUserSuccess(response.data.token));
         dispatch(push(redirect));
       } catch (e) {
+        console.log(e);
         dispatch(loginUserFailure({
           response: {
             status: 403,
