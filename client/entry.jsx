@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
@@ -13,11 +13,14 @@ import reducers from 'redux/reducers';
 import 'styles/sass/main.scss';
 
 
+const routingMiddleware = routerMiddleware(browserHistory);
+
 const createStoreWithMiddleware = compose(
   applyMiddleware(
     thunk,
     promise,
-    createLogger()
+    createLogger(),
+    routingMiddleware
   ),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
