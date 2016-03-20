@@ -4,7 +4,6 @@ var path = require('path');
 var webpack = require('webpack');
 var config = require('./webpack.base.config.js');
 var update = require('react/lib/update');
-var ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 if (process.env.NODE_ENV !== 'test') {

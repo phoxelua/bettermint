@@ -3,28 +3,36 @@ from sys import stdout
 
 from flask import Flask
 from flask.ext.cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+
+from server.database import db
+from server.constants import CONFIG_PY_PATH
 
 
-def create_app(db):
+app = Flask(
+    __name__
+)
 
-    app = Flask(__name__)
-    app.config.from_pyfile('config.py')
+
+def create_app():
+    """Initializes everything for the app needs."""
+
+    app.config.from_pyfile(CONFIG_PY_PATH)
+
+    db.init_app(app)
 
     _register_apis(app)
     _register_views(app)
-
-    db.init_app(app)
 
     handler = StreamHandler(stdout)
     app.logger.addHandler(handler)
 
     CORS(app, supports_credentials=True)
+
     return app
 
 
 def _register_apis(app):
+    """Register all of the separate api endpoints."""
 
     from server.api.kittens import kittens_api
     from server.api.login import login_api
@@ -37,6 +45,7 @@ def _register_apis(app):
 
 
 def _register_views(app):
+    """Register all of the separate views."""
 
     from server.views.index import index_view
 
@@ -44,9 +53,3 @@ def _register_views(app):
         index_view
     ]:
         app.register_blueprint(view)
-
-
-db = SQLAlchemy()
-app = create_app(db)
-
-migrate = Migrate(app, db, directory='server/migrations')

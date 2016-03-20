@@ -1,10 +1,6 @@
-from datetime import datetime
-from server.app import db
+from server.models import TimestampBase
 
 
-class Kitten(db.Model):
-    __tablename__ = 'kittens'
+class Kitten(TimestampBase):
 
-    id = db.Column(db.Integer, primary_key=True)
-    created = db.Column(db.DateTime, default=datetime.utcnow)
-    modified = db.Column(db.DateTime, default=datetime.utcnow)
+    __tablename__ = 'Kitten'
