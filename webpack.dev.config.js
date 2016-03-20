@@ -42,8 +42,7 @@ config = update(config, {
         inject: true,
         filename: 'dev/index.html',
         template: 'client/index.html'
-      }),
-      new ExportFilesWebpackPlugin('dev/index.html')
+      })
     ]
   },
 

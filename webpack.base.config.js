@@ -1,4 +1,3 @@
-var BowerWebpackPlugin = require("bower-webpack-plugin");
 var path = require('path');
 var webpack = require('webpack');
 
