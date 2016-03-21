@@ -43,7 +43,7 @@
     "babel": "^6.5.2",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.6.5",
-    "babel-eslint": "^5.0.0-beta10",
+    "babel-eslint": "^6.0.0-beta.6",
     "babel-jest": "^9.0.3",
     "babel-loader": "^6.2.1",
     "babel-plugin-react-transform": "^2.0.0",
