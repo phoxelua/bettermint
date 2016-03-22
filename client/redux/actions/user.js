@@ -3,7 +3,6 @@ import { userConstants } from 'redux/constants/user';
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
-
 function loginUserSuccess(token) {
   localStorage.setItem('token', token);
   return {
@@ -11,8 +10,8 @@ function loginUserSuccess(token) {
     payload: {
       token
     }
-  }
-}
+  };
+};
 
 function loginUserFailure(error) {
   localStorage.removeItem('token');
@@ -22,28 +21,28 @@ function loginUserFailure(error) {
       status: error.response.status,
       statusText: error.response.statusText
     }
-  }
-}
+  };
+};
 
 function loginUserRequest() {
   return {
     type: userConstants.LOGIN_USER_REQUEST
-  }
-}
+  };
+};
 
 function logout() {
   localStorage.removeItem('token');
   return {
     type: userConstants.LOGOUT_USER
-  }
-}
+  };
+};
 
 export function logoutAndRedirect() {
   return (dispatch, state) => {
     dispatch(logout());
     dispatch(push('/login'));
-  }
-}
+  };
+};
 
 export function loginUser(email, password, redirect='/') {
   return function(dispatch) {
@@ -68,7 +67,6 @@ export function loginUser(email, password, redirect='/') {
         dispatch(loginUserSuccess(response.data.token));
         dispatch(push(redirect));
       } catch (e) {
-        console.log(e);
         dispatch(loginUserFailure({
           response: {
             status: 403,
@@ -79,6 +77,6 @@ export function loginUser(email, password, redirect='/') {
     })
     .catch(error => {
       dispatch(loginUserFailure(error));
-    })
-  }
-}
+    });
+  };
+};

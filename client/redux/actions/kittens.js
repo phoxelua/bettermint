@@ -1,9 +1,8 @@
 import { kittenConstants } from 'redux/constants/kittens';
 import { get, post, del } from 'redux/utils/api';
 
-
 export function addKitten() {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
       type: kittenConstants.ADD_KITTEN
     });
@@ -26,8 +25,7 @@ export function addKitten() {
 }
 
 export function requestKittens() {
-
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
       type: kittenConstants.REQUEST_KITTENS
     });
@@ -50,7 +48,7 @@ export function requestKittens() {
 }
 
 export function deleteKitten(kittenId) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
       type: kittenConstants.DELETE_KITTEN,
       kittenId

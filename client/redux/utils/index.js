@@ -6,7 +6,7 @@ export function createConstants(...constants) {
     acc[constant] = constant;
     return acc;
   }, {});
-}
+};
 
 export function createReducer(initialState, reducerMap) {
   return (state = initialState, action) => {
@@ -16,7 +16,7 @@ export function createReducer(initialState, reducerMap) {
       ? reducer(state, action.payload)
       : state;
   };
-}
+};
 
 export function checkHttpStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -26,13 +26,13 @@ export function checkHttpStatus(response) {
     error.response = response
     throw error
   }
-}
+};
 
 export function parseJSON(response) {
   return response.json()
-}
+};
 
-export const requireAuthentication = UserAuthWrapper({
+export const requireAuthentication = UserAuthWrapper({ // eslint-disable-line babel/new-cap
   authSelector: state => state.auth,
   predicate: auth => auth.isAuthenticated,
   redirectAction: push,
