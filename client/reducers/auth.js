@@ -1,5 +1,5 @@
-import { createReducer } from 'redux/utils';
-import { userConstants } from 'redux/constants/user';
+import { createReducer } from 'utilities';
+import { userConstants } from 'constants/user';
 import { push } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
 

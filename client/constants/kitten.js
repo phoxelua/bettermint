@@ -1,4 +1,4 @@
-import { createConstants } from 'redux/utils';
+import { createConstants } from 'utilities';
 
 export const kittenConstants = createConstants(
   'REQUEST_KITTENS',

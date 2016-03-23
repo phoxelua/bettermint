@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 
 import Root from 'containers/Root';
 import makeRoutes from 'routes';
-import reducers from 'redux/reducers';
+import reducers from 'reducers';
 import 'styles/sass/main.scss';
 
 

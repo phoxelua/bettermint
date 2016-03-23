@@ -1,5 +1,5 @@
-import { kittenConstants } from 'redux/constants/kittens';
-import { get, post, del } from 'redux/utils/api';
+import { kittenConstants } from 'constants/kitten';
+import { get, post, del } from 'utilities';
 
 export function addKitten() {
   return async (dispatch) => {

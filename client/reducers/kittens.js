@@ -1,5 +1,5 @@
-import { kittenConstants } from 'redux/constants/kittens';
-import { createReducer } from 'redux/utils';
+import { kittenConstants } from 'constants/kitten';
+import { createReducer } from 'utilities';
 
 
 const initialState = {

@@ -1,4 +1,4 @@
-import { createConstants } from 'redux/utils';
+import { createConstants } from 'utilities';
 
 export const userConstants = createConstants(
   'LOGIN_USER_REQUEST',

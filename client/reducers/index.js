@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import auth from 'redux/reducers/auth';
-import data from 'redux/reducers/data';
-import kittens from 'redux/reducers/kittens';
+
+import auth from 'reducers/auth';
+import data from 'reducers/data';
+import kittens from 'reducers/kittens';
 
 const reducers = combineReducers({
   auth,

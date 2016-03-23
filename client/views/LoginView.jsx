@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import { connect } from 'react-redux';
 import reactMixin from 'react-mixin';
-import * as actionCreators from 'redux/actions/user';
+import * as actionCreators from 'actions/user';
 
 class LoginView extends Component {
 

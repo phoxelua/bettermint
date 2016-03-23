@@ -9,7 +9,7 @@ import {
   KittensView,
   LoginView
 } from 'views';
-import { requireAuthentication } from 'redux/utils';
+import { requireAuthentication } from 'utilities';
 
 
 export default (store) => (

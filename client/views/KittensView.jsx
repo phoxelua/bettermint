@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Kittens from 'containers/Kittens';
 import { connect } from 'react-redux';
-import { requestKittens } from 'redux/actions/kittens';
+import { requestKittens } from 'actions/kittens';
 
 export default class KittensView extends Component {
   componentDidMount() {

@@ -1,5 +1,8 @@
+import Promise from 'bluebird';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { push } from 'react-router-redux';
+
+export { get, post, del } from 'utilities/api';
 
 export function createConstants(...constants) {
   return constants.reduce((acc, constant) => {
@@ -28,8 +31,13 @@ export function checkHttpStatus(response) {
   }
 };
 
-export function parseJSON(response) {
-  return response.json()
+export function parseResponse(response) {
+  let json = response.json();
+  if (response.status >= 200 && response.status < 300) {
+    return json;
+  } else {
+    return json.then(err => Promise.reject(err));
+  }
 };
 
 export const requireAuthentication = UserAuthWrapper({ // eslint-disable-line babel/new-cap

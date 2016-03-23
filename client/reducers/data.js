@@ -1,8 +1,8 @@
-import { createReducer } from 'redux/utils';
+import { createReducer } from 'utilities';
 import {
   RECEIVE_PROTECTED_DATA,
   FETCH_PROTECTED_DATA_REQUEST
-} from 'redux/constants/user';
+} from 'constants/user';
 
 const initialState = {
   data: null,

@@ -4,7 +4,7 @@ export default class GoalsView extends Component {
   render() {
     return (
       <div>
-        <div>Goals</div>
+        blah
       </div>
     );
   }

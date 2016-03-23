@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutAndRedirect } from 'redux/actions/user';
+import { logoutAndRedirect } from 'actions/user';
 
 import 'vendor/materialize.js';
 import 'jQuery';
