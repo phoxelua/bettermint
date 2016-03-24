@@ -34,19 +34,19 @@ class LoginView extends Component {
               className='form-control input-lg'
               valueLink={this.linkState('email')}
               placeholder='Email' />
-            </div>
-          <div className='form-group'>
-            <input type='password'
-              className='form-control input-lg'
-              valueLink={this.linkState('password')}
-              placeholder='Password' />
-          </div>
-          <button type='submit'
-            className='btn btn-lg'
-            disabled={this.props.isAuthenticating}
-            onClick={this.login.bind(this)}>Submit</button>
-      </form>
-    </div>
+        </div>
+        <div className='form-group'>
+          <input type='password'
+            className='form-control input-lg'
+            valueLink={this.linkState('password')}
+            placeholder='Password' />
+        </div>
+        <button type='submit'
+          className='btn btn-lg'
+          disabled={this.props.isAuthenticating}
+          onClick={this.login.bind(this)}>Submit</button>
+        </form>
+      </div>
     );
   }
 }
