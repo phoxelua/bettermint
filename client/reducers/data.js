@@ -2,7 +2,7 @@ import { createReducer } from 'utilities';
 import {
   RECEIVE_PROTECTED_DATA,
   FETCH_PROTECTED_DATA_REQUEST
-} from 'constants/user';
+} from 'constants/authentication';
 
 const initialState = {
   data: null,

@@ -1,22 +1,22 @@
 import { checkHttpStatus, parseResponse } from 'utilities';
-import { userConstants } from 'constants/user';
+import { authenticationConstants } from 'constants/authentication';
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
-function loginUserSuccess(token) {
+function signUpUserSuccess(token) {
   localStorage.setItem('token', token);
   return {
-    type: userConstants.LOGIN_USER_SUCCESS,
+    type: authenticationConstants.SIGN_IN_USER_SUCCESS,
     payload: {
       token
     }
   };
 };
 
-function loginUserFailure(error) {
+function signUpUserFailure(error) {
   localStorage.removeItem('token');
   return {
-    type: userConstants.LOGIN_USER_FAILURE,
+    type: authenticationConstants.SIGN_IN_USER_FAILURE,
     payload: {
       status: error.response.status,
       statusText: error.response.statusText
@@ -24,30 +24,16 @@ function loginUserFailure(error) {
   };
 };
 
-function loginUserRequest() {
+function signUpUserRequest() {
   return {
-    type: userConstants.LOGIN_USER_REQUEST
+    type: authenticationConstants.SIGN_IN_USER_REQUEST
   };
 };
 
-function logout() {
-  localStorage.removeItem('token');
-  return {
-    type: userConstants.LOGOUT_USER
-  };
-};
-
-export function logoutAndRedirect() {
-  return (dispatch, state) => {
-    dispatch(logout());
-    dispatch(push('/login'));
-  };
-};
-
-export function loginUser(email, password, redirect='/') {
+export function signUpUser(email, password, redirect='/') {
   return function(dispatch) {
-    dispatch(loginUserRequest());
-    return fetch('http://localhost:3001/api/login/token/', {
+    dispatch(signUpUserRequest());
+    return fetch('http://localhost:3001/api/auth/signup/', {
       method: 'post',
       credentials: 'include',
       headers: {
@@ -64,10 +50,10 @@ export function loginUser(email, password, redirect='/') {
     .then(response => {
       try {
         let decoded = jwtDecode(response.data.token);
-        dispatch(loginUserSuccess(response.data.token));
+        dispatch(signUpUserSuccess(response.data.token));
         dispatch(push(redirect));
       } catch (e) {
-        dispatch(loginUserFailure({
+        dispatch(signUpUserFailure({
           response: {
             status: 403,
             statusText: 'Invalid token'
@@ -76,7 +62,7 @@ export function loginUser(email, password, redirect='/') {
       }
     })
     .catch(error => {
-      dispatch(loginUserFailure(error));
+      dispatch(signUpUserFailure(error));
     });
   };
 };

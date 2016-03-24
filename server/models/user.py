@@ -9,4 +9,4 @@ class User(TimestampBase):
 
     email = db.Column(db.String(255), nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
-    password_salt = db.Column(db.String(31), nullable=False)
+    password_salt = db.Column(db.String(29), nullable=False)

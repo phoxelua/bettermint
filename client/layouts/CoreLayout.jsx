@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutAndRedirect } from 'actions/user';
 
 import 'vendor/materialize.js';
 import 'jQuery';
 
 
-const isAuthenticated = (state) => {
+const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated
   };
@@ -67,4 +66,6 @@ export class CoreLayout extends Component {
   }
 }
 
-export default connect(isAuthenticated)(CoreLayout);
+export default connect(
+  mapStateToProps
+)(CoreLayout);
