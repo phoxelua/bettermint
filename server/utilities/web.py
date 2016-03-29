@@ -111,6 +111,7 @@ def get_json_with_keys(request, keys):
         request_json = camel_to_snake_case_dict(request.get_json())
         for key in keys:
             assert key in request_json
+        return request_json
     except BadRequest as e:
         raise Exception("Could not get json from request.") from e
     except AssertionError as e:

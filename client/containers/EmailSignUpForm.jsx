@@ -1,67 +1,96 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import reactMixin from 'react-mixin';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
+import { reduxForm } from 'redux-form';
+import zxcvbn from 'zxcvbn';
 
 import * as actionCreators from 'actions/auth/emailSignUp';
 
-class EmailSignUpForm extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    };
+const fields = ['firstName', 'lastName', 'email', 'password'];
+
+const validate = values => {
+  const errors = {};
+
+  if (!values.firstName) {
+    errors.firstName = 'Required';
   }
 
-  signUp (e) {
-    e.preventDefault();
-    this.props.actions.signUpUser(this.state.email, this.state.password);
+  if (!values.lastName) {
+    errors.lastName = 'Required';
+  }
+
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  if (!values.password) {
+    errors.email = 'Required';
+  } else {
+    let passwordStrength = zxcvbn(values.password).score;
+
+    if (passwordStrength < 2) {
+      errors.password = 'Password is too weak';
+    }
+  }
+
+  return errors;
+};
+
+class EmailSignUpForm extends Component {
+  static propTypes = {
+    fields: PropTypes.object.isRequired
+  };
+
+  handleSubmit ({ firstName, lastName, email, password }) {
+    var redirectRoute = this.props.redirectRoute || '/';
+    this.props.actions.signUpUser(firstName, lastName, email, password, redirectRoute);
   }
 
   render () {
+    const { fields: { firstName, lastName, email, password }, handleSubmit } = this.props;
+
     return (
       <div className="row">
-        <form className="col s12">
+        <form className="col s12"
+          onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
           <div className="row">
             <div className="input-field col s6">
-              <input type="text" className="validate" id="first-name" placeholder="John" required
-                valueLink={this.linkState("firstName")} />
+              <input type="text" className="validate" id="first-name" placeholder="John"
+                {...firstName}/>
               <label htmlFor="first-name">First Name</label>
             </div>
             <div className="input-field col s6">
-              <input type="text" className="validate" id="last-name" placeholder="Doe" required
-                valueLink={this.linkState("lastName")} />
+              <input type="text" className="validate" id="last-name" placeholder="Doe"
+                {...lastName} />
               <label htmlFor="last-name">Last Name</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input type="email" className="validate" id="email" placeholder="john@doe.com" required
-                valueLink={this.linkState("email")} />
+              <input type="email" className="validate" id="email" placeholder="john@doe.com"
+                {...email} />
               <label htmlFor="email">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input type="password" className="validate" id="password" placeholder="hunter2" required
-                valueLink={this.linkState("password")} />
+              <input type="password" className="validate" id="password" placeholder="hunter2"
+                {...password} />
               <label htmlFor="password">Password</label>
             </div>
           </div>
-          <button type="submit"
-            className="btn btn-lg"
-            disabled={this.props.isAuthenticating}
-            onClick={this.signUp.bind(this)}>Submit</button>
+          <button type="submit" className="btn btn-lg">
+            Submit
+          </button>
         </form>
       </div>
     )
   }
 };
 
+// TODO: update this
 const mapStateToProps = (state) => {
   return {
     isAuthenticating: state.auth.isAuthenticating,
@@ -75,9 +104,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-reactMixin(EmailSignUpForm.prototype, LinkedStateMixin);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default reduxForm({
+  form: 'emailSignUpForm',
+  fields,
+  validate
+},
+mapStateToProps,
+mapDispatchToProps
 )(EmailSignUpForm);

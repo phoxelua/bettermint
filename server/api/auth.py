@@ -40,12 +40,15 @@ def signup():
     Creates a new user with the provided credentials, and returns a token.
     """
 
-    request_json = get_json_with_keys(flask.request, ['email', 'password'])
+    request_json = get_json_with_keys(flask.request, ['first_name', 'last_name', 'email', 'password'])
+
+    first_name = request_json['first_name']
+    last_name = request_json['last_name']
     email = request_json['email']
     password = request_json['password']
 
     # TODO: Check to make sure that a user with these credentials (this email) doesn't exist.
-    user = UserFactory.instance.create(email, password)
+    user = UserFactory.instance.create(first_name, last_name, email, password)
     db.session.add(user)
     db.session.commit()
 

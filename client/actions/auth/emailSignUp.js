@@ -30,7 +30,7 @@ function signUpUserRequest() {
   };
 };
 
-export function signUpUser(email, password, redirect='/') {
+export function signUpUser(firstName, lastName, email, password, redirect='/') {
   return function(dispatch) {
     dispatch(signUpUserRequest());
     return fetch('http://localhost:3001/api/auth/signup/', {
@@ -41,6 +41,8 @@ export function signUpUser(email, password, redirect='/') {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        firstName,
+        lastName,
         email,
         password
       })
