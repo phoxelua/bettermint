@@ -4,8 +4,10 @@ import flask
 
 from server.database import db
 from server.factories.user import UserFactory
-from server.utilities.web import write_success_data, snake_to_camel_case_dict
+from server.models.user import User
+from server.utilities.bcrypt import hashpw
 from server.utilities.token import generate_token
+from server.utilities.web import write_success_data, write_fail, snake_to_camel_case_dict, get_json_with_keys
 
 
 auth_api = flask.Blueprint('auth_api', __name__, url_prefix='/api/auth')
@@ -17,20 +19,19 @@ def create_token():
     If the provided email and password combination is valid, generates a JWT for client-use which expires in 7 days.
     """
 
-    # TODO: Ensure that these parameters are valid and won't throw an error.
-    # TODO: Write a wrapper which does the get_json and error check, and grabs whatever values you want (with a key check)
-    # TODO: Make sure this wrapper uses camel_to_snake_case_dict
-    request_json = flask.request.get_json()
+    request_json = get_json_with_keys(flask.request, ['email', 'password'])
     email = request_json['email']
-    # password = request_json['password']
+    password = request_json['password']
+    existing_user = User.by_email(db.session, email)
 
-    # TODO: Check that the email and password combination are valid for a particular user before emitting this token.
-    token = generate_token({'email': email}, datetime.timedelta(days=7))
+    if hashpw(password, existing_user.password_salt) == existing_user.password_hash:
+        token = generate_token({'email': email}, datetime.timedelta(days=7))
 
-    # TODO: somehow do the snake_to_camel_case_dict implicitly.  maybe write_success_data shouldn't use default flask jsonify
-    return write_success_data(snake_to_camel_case_dict({
-        'token': token.decode("utf-8")
-    }))
+        return write_success_data(snake_to_camel_case_dict({
+            'token': token.decode("utf-8")
+        }))
+    else:
+        return write_fail()
 
 
 @auth_api.route('/signup/', methods=['POST'])
@@ -39,8 +40,7 @@ def signup():
     Creates a new user with the provided credentials, and returns a token.
     """
 
-    # TODO: Ensure that these parameters are valid and won't throw an error.
-    request_json = flask.request.get_json()
+    request_json = get_json_with_keys(flask.request, ['email', 'password'])
     email = request_json['email']
     password = request_json['password']
 

@@ -1,23 +1,21 @@
-import bcrypt
-
 from server.models.user import User
 from server.factories.base import BaseFactory
+from server.utilities.bcrypt import hashpw, gensalt
 
 
 class UserFactory(BaseFactory):
     """A factory which constructs different types of Users."""
 
-    @classmethod
-    def create(cls, email, password):
+    def create(self, email: str, password: str) -> User:
         """Creates a regular user."""
 
-        salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+        salt = gensalt()
+        hashed = hashpw(password, salt)
 
         user = User(
             email=email,
-            password_hash=hashed.decode('utf-8'),
-            password_salt=salt.decode('utf-8')
+            password_hash=hashed,
+            password_salt=salt
         )
 
         return user

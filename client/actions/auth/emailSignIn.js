@@ -1,5 +1,5 @@
 import { checkHttpStatus, parseResponse } from 'utilities';
-import { authenticationConstants as authConstants } from 'constants/authentication';
+import { authConstants as authConstants } from 'constants/auth';
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
@@ -70,7 +70,7 @@ export function loginUser(email, password, redirect='/') {
         dispatch(loginUserFailure({
           response: {
             status: 403,
-            statusText: 'Invalid token'
+            statusText: 'Invalid password.'
           }
         }));
       }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 export default class IndexView extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class IndexView extends Component {
           </h5>
         </div>
         <div className='row center'>
-          <a className='waves-effect waves-light btn-large'>Get Started</a>
+          <Link className='waves-effect waves-light btn-large' to={'/login'}>Get Started</Link>
         </div>
         <div className='details container'>
           <div className='row'>

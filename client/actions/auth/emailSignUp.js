@@ -1,12 +1,12 @@
 import { checkHttpStatus, parseResponse } from 'utilities';
-import { authenticationConstants } from 'constants/authentication';
+import { authConstants } from 'constants/auth';
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
 function signUpUserSuccess(token) {
   localStorage.setItem('token', token);
   return {
-    type: authenticationConstants.SIGN_IN_USER_SUCCESS,
+    type: authConstants.SIGN_IN_USER_SUCCESS,
     payload: {
       token
     }
@@ -16,7 +16,7 @@ function signUpUserSuccess(token) {
 function signUpUserFailure(error) {
   localStorage.removeItem('token');
   return {
-    type: authenticationConstants.SIGN_IN_USER_FAILURE,
+    type: authConstants.SIGN_IN_USER_FAILURE,
     payload: {
       status: error.response.status,
       statusText: error.response.statusText
@@ -26,7 +26,7 @@ function signUpUserFailure(error) {
 
 function signUpUserRequest() {
   return {
-    type: authenticationConstants.SIGN_IN_USER_REQUEST
+    type: authConstants.SIGN_IN_USER_REQUEST
   };
 };
 

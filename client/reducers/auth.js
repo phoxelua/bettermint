@@ -1,5 +1,5 @@
 import { createReducer } from 'utilities';
-import { authenticationConstants } from 'constants/authentication';
+import { authConstants } from 'constants/auth';
 import { push } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
 
@@ -13,13 +13,13 @@ const initialState = {
 
 
 export default createReducer(initialState, {
-  [authenticationConstants.SIGN_IN_USER_REQUEST]: (state, payload) => {
+  [authConstants.SIGN_IN_USER_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       isAuthenticating: true,
       statusText: null
     });
   },
-  [authenticationConstants.SIGN_IN_USER_SUCCESS]: (state, payload) => {
+  [authConstants.SIGN_IN_USER_SUCCESS]: (state, payload) => {
     return Object.assign({}, state, {
       isAuthenticating: false,
       isAuthenticated: true,
@@ -28,7 +28,7 @@ export default createReducer(initialState, {
       statusText: 'You have been successfully logged in.'
     });
   },
-  [authenticationConstants.SIGN_IN_USER_FAILURE]: (state, payload) => {
+  [authConstants.SIGN_IN_USER_FAILURE]: (state, payload) => {
     return Object.assign({}, state, {
       isAuthenticating: false,
       isAuthenticated: false,
@@ -37,7 +37,7 @@ export default createReducer(initialState, {
       statusText: `Authentication Error: ${payload.status} ${payload.statusText}`
     });
   },
-  [authenticationConstants.SIGN_OUT_USER]: (state, payload) => {
+  [authConstants.SIGN_OUT_USER]: (state, payload) => {
     return Object.assign({}, state, {
       isAuthenticated: false,
       token: null,

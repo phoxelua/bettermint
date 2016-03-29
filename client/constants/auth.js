@@ -1,6 +1,6 @@
 import { createConstants } from 'utilities';
 
-export const authenticationConstants = createConstants(
+export const authConstants = createConstants(
   'SIGN_IN_USER_REQUEST',
   'SIGN_IN_USER_FAILURE',
   'SIGN_IN_USER_SUCCESS',
