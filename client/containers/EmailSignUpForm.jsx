@@ -8,6 +8,7 @@ import * as actionCreators from 'actions/auth/emailSignUp';
 
 const fields = ['firstName', 'lastName', 'email', 'password'];
 
+// TODO: do something with these errors.
 const validate = values => {
   const errors = {};
 
@@ -22,6 +23,8 @@ const validate = values => {
   if (!values.email) {
     errors.email = 'Required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    // TODO: Put this regex in some sort of utility
+
     errors.email = 'Invalid email address';
   }
 
