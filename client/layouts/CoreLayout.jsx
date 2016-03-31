@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import 'vendor/materialize.js';
-import 'jQuery';
-
+import Menu, { SubMenu, MenuItem } from 'rc-menu';
 
 const mapStateToProps = (state) => {
   return {
@@ -15,33 +12,25 @@ const mapStateToProps = (state) => {
 
 export class CoreLayout extends Component {
 
-  componentDidMount() {
-    $('.dropdown-button').dropdown();
-  }
-
   render () {
     return (
       <div>
         <header>
-          <ul className='dropdown-content' id='mobile-nav-dropdown'>
-            <li><Link to='transactions'>Transactions</Link></li>
-            <li><Link to='goals'>Goals</Link></li>
-            <li><Link to='profile'>Profile</Link></li>
-          </ul>
           <nav className='teal accent-4'>
             <div className='nav-wrapper container'>
               <Link to='/' className='brand-logo'>$$$</Link>
-              <ul className='right hide-on-med-and-down'>
-                <li><Link to='transactions'>Transactions</Link></li>
-                <li><Link to='goals'>Goals</Link></li>
-                <li><Link to='profile'>Profile</Link></li>
-              </ul>
-              <Link
-                to='#'
-                data-activates='mobile-nav-dropdown'
-                className='dropdown-button right hide-on-large-only'>
-                <i className='material-icons'>menu</i>
-              </Link>
+              <Menu className='right hide-on-med-and-down'>
+                <MenuItem key="1"><Link to='transactions'>Transactions</Link></MenuItem>
+                <MenuItem key="2"><Link to='goals'>Goals</Link></MenuItem>
+                <MenuItem key="3"><Link to='profile'>Profile</Link></MenuItem>
+              </Menu>
+              <Menu className='right hide-on-large-only'>
+                <SubMenu title={<i className='material-icons'>menu</i>} key="1">
+                  <MenuItem key="1-1"><Link to='transactions'>Transactions</Link></MenuItem>
+                  <MenuItem key="1-2"><Link to='goals'>Goals</Link></MenuItem>
+                  <MenuItem key="1-3"><Link to='profile'>Profile</Link></MenuItem>
+                </SubMenu>
+              </Menu>
             </div>
           </nav>
         </header>

@@ -29,7 +29,7 @@ const validate = values => {
   }
 
   if (!values.password) {
-    errors.email = 'Required';
+    errors.password = 'Required';
   } else {
     let passwordStrength = zxcvbn(values.password).score;
 

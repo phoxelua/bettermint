@@ -24,6 +24,8 @@
     "jwt-decode": "^2.0.1",
     "lodash": "^4.6.1",
     "node-libs-browser": "^1.0.0",
+    "normalize-scss": "^4.0.3",
+    "rc-menu": "^4.10.8",
     "react": "^0.14.7",
     "react-addons-linked-state-mixin": "^0.14.7",
     "react-dom": "^0.14.7",
@@ -37,6 +39,7 @@
     "redux-logger": "^2.6.1",
     "redux-promise": "^0.5.1",
     "redux-thunk": "^2.0.1",
+    "velocity-animate": "^1.2.3",
     "webpack": "^1.12.14",
     "whatwg-fetch": "^0.11.0",
     "zxcvbn": "^4.2.0"
