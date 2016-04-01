@@ -1,0 +1,58 @@
+.CoreLayout {
+  .CoreLayout__links {
+    @include breakpoint(0px $medium-screen - 1) {
+      display: none;
+    }
+
+    &>li {
+      padding-right: 1.5em;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  header {
+    .CoreLayout__nav {
+      @include outer-container;
+
+      .CoreLayout__nav__wrapper {
+        @include span-columns(12);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      // TODO: Update these breakpoints.
+      .CoreLayout__nav__mobile-dropdown {
+        @include breakpoint($medium-screen) {
+          display: none;
+        }
+      }
+
+      .CoreLayout__nav__links--desktop {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  main {
+    @include outer-container;
+    .CoreLayout__main__wrapper {
+      @include span-columns(12);
+    }
+  }
+
+  footer {
+    @include outer-container;
+    .CoreLayout__footer__wrapper {
+      @include span-columns(12);
+    }
+
+    .CoreLayout__footer__links {
+      display: flex;
+      justify-content: flex-end
+    }
+  }
+}

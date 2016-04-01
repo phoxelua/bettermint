@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Menu, { SubMenu, MenuItem } from 'rc-menu';
+import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,39 +14,42 @@ export class CoreLayout extends Component {
 
   render () {
     return (
-      <div>
+      <div className="CoreLayout">
         <header>
-          <nav className='teal accent-4'>
-            <div className='nav-wrapper container'>
-              <Link to='/' className='brand-logo'>$$$</Link>
-              <Menu className='right hide-on-med-and-down'>
-                <MenuItem key="1"><Link to='transactions'>Transactions</Link></MenuItem>
-                <MenuItem key="2"><Link to='goals'>Goals</Link></MenuItem>
-                <MenuItem key="3"><Link to='profile'>Profile</Link></MenuItem>
-              </Menu>
-              <Menu className='right hide-on-large-only'>
-                <SubMenu title={<i className='material-icons'>menu</i>} key="1">
-                  <MenuItem key="1-1"><Link to='transactions'>Transactions</Link></MenuItem>
-                  <MenuItem key="1-2"><Link to='goals'>Goals</Link></MenuItem>
-                  <MenuItem key="1-3"><Link to='profile'>Profile</Link></MenuItem>
-                </SubMenu>
-              </Menu>
+          <nav className="CoreLayout__nav">
+            <div className="CoreLayout__nav__wrapper">
+              <Link to="/" className="home-link">$$$</Link>
+              <ul className="CoreLayout__links CoreLayout__nav__links--desktop">
+                <li><Link to="transactions">Transactions</Link></li>
+                <li><Link to="goals">Goals</Link></li>
+                <li><Link to="profile">Profile</Link></li>
+              </ul>
+              <Dropdown className="CoreLayout__nav__mobile-dropdown">
+                <DropdownTrigger><i className="material-icons">menu</i></DropdownTrigger>
+                <DropdownContent>
+                  <ul>
+                    <li><Link to="transactions">Transactions</Link></li>
+                    <li><Link to="goals">Goals</Link></li>
+                    <li><Link to="profile">Profile</Link></li>
+                  </ul>
+                </DropdownContent>
+              </Dropdown>
             </div>
           </nav>
         </header>
 
         <main>
-          <div className='container'>
+          <div className="CoreLayout__main__wrapper">
             { this.props.children }
           </div>
         </main>
 
-        <footer className='teal accent-4'>
-          <div className='container'>
-            <ul className='links'>
-              <li><Link to='/about' className='grey-text text-lighten-4'>About</Link></li>
-              <li><Link to='/privacy' className='grey-text text-lighten-4'>Privacy</Link></li>
-              <li className='flex-right grey-text text-lighten-3'><span>© 2016 Bettermint</span></li>
+        <footer>
+          <div className="CoreLayout__footer__wrapper">
+            <ul className="CoreLayout__links CoreLayout__footer__links">
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/privacy">Privacy</Link></li>
+              <li className=""><span>© 2016 Bettermint</span></li>
             </ul>
           </div>
         </footer>
