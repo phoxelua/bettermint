@@ -8,7 +8,8 @@ import * as actionCreators from 'actions/auth/emailSignUp';
 
 const fields = ['firstName', 'lastName', 'email', 'password'];
 
-// TODO: do something with these errors.
+const validEmailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
 const validate = values => {
   const errors = {};
 
@@ -22,9 +23,7 @@ const validate = values => {
 
   if (!values.email) {
     errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    // TODO: Put this regex in some sort of utility
-
+  } else if (!validEmailRegex.test(values.email)) {
     errors.email = 'Invalid email address';
   }
 
@@ -32,7 +31,6 @@ const validate = values => {
     errors.password = 'Required';
   } else {
     let passwordStrength = zxcvbn(values.password).score;
-
     if (passwordStrength < 2) {
       errors.password = 'Password is too weak';
     }
@@ -52,40 +50,29 @@ class EmailSignUpForm extends Component {
   }
 
   render () {
-    const { fields: { firstName, lastName, email, password }, handleSubmit } = this.props;
+    const { fields: { firstName, lastName, email, password }, handleSubmit, submitting } = this.props;
 
     return (
-      <div className="row">
-        <form className="col s12"
-          onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-          <div className="row">
-            <div className="input-field col s6">
-              <input type="text" className="validate" id="first-name" placeholder="John"
-                {...firstName}/>
-              <label htmlFor="first-name">First Name</label>
-            </div>
-            <div className="input-field col s6">
-              <input type="text" className="validate" id="last-name" placeholder="Doe"
-                {...lastName} />
-              <label htmlFor="last-name">Last Name</label>
-            </div>
+      <div className="">
+        <form className="" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
+          <div className="">
+            <input type="text" placeholder="John" {...firstName}/>
+            {firstName.touched && firstName.error && <div>{firstName.error}</div>}
           </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input type="email" className="validate" id="email" placeholder="john@doe.com"
-                {...email} />
-              <label htmlFor="email">Email</label>
-            </div>
+          <div className="">
+            <input type="text" placeholder="Doe" {...lastName} />
+            {lastName.touched && lastName.error && <div>{lastName.error}</div>}
           </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input type="password" className="validate" id="password" placeholder="hunter2"
-                {...password} />
-              <label htmlFor="password">Password</label>
-            </div>
+          <div className="">
+            <input type="email" placeholder="john@doe.com" {...email} />
+            {email.touched && email.error && <div>{email.error}</div>}
           </div>
-          <button type="submit" className="btn btn-lg">
-            Submit
+          <div className="">
+            <input type="password" placeholder="hunter2" {...password} />
+            {password.touched && password.error && <div>{password.error}</div>}
+          </div>
+          <button type="submit" className="" disabled={submitting}>
+            {submitting ? <i/> : <i/>} Submit
           </button>
         </form>
       </div>
