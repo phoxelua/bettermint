@@ -1,51 +1,70 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import reactMixin from 'react-mixin';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
+import { reduxForm } from 'redux-form';
 
 import * as actionCreators from 'actions/auth/emailSignIn';
 
-class EmailSignInForm extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      redirectTo: props.redirectRoute
-    };
+const fields = ['email', 'password'];
+
+const validate = values => {
+  const errors = {};
+
+  if (!values.email) {
+    errors.email = 'Required';
   }
 
-  signIn (e) {
-    e.preventDefault();
-    this.props.actions.loginUser(this.state.email, this.state.password, this.state.redirectTo);
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+
+  return errors;
+};
+
+class EmailSignInForm extends Component {
+  static propTypes = {
+    fields: PropTypes.object.isRequired
+  };
+
+  handleSubmit ({ email, password }) {
+    console.log(this.props);
+    var redirectRoute = this.props.redirectRoute || '/';
+    this.props.actions.signInUser(email, password, redirectRoute);
   }
 
   render () {
+    const { fields: { email, password }, handleSubmit, submitting } = this.props;
+
     return (
-      <div className="row">
-        <form className="col s12">
-          {this.props.statusText ? <div className='alert alert-info'>{this.props.statusText}</div> : ''}
-          <div className="row">
-            <div className="input-field col s12">
-              <input type="email" className="validate" id="email" required
-                valueLink={this.linkState("email")} />
-              <label htmlFor="email">Email</label>
-            </div>
+      <form className="EmailSignUpForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
+        <div className="EmailSignUpForm__input-group">
+          <label>Email</label>
+          <div className="EmailSignUpForm__input-wrapper">
+            <input type="email" placeholder="john@doe.com" {...email} />
+            {
+              email.touched &&
+              email.error &&
+              <span className="EmailSignUpForm__input-wrapper__error">{email.error}</span>
+            }
           </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input type="password" className="validate" id="password" required
-                valueLink={this.linkState("password")} />
-              <label htmlFor="password">Password</label>
-            </div>
+        </div>
+        <div className="EmailSignUpForm__input-group">
+          <label>Password</label>
+          <div className="EmailSignUpForm__input-wrapper">
+            <input type="password" placeholder="hunter2" {...password} />
+            {
+              password.touched &&
+              password.error &&
+              <span className="EmailSignUpForm__input-wrapper__error">{password.error}</span>
+            }
           </div>
-          <button type="submit"
-            className="btn btn-lg"
-            disabled={this.props.isAuthenticating}
-            onClick={this.signIn.bind(this)}>Submit</button>
-        </form>
-      </div>
+        </div>
+        <div className="EmailSignUpForm__input-group EmailSignUpForm__submit">
+          <button type="submit" className="" disabled={submitting}>
+            {submitting ? <i/> : <i/>} Submit
+          </button>
+        </div>
+      </form>
     )
   }
 };
@@ -63,9 +82,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-reactMixin(EmailSignInForm.prototype, LinkedStateMixin);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default reduxForm({
+  form: 'emailSignInForm',
+  fields,
+  validate
+},
+mapStateToProps,
+mapDispatchToProps
 )(EmailSignInForm);

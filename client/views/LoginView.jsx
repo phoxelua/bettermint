@@ -8,12 +8,6 @@ import EmailSignInForm from 'containers/EmailSignInForm';
 import EmailSignUpForm from 'containers/EmailSignUpForm';
 
 class LoginView extends Component {
-
-  signUp (e) {
-    console.log('hello');
-    this.props.actions.signUpUser();
-  }
-
   render () {
     const redirectRoute = this.props.location.query.redirect || '/login';
 
@@ -22,9 +16,7 @@ class LoginView extends Component {
         <p>This is the sign in form</p>
         <EmailSignInForm redirectRoute={redirectRoute} />
         <p>This is the sign up form</p>
-        <EmailSignUpForm
-          redirectRoute={redirectRoute}
-          handleSubmit={this.signUp.bind(this)}/>
+        <EmailSignUpForm redirectRoute={redirectRoute} />
       </div>
     );
   };

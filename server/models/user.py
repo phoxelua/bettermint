@@ -15,6 +15,6 @@ class User(TimestampBase):
 
     @classmethod
     def by_email(cls, session, email: str) -> 'User':
-        return session.query(cls).where(
+        return session.query(cls).filter(
             cls.email == email
         ).first()
