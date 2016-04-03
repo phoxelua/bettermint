@@ -1,0 +1,42 @@
+.EmailSignUpForm {
+  @include outer-container;
+
+  .EmailSignUpForm__input-group {
+    margin-bottom: 1em;
+
+    @include span-columns(12);
+
+    @include breakpoint($large-screen) {
+      @include span-columns(10);
+      @include shift(1);
+    }
+
+    >label {
+      @include span-columns(3 of 12);
+
+      @include breakpoint($large-screen) {
+        @include span-columns(2 of 10);
+      }
+    }
+
+    >.EmailSignUpForm__input-wrapper {
+      @include span-columns(9 of 12);
+
+      @include breakpoint($large-screen) {
+        @include span-columns(8 of 10);
+      }
+
+      input {
+        margin-bottom: 0;
+      }
+
+      span {
+        font-style: italic;
+      }
+    }
+  }
+
+  .EmailSignUpForm__submit {
+    text-align: center;
+  }
+}

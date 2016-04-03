@@ -1,9 +1,6 @@
 .CoreLayout {
-  .CoreLayout__links {
-    @include breakpoint(0px $medium-screen - 1) {
-      display: none;
-    }
 
+  .CoreLayout__links {
     &>li {
       padding-right: 1.5em;
 
@@ -14,6 +11,7 @@
   }
 
   header {
+
     .CoreLayout__nav {
       @include outer-container;
 
@@ -26,25 +24,27 @@
       // TODO: Update these breakpoints.
       .CoreLayout__nav__mobile-dropdown {
         @include breakpoint($medium-screen) {
-          display: none;
+          display: none !important;
         }
       }
 
       .CoreLayout__nav__links--desktop {
         display: flex;
         justify-content: space-between;
+
+        @include breakpoint(0px $medium-screen - 1) {
+          display: none !important;
+        }
       }
     }
   }
 
   main {
     @include outer-container;
-    .CoreLayout__main__wrapper {
-      @include span-columns(12);
-    }
   }
 
   footer {
+
     @include outer-container;
     .CoreLayout__footer__wrapper {
       @include span-columns(12);

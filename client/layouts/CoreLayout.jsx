@@ -39,9 +39,7 @@ export class CoreLayout extends Component {
         </header>
 
         <main>
-          <div className="CoreLayout__main__wrapper">
-            { this.props.children }
-          </div>
+          { this.props.children }
         </main>
 
         <footer>
