@@ -34,11 +34,9 @@ def create_app():
 def _register_apis(app):
     """Register all of the separate api endpoints."""
 
-    from server.api.kittens import kittens_api
     from server.api.auth import auth_api
 
     for blueprint in [
-        kittens_api,
         auth_api
     ]:
         app.register_blueprint(blueprint)
