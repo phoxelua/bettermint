@@ -1,7 +1,8 @@
+import datetime
+
 from plaid import Client
 
 from server.config import PLAID_CLIENT_ID, PLAID_SECRET
-from server.utilities.lazy import Lazy
 
 
 class PlaidClient:
@@ -9,25 +10,22 @@ class PlaidClient:
     A wrapper class around the Plaid API client.
     """
 
-    @classmethod
-    def _create_instance(cls):
-        """Creates and initializes a singleton instance."""
+    def __init__(self, access_token=None):
+        """
+        Initializes an instance.
 
-        instance = cls()
+        NOTE: we don't use the Lazy pattern here because the Plaid Client caches access tokens between method calls.
+        """
 
-        instance._client = Client(
+        self._client = Client(
             client_id=PLAID_CLIENT_ID,
-            secret=PLAID_SECRET
+            secret=PLAID_SECRET,
+            access_token=access_token
         )
 
-        instance._client.config({
+        self._client.config({
             'url': 'https://tartan.plaid.com'
         })
-
-        return instance
-
-    instance = Lazy(lambda cls: cls._create_instance())
-    """The singleton instance of this class."""
 
     def add_user(self, institution, username: str, password: str):
         """
@@ -38,6 +36,15 @@ class PlaidClient:
         institution.
 
         TODO: specify institutions as constants somewhere.
+        TODO: make it work smoothly for mfa
+
+        Args:
+            institution: The financial institution to connect to.
+            username: The username for the account.
+            password: The password for the account.
+
+        Returns:
+            An access token for the account.
         """
 
         response = self._client.connect(institution, {
@@ -47,6 +54,7 @@ class PlaidClient:
 
         print(response.json())
 
+        # TODO: Factor this into another method so we can cleanly support MFA types
         response = self._client.connect_step(institution, None, options={'send_method': {'type': 'phone'}})
 
         print(response.json())
@@ -55,4 +63,37 @@ class PlaidClient:
 
         response = self._client.connect_step(institution, code)
 
+        print(response.json())
+
+    def get_transactions(
+        self,
+        start: datetime.datetime=datetime.datetime.utcnow() - datetime.timedelta(days=30),
+        end: datetime.datetime=datetime.datetime.utcnow(),
+        pending=False,
+        account_id=None
+    ):
+        """
+        Retrieves transactions from the institution specified by the stored access token.
+
+        Args:
+            start: The start date for the transaction history set. Default one month before today.
+            end: The end date for the transaction history set. Default today.
+            pending: Whether or not to fetch pending transactions.
+            account_id: If not None, will fetch transactions only from this account id.
+
+        Returns:
+            TODO, a dictionary for now.
+
+        Raises:
+            TODO
+        """
+
+        options = {
+            'pending': pending,
+            'gte': start.isoformat(),
+            'end': end.isoformat(),
+            'account': account_id
+        }
+
+        response = self._client.connect_get(options)
         print(response.json())

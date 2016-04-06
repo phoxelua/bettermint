@@ -35,3 +35,10 @@ class UserToInstitution(PrimaryKeyIdBase):
     access_token = db.Column(db.String(160), nullable=False)
 
     user = db.relationship('User')
+
+    @classmethod
+    def by_user_id_and_institution(cls, session, user_id: int, institution: str) -> 'UserToInstitution':
+        return session.query(cls).filter(
+            cls.user_id == user_id,
+            cls.institution == institution
+        ).first()

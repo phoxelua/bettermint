@@ -1,0 +1,2 @@
+class PlaidClientException(Exception):
+    pass

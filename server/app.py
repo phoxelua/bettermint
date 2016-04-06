@@ -8,13 +8,10 @@ from server.database import db
 from server.constants import CONFIG_PY_PATH
 
 
-app = Flask(
-    __name__
-)
-
-
 def create_app():
     """Initializes everything for the app needs."""
+
+    app = Flask(__name__)
 
     app.config.from_pyfile(CONFIG_PY_PATH)
 
