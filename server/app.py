@@ -32,9 +32,11 @@ def _register_apis(app):
     """Register all of the separate api endpoints."""
 
     from server.api.auth import auth_api
+    from server.api.financial import financial_api
 
     for blueprint in [
-        auth_api
+        auth_api,
+        financial_api,
     ]:
         app.register_blueprint(blueprint)
 
