@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 export default class ProfileView extends Component {
-  render() {
+  componentDidMount () {
+    console.log(this);
+  }
+
+  render () {
     return (
       <div>
         <div>Profile</div>
@@ -10,4 +15,15 @@ export default class ProfileView extends Component {
   }
 };
 
-export default ProfileView;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileView);

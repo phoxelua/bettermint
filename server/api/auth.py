@@ -31,7 +31,7 @@ def create_token():
             'token': token.decode("utf-8")
         }))
     else:
-        return write_fail()
+        return write_fail('Email and password were not correct.')
 
 
 @auth_api.route('/signup/', methods=['POST'])
