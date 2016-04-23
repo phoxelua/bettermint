@@ -20,7 +20,8 @@ async function request({ url, data, params = {} }) {
     }
 
     if (response.status === 200 && contentType.indexOf('application/json') !== -1) {
-      return await response.json();
+      let result = await response.json();
+      return result.data;
     }
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

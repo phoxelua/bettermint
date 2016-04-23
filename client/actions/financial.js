@@ -1,3 +1,5 @@
+import * as path from 'path';
+
 import { financialConstants } from 'constants/financial';
 import { get, post, del } from 'utilities';
 
@@ -8,14 +10,14 @@ export function requestTransactions(institution) {
     });
 
     try {
-      const result = await get('/api/financial/institution/' + institution);  // TODO: Find some utility which joins paths
+      let endpoint = path.join('/api/financial/institution', institution);
 
-      console.log(result);
+      const result = await get(endpoint);
 
       dispatch({
         type: financialConstants.REQUEST_TRANSACTIONS_SUCCESS,
         payload: {
-          kittens: result.kittens
+          transactions: result.transactions
         }
       });
     } catch(e) {

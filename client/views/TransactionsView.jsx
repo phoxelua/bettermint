@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actionCreators from 'actions/financial';
+import Transactions from 'containers/Transactions';
 
 export default class TransactionsView extends Component {
   componentDidMount () {
@@ -12,14 +13,16 @@ export default class TransactionsView extends Component {
   render() {
     return (
       <div>
-        <div>Transactions</div>
+        <Transactions />
       </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    transactions: state.financial.transactions
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
