@@ -3,9 +3,9 @@ from flask_script import Manager, Server
 from flask_shellplus import Shell
 from flask_migrate import Migrate, MigrateCommand
 from utils.commands import WebpackServer, InitDB
-from server.app import create_app
-from server.database import db
-from server import models
+from bettermint.app import create_app
+from bettermint.database import db
+from bettermint import models
 
 
 def _make_context():

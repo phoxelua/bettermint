@@ -1,6 +1,6 @@
 import datetime
 
-from server.database import db
+from bettermint.database import db
 
 
 class PrimaryKeyIdBase(db.Model):

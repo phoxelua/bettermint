@@ -2,7 +2,7 @@ import datetime
 
 from plaid import Client
 
-from server.config import PLAID_CLIENT_ID, PLAID_SECRET
+from bettermint.config import PLAID_CLIENT_ID, PLAID_SECRET
 
 
 class PlaidClient:
@@ -65,6 +65,8 @@ class PlaidClient:
 
         print(response.json())
 
+        return response.json()
+
     def get_transactions(
         self,
         start: datetime.datetime=datetime.datetime.utcnow() - datetime.timedelta(days=30),
@@ -96,4 +98,4 @@ class PlaidClient:
         }
 
         response = self._client.connect_get(options)
-        print(response.json())
+        return response.json()

@@ -1,6 +1,6 @@
-from server.models.user import User
-from server.factories.base import BaseFactory
-from server.utilities.bcrypt import hashpw, gensalt
+from bettermint.models.user import User
+from bettermint.factories.base import BaseFactory
+from bettermint.lib.utils.bcrypt import hashpw, gensalt
 
 
 class UserFactory(BaseFactory):

@@ -1,6 +1,6 @@
 import abc
 
-from server.utilities.lazy import Lazy
+from bettermint.lib.utils.lazy import Lazy
 
 
 class BaseFactory(metaclass=abc.ABCMeta):

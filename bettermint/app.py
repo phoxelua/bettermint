@@ -4,8 +4,8 @@ from sys import stdout
 from flask import Flask
 from flask.ext.cors import CORS
 
-from server.database import db
-from server.constants import CONFIG_PY_PATH
+from bettermint.database import db
+from bettermint.constants import CONFIG_PY_PATH
 
 
 def create_app():
@@ -31,10 +31,12 @@ def create_app():
 def _register_apis(app):
     """Register all of the separate api endpoints."""
 
-    from server.api.auth import auth_api
+    from bettermint.api.auth import auth_api
+    from bettermint.api.financial import financial_api
 
     for blueprint in [
-        auth_api
+        auth_api,
+        financial_api,
     ]:
         app.register_blueprint(blueprint)
 
@@ -42,7 +44,7 @@ def _register_apis(app):
 def _register_views(app):
     """Register all of the separate views."""
 
-    from server.views.index import index_view
+    from bettermint.views.index import index_view
 
     for view in [
         index_view
