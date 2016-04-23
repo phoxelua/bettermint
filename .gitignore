@@ -90,8 +90,8 @@ node_modules
 
 venv/
 
-server/static/scripts/
-server/templates/
+bettermint/static/scripts/
+bettermint/templates/
 dev/
 logfile
 
