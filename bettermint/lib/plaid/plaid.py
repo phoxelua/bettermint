@@ -2,7 +2,7 @@ import datetime
 
 from plaid import Client
 
-from server.config import PLAID_CLIENT_ID, PLAID_SECRET
+from bettermint.config import PLAID_CLIENT_ID, PLAID_SECRET
 
 
 class PlaidClient:

@@ -2,7 +2,7 @@ import datetime
 
 import jwt
 
-from server.config import SECRET_KEY
+from bettermint.config import SECRET_KEY
 
 
 def generate_token(dictionary: dict, expiration: datetime.timedelta):

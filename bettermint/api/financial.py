@@ -1,9 +1,12 @@
+import datetime
+
 import flask
 
-from server.database import db
-from server.models.user import User, UserToInstitution
-from server.plaid.plaid import PlaidClient
-from server.utilities.decorators import require_authentication
+from bettermint.database import db
+from bettermint.models.user import User, UserToInstitution
+from bettermint.lib.plaid.plaid import PlaidClient
+from bettermint.lib.utils.decorators import require_authentication
+from bettermint.lib.utils.web import write_success_data
 
 
 financial_api = flask.Blueprint('financial_api', __name__, url_prefix='/api/financial')
@@ -20,4 +23,5 @@ def get_institution(institution, account_id):
     user = User.by_email(db.session, 'jason.j.won@gmail.com')
     u2i = UserToInstitution.by_user_id_and_institution(db.session, user.id, institution)
     client = PlaidClient(u2i.access_token)
-    client.get_transactions()
+    json = client.get_transactions(start=datetime.datetime.now() - datetime.timedelta(days=7))
+    return write_success_data(json)

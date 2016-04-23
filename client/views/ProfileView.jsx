@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-export default class ProfileView extends Component {
-  componentDidMount () {
-    console.log(this);
-  }
+import * as actionCreators from 'actions/financial';
 
+export default class ProfileView extends Component {
   render () {
     return (
       <div>
@@ -20,7 +19,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    actions : bindActionCreators(actionCreators, dispatch)
+  };
 };
 
 export default connect(

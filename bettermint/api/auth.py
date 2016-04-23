@@ -2,12 +2,12 @@ import datetime
 
 import flask
 
-from server.database import db
-from server.factories.user import UserFactory
-from server.models.user import User
-from server.utilities.bcrypt import hashpw
-from server.utilities.token import generate_token
-from server.utilities.web import write_success_data, write_fail, snake_to_camel_case_dict, get_json_with_keys
+from bettermint.database import db
+from bettermint.factories.user import UserFactory
+from bettermint.models.user import User
+from bettermint.lib.utils.bcrypt import hashpw
+from bettermint.lib.utils.token import generate_token
+from bettermint.lib.utils.web import write_success_data, write_fail, snake_to_camel_case_dict, get_json_with_keys
 
 
 auth_api = flask.Blueprint('auth_api', __name__, url_prefix='/api/auth')

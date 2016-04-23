@@ -1,5 +1,5 @@
-from server.database import db
-from server.models import PrimaryKeyIdBase, TimestampBase
+from bettermint.database import db
+from bettermint.models import PrimaryKeyIdBase, TimestampBase
 
 
 class User(TimestampBase):

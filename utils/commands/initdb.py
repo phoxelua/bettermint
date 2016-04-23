@@ -1,6 +1,6 @@
 from flask_script import Command
-from server.app import create_app
-from server.database import db
+from bettermint.app import create_app
+from bettermint.database import db
 
 
 class InitDB(Command):
