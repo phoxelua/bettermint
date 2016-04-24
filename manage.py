@@ -14,7 +14,7 @@ def _make_context():
 
 app = create_app()
 
-migrate = Migrate(app, db, directory='server/migrations')
+migrate = Migrate(app, db, directory='bettermint/migrations')
 
 manager = Manager(app)
 manager.add_command("shell", Shell(make_context=_make_context))
