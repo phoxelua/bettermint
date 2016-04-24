@@ -1,7 +1,11 @@
 import { createReducer } from 'utilities';
 import { authConstants } from 'constants/auth';
 import { push } from 'react-router-redux';
+import * as store from 'store';
+
 import jwtDecode from 'jwt-decode';
+
+console.log(store);
 
 const initialState = {
   token: null,
