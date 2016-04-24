@@ -3,7 +3,7 @@ import { authConstants as authConstants } from 'constants/auth';
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode';
 
-function signInUserSuccess(token) {
+export function signInUserSuccess(token) {
   localStorage.setItem('token', token);
   return {
     type: authConstants.SIGN_IN_USER_SUCCESS,
@@ -13,7 +13,7 @@ function signInUserSuccess(token) {
   };
 };
 
-function signInUserFailure(error) {
+export function signInUserFailure(error) {
   localStorage.removeItem('token');
   return {
     type: authConstants.SIGN_IN_USER_FAILURE,
@@ -24,13 +24,13 @@ function signInUserFailure(error) {
   };
 };
 
-function signInUserRequest() {
+export function signInUserRequest() {
   return {
     type: authConstants.SIGN_IN_USER_REQUEST
   };
 };
 
-function signOut() {
+export function signOut() {
   localStorage.removeItem('token');
   return {
     type: authConstants.SIGN_OUT_USER

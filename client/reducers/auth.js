@@ -11,7 +11,6 @@ const initialState = {
   statusText: null
 };
 
-
 export default createReducer(initialState, {
   [authConstants.SIGN_IN_USER_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
