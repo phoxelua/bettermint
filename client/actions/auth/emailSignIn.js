@@ -89,7 +89,7 @@ export function signInUserWithToken(token, redirect='/') {
       dispatch(signInUserSuccess(token));
       dispatch(push(redirect));
     } catch (e) {
-      // TODO: Do something special here where we say your session expired.
+      // TODO: Do something special here where we say your session expired. This might be the wrong action.
       dispatch(signInUserFailure({
         response: {
           status: 403,

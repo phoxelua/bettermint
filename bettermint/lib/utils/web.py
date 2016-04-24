@@ -97,7 +97,7 @@ def write_success():
 def write_success_data(data, message=None):
     """Returns a success object with data, and optionally, a message."""
 
-    obj = {'success': True, 'data': data}
+    obj = {'success': True, 'data': snake_to_camel_case_dict(data)}
     if message:
         obj['message'] = message
 

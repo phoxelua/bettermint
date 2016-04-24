@@ -17,6 +17,7 @@ export function requestTransactions(institution) {
       dispatch({
         type: financialConstants.REQUEST_TRANSACTIONS_SUCCESS,
         payload: {
+          accounts: result.accounts,
           transactions: result.transactions
         }
       });

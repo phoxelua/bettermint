@@ -10,14 +10,17 @@ import EmailSignInForm from 'containers/EmailSignInForm';
 import EmailSignUpForm from 'containers/EmailSignUpForm';
 
 class LoginView extends Component {
-  render () {
-    const redirectRoute = this.props.location.query.redirect || '/login';
-
+  componentDidMount () {
+    let redirectRoute = this.props.location.query.redirect || '/login';
     let token = store.get('token');
 
     if (!!token) {
       this.props.actions.signInUserWithToken(token, redirectRoute);
     }
+  }
+
+  render () {
+    const redirectRoute = this.props.location.query.redirect || '/login';
 
     return (
       <div className='col-xs-12 col-md-6 col-md-offset-3'>
