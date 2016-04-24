@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import { connect } from 'react-redux';
 import reactMixin from 'react-mixin';
 

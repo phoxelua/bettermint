@@ -27,9 +27,9 @@ config = update(config, {
 
   output: {
     $set: {
-      path: path.join(process.cwd(), '/dev/static/scripts'),
+      path: path.join(process.cwd(), 'dev'),
       pathInfo: true,
-      publicPath: 'http://localhost:3000/static/scripts/',
+      publicPath: 'http://localhost:3000/',
       filename: 'main.js'
     }
   },
@@ -39,7 +39,7 @@ config = update(config, {
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         inject: true,
-        filename: 'dev/index.html',
+        filename: './index.html',
         template: 'client/index.html'
       })
     ]
@@ -55,8 +55,6 @@ config = update(config, {
 
   devServer: {
     $set: {
-      publicPath: '/static/scripts/',
-
       port: 3000,
 
       contentBase: './dev',
