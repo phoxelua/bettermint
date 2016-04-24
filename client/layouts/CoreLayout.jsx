@@ -3,22 +3,8 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
-import * as store from 'store';
-import jwtDecode from 'jwt-decode';
-
-import * as actionCreators from 'actions/auth/emailSignIn';
 
 export class CoreLayout extends Component {
-
-  componentDidMount () {
-    let token = store.get('token');
-
-    // TODO: Validate this token before issuing this action.
-    if (!!token) {
-      this.props.actions.signInUserSuccess(token);
-    }
-  };
-
   render () {
     return (
       <div className="CoreLayout">
@@ -65,13 +51,13 @@ export class CoreLayout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions : bindActionCreators(actionCreators, dispatch)
+
   };
 }
 

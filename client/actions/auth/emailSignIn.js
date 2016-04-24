@@ -44,7 +44,7 @@ export function signOutAndRedirect() {
   };
 };
 
-export function signInUser(email, password, redirect='/') {
+export function signInUserWithCredentials(email, password, redirect='/') {
   return function(dispatch) {
     dispatch(signInUserRequest());
     return fetch('http://localhost:3001/api/auth/token/', {
@@ -78,5 +78,24 @@ export function signInUser(email, password, redirect='/') {
     .catch(error => {
       dispatch(signInUserFailure(error));
     });
+  };
+};
+
+export function signInUserWithToken(token, redirect='/') {
+  return function(dispatch) {
+    // TODO: Check if the token is valid, first.
+    try {
+      let decoded = jwtDecode(token);
+      dispatch(signInUserSuccess(token));
+      dispatch(push(redirect));
+    } catch (e) {
+      // TODO: Do something special here where we say your session expired.
+      dispatch(signInUserFailure({
+        response: {
+          status: 403,
+          statusText: 'Invalid token.'
+        }
+      }));
+    }
   };
 };
