@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
 class Transaction extends Component {
-  // TODO: Enforce PropTypes
-  // static propTypes = {
-  //   kitten: PropTypes.shape({
-  //     id: PropTypes.number.isRequired,
-  //     created: PropTypes.string.isRequired
-  //   }).isRequired
-  // };
+  static propTypes = {
+    transaction: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+      date: PropTypes.string.isRequired
+    }).isRequired
+  }
 
   render () {
     return (

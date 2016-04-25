@@ -13,9 +13,7 @@ class Accounts extends Component {
         {!!this.props.accounts.length &&
           <div>
             {this.props.accounts.map(account => (
-              <div>
-                <Account key={account._id} account={account} />
-              </div>
+              <Account key={account._id} account={account} />
             ))}
           </div>
         }

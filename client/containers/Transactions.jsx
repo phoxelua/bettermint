@@ -13,9 +13,7 @@ class Transactions extends Component {
         {!!this.props.transactions.length &&
           <div>
             {this.props.transactions.map(transaction => (
-              <div>
-                <Transaction transaction={transaction} />
-              </div>
+              <Transaction key={transaction._id} transaction={transaction} />
             ))}
           </div>
         }

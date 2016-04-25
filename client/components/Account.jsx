@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 
 class Account extends Component {
-  // TODO: Enforce PropTypes
-  // static propTypes = {
-  //   kitten: PropTypes.shape({
-  //     id: PropTypes.number.isRequired,
-  //     created: PropTypes.string.isRequired
-  //   }).isRequired
-  // };
-
-  componentDidMount () {
-    console.log(this.props.accoujnt)
+  static propTypes = {
+    account: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      meta: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired
+      }).isRequired,
+      institutionType: PropTypes.string.isRequired,
+      balance: PropTypes.shape({
+        available: PropTypes.number.isRequired,
+        current: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired
   }
 
   render () {

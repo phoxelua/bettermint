@@ -17,10 +17,12 @@ def is_camel_case(name):
 
 
 def snake_to_camel_case(name):
-    """Convert `name` from snake_case to camelCase."""
+    """Convert `name` from snake_case to camelCase, ignoring leading and trailing underscores."""
 
-    first, *rest = name.split('_')
-    return first + ''.join(word.capitalize() for word in rest)
+    num_left_underscores = len(name) - len(name.lstrip('_'))
+    num_right_underscores = len(name) - len(name.rstrip('_'))
+    first, *rest = name.strip('_').split('_')
+    return '_' * num_left_underscores + first + ''.join(word.capitalize() for word in rest) + '_' * num_right_underscores
 
 
 def camel_to_snake_case(name):
