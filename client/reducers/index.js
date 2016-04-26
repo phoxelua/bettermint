@@ -11,7 +11,7 @@ const reducers = combineReducers({
   data,
   financial,
   form: formReducer,
-  routing: routerReducer
+  routing: routerReducer,
 });
 
 export default reducers;

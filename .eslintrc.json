@@ -1,0 +1,13 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "babel"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+        "strict": 0,
+        "arrow-body-style": [0, "always"],
+        "no-else-return": 1
+    }
+}

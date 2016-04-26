@@ -19,7 +19,7 @@ class Transactions extends Component {
         }
       </div>
     );
-  };
+  }
 };
 
 const mapStateToProps = function(state) {

@@ -2,15 +2,25 @@ import 'whatwg-fetch';
 
 async function request({ url, data, params = {} }) {
   try {
+    let body;
+
+    if (data) {
+      if (data instanceof FormData) {
+        body = data;
+      } else {
+        body = JSON.stringify(data);
+      }
+    }
+
     const response = await fetch(url, {
       credentials: 'include',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: data ? ((data instanceof FormData) ? data : JSON.stringify(data)) : undefined,
-      ...params
-    })
+      body,
+      ...params,
+    });
     const contentType = response.headers.get('content-type');
 
     if (response.status < 200 || response.status >= 400) {
@@ -20,13 +30,15 @@ async function request({ url, data, params = {} }) {
     }
 
     if (response.status === 200 && contentType.indexOf('application/json') !== -1) {
-      let result = await response.json();
+      const result = await response.json();
       return result.data;
     }
+
+    return -1;
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
-    window.alert(JSON.stringify(await err.response.json()));
-    throw  err;
+    console.error(JSON.stringify(await err.response.json())); // eslint-disable-line no-console
+    throw err;
   }
 }
 
