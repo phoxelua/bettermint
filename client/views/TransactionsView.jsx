@@ -7,7 +7,7 @@ import Transactions from 'containers/Transactions';
 
 export default class TransactionsView extends Component {
   componentDidMount () {
-    this.props.actions.requestTransactions('chase');
+    this.props.actions.requestTransactions('chase', this.props.token);
   };
 
   render() {
@@ -21,13 +21,14 @@ export default class TransactionsView extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    transactions: state.financial.transactions
+    transactions: state.financial.transactions,
+    token: state.auth.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions : bindActionCreators(actionCreators, dispatch)
+    actions : bindActionCreators(actionCreators, dispatch),
   };
 };
 

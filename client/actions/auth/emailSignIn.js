@@ -44,10 +44,10 @@ export function signOutAndRedirect() {
   };
 }
 
-export function signInUserWithCredentials(email, password, redirect = '/') {
+export function signInUserWithCredentials(email, password, redirect='/') {
   return function action(dispatch) {
     dispatch(signInUserRequest());
-    return fetch('http://localhost:3001/api/auth/token/', {
+    return fetch('/api/auth/token/', {
       method: 'post',
       credentials: 'include',
       headers: {
@@ -81,7 +81,7 @@ export function signInUserWithCredentials(email, password, redirect = '/') {
   };
 }
 
-export function signInUserWithToken(token, redirect = '/') {
+export function signInUserWithToken(token, redirect='/') {
   return function action(dispatch) {
     // TODO: Check if the token is valid, first.
     try {

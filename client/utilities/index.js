@@ -6,9 +6,8 @@ export { get, post, del } from 'utilities/api';
 
 export function createConstants(...constants) {
   return constants.reduce((accumulator, constant) => {
-    const newAccumulator = accumulator;
-    newAccumulator[constant] = constant;
-    return newAccumulator;
+    accumulator[constant] = constant;
+    return accumulator;
   }, {});
 }
 

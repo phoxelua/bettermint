@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [authConstants.SIGN_IN_USER_REQUEST]: (state) => {
+  [authConstants.SIGN_IN_USER_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       isAuthenticating: true,
       statusText: null,
@@ -35,7 +35,7 @@ export default createReducer(initialState, {
       statusText: `Authentication Error: ${payload.status} ${payload.statusText}`,
     });
   },
-  [authConstants.SIGN_OUT_USER]: (state) => {
+  [authConstants.SIGN_OUT_USER]: (state, payload) => {
     return Object.assign({}, state, {
       isAuthenticated: false,
       token: null,

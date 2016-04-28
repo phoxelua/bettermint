@@ -6,7 +6,7 @@ from bettermint.database import db
 class PrimaryKeyIdBase(db.Model):
     __abstract__ = True
 
-    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
 
 class TimestampBase(PrimaryKeyIdBase):

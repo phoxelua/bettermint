@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-async function request({ url, data, params = {} }) {
+async function request({ url, data, params={}, authToken=null }) {
   try {
     let body;
 
@@ -12,7 +12,7 @@ async function request({ url, data, params = {} }) {
       }
     }
 
-    const response = await fetch(url, {
+    const req = {
       credentials: 'include',
       headers: {
         Accept: 'application/json',
@@ -20,11 +20,18 @@ async function request({ url, data, params = {} }) {
       },
       body,
       ...params,
-    });
+    };
+
+    if (authToken) {
+      req.headers.Authorization = `Bearer ${authToken}`;
+    }
+
+    const response = await fetch(url, req);
     const contentType = response.headers.get('content-type');
 
     if (response.status < 200 || response.status >= 400) {
       const error = Error('API Error');
+      console.log(response);
       error.response = response;
       throw error;
     }
@@ -42,14 +49,14 @@ async function request({ url, data, params = {} }) {
   }
 }
 
-export function get(url) {
-  return request({ url });
+export function get(url, authToken) {
+  return request({ url, authToken });
 }
 
-export function post(url, data) {
-  return request({ url, data, params: { method: 'post' } });
+export function post(url, data, authToken) {
+  return request({ url, data, params: { method: 'post' }, authToken });
 }
 
-export function del(url) {
-  return request({ url, params: { method: 'delete' } });
+export function del(url, authToken) {
+  return request({ url, params: { method: 'delete' }, authToken });
 }

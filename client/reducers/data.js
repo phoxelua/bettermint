@@ -16,7 +16,7 @@ export default createReducer(initialState, {
       isFetching: false,
     });
   },
-  [FETCH_PROTECTED_DATA_REQUEST]: (state) => {
+  [FETCH_PROTECTED_DATA_REQUEST]: (state, payload) => {
     return Object.assign({}, state, {
       isFetching: true,
     });

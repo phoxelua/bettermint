@@ -9,7 +9,7 @@ const initialState = {
 
 
 export default createReducer(initialState, {
-  [financialConstants.REQUEST_TRANSACTIONS]: (state) => {
+  [financialConstants.REQUEST_TRANSACTIONS]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: true,
       transactions: [],
@@ -23,7 +23,7 @@ export default createReducer(initialState, {
       accounts: payload.accounts,
     });
   },
-  [financialConstants.REQUEST_TRANSACTIONS_ERROR]: (state) => {
+  [financialConstants.REQUEST_TRANSACTIONS_ERROR]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: false,
       transactions: [],

@@ -3,6 +3,7 @@ import datetime
 from plaid import Client
 
 from bettermint.config import PLAID_CLIENT_ID, PLAID_SECRET
+from bettermint.lib.plaid.institutions import PlaidInstitutions
 
 
 class PlaidClient:
@@ -99,3 +100,17 @@ class PlaidClient:
 
         response = self._client.connect_get(options)
         return response.json()
+
+    def delete_user(self):
+        """
+        Deletes the user associated with this client from Plaid's cache. They will have to log in again next time.
+        """
+        self._client.connect_delete()
+
+    def exchange_token(self, token):
+        """
+        """
+        response = self._client.exchange_token(token)
+
+        if response.ok:
+            return response.json()['access_token']

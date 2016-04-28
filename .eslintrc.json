@@ -7,6 +7,12 @@
     "parser": "babel-eslint",
     "rules": {
         "arrow-body-style": [0, "always"],
-        "no-else-return": 1
+        "consistent-return": 1,
+        "eqeqeq": [2, "allow-null"],
+        "max-len": [1, {"code": 120, "tabWidth": 2, "ignoreUrls": true}],
+        "no-else-return": 0,
+        "no-param-reassign": 0,
+        "no-unused-vars": [2, {"args": "none"}],
+        "space-infix-ops": 0
     }
 }

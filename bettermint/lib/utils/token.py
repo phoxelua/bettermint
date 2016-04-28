@@ -14,3 +14,7 @@ def generate_token(dictionary: dict, expiration: datetime.timedelta):
     dictionary['expiration'] = (datetime.datetime.utcnow() + expiration).timestamp()
 
     return jwt.encode(dictionary, SECRET_KEY, algorithm='HS256')
+
+
+def decode_token(token: str):
+    return jwt.decode(token, SECRET_KEY, algorithm='HS256')

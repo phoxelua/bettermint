@@ -3,7 +3,7 @@ import * as path from 'path';
 import { financialConstants } from 'constants/financial';
 import { get } from 'utilities';
 
-export function requestTransactions(institution) {
+export function requestTransactions(institution, token) {
   return async (dispatch) => {
     dispatch({
       type: financialConstants.REQUEST_TRANSACTIONS,
@@ -11,7 +11,7 @@ export function requestTransactions(institution) {
 
     try {
       const endpoint = path.join('/api/financial/institution', institution);
-      const result = await get(endpoint);
+      const result = await get(endpoint, token);
 
       dispatch({
         type: financialConstants.REQUEST_TRANSACTIONS_SUCCESS,
