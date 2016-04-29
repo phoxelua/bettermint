@@ -31,7 +31,6 @@ async function request({ url, data, params={}, authToken=null }) {
 
     if (response.status < 200 || response.status >= 400) {
       const error = Error('API Error');
-      console.log(response);
       error.response = response;
       throw error;
     }

@@ -28,46 +28,6 @@ class PlaidClient:
             'url': 'https://tartan.plaid.com'
         })
 
-    def add_user(self, institution, username: str, password: str):
-        """
-        Adds a user to Bettermint.
-
-        Makes a request to the financial institution specified, using the credentials provided.  If the credentials
-        succeed, an access token is granted, which gives access to the user's financial transactions from this
-        institution.
-
-        TODO: specify institutions as constants somewhere.
-        TODO: make it work smoothly for mfa
-
-        Args:
-            institution: The financial institution to connect to.
-            username: The username for the account.
-            password: The password for the account.
-
-        Returns:
-            An access token for the account.
-        """
-
-        response = self._client.connect(institution, {
-            'username': username,
-            'password': password
-        })
-
-        print(response.json())
-
-        # TODO: Factor this into another method so we can cleanly support MFA types
-        response = self._client.connect_step(institution, None, options={'send_method': {'type': 'phone'}})
-
-        print(response.json())
-
-        code = input()
-
-        response = self._client.connect_step(institution, code)
-
-        print(response.json())
-
-        return response.json()
-
     def get_transactions(
         self,
         start: datetime.datetime=datetime.datetime.utcnow() - datetime.timedelta(days=30),
@@ -107,10 +67,12 @@ class PlaidClient:
         """
         self._client.connect_delete()
 
-    def exchange_token(self, token):
+    def exchange_token(self, public_token):
         """
+        Exchanges the public_token returned by the Plaid Link module for a complete Plaid access token.
         """
-        response = self._client.exchange_token(token)
+
+        response = self._client.exchange_token(public_token)
 
         if response.ok:
             return response.json()['access_token']

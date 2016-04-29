@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
 
-import { post } from 'utilities';
+import { post } from 'utilities/api';
 
 const plaidLinkUrl = 'https://cdn.plaid.com/link/stable/link-initialize.js';
 

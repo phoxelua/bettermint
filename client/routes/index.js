@@ -8,7 +8,7 @@ import {
   ProfileView,
   LoginView,
 } from 'views';
-import { requireAuthentication } from 'utilities';
+import { requireAuthentication } from 'utilities/routes';
 
 
 export default () => {

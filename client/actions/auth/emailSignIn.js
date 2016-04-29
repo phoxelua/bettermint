@@ -1,4 +1,4 @@
-import { checkHttpStatus, parseResponse } from 'utilities';
+import { checkHttpStatus, parseResponse } from 'utilities/http';
 import { authConstants as authConstants } from 'constants/auth';
 import { push } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';

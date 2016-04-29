@@ -1,4 +1,4 @@
-import { createReducer } from 'utilities';
+import { createReducer } from 'utilities/redux';
 import { authConstants } from 'constants/auth';
 import jwtDecode from 'jwt-decode';
 

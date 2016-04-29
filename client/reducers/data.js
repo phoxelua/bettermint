@@ -1,4 +1,4 @@
-import { createReducer } from 'utilities';
+import { createReducer } from 'utilities/redux';
 import {
   RECEIVE_PROTECTED_DATA,
   FETCH_PROTECTED_DATA_REQUEST,

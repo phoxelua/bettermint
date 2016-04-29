@@ -6,24 +6,45 @@ from bettermint.database import db
 from bettermint.models.user import User, UserToInstitution
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication
-from bettermint.lib.utils.web import write_success_data, write_success
+from bettermint.lib.utils.web import write_fail, write_success_data, write_success
 
 
 financial_api = flask.Blueprint('financial_api', __name__, url_prefix='/api/financial')
 
 
-@financial_api.route('/institution/<institution>', defaults={'account_id': None}, methods=['GET'])
-@financial_api.route('/institution/<institution>/<account_id>', methods=['GET'])
+@financial_api.route('/institution', methods=['GET'])
 @require_authentication
-def get_institution(institution, account_id, user):
+def get_institutions(user):
     """
-    Get data associated with an institution.
+    Gets all institutions associated with `user`.
+    """
+
+    u2is = db.session.query(UserToInstitution).filter(
+        UserToInstitution.user == user
+    ).all()
+
+    institutions = [u2i.institution for u2i in u2is]
+    return write_success_data({
+        'institutions': institutions
+    })
+
+
+@financial_api.route('/transactions/<institution>', defaults={'account_id': None}, methods=['GET'])
+@financial_api.route('/transactions/<institution>/<account_id>', methods=['GET'])
+@require_authentication
+def get_transactions(institution, account_id, user):
+    """
+    Get transactions associated with an institution.
     """
 
     u2i = UserToInstitution.by_user_id_and_institution(db.session, user.id, institution)
-    client = PlaidClient(u2i.access_token)
-    json = client.get_transactions(start=datetime.datetime.now() - datetime.timedelta(days=7))
-    return write_success_data(json)
+
+    if u2i:
+        client = PlaidClient(u2i.access_token)
+        json = client.get_transactions(start=datetime.datetime.now() - datetime.timedelta(days=7))
+        return write_success_data(json)
+    else:
+        return write_fail("That user isn't associated with that institution!")
 
 
 @financial_api.route('/token/convert', methods=['POST'])
