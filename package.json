@@ -31,7 +31,7 @@
     "react-mixin": "~3.0.3",
     "react-redux": "~4.4.0",
     "react-router": "2.x",
-    "react-router-redux": "4.4.x",
+    "react-router-redux": "4.0.x",
     "react-simple-dropdown": "1.x",
     "redux": "3.x",
     "redux-auth-wrapper": "0.3.x",
