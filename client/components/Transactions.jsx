@@ -1,21 +1,40 @@
-import React from 'react';
-import Transaction from 'components/Transaction';
+import React, { PropTypes } from 'react';
 
-const Transactions = () => {
+const Transactions = (props) => {
   return (
     <div>
-      {!!this.props.transactions.length &&
+      {!!props.transactions.length &&
         <h1>Transactions</h1>
       }
-      {!!this.props.transactions.length &&
-        <div>
-          {this.props.transactions.map(transaction => (
-            <Transaction key={transaction._id} transaction={transaction} />
-          ))}
-        </div>
+      {!!props.transactions.length &&
+        <table>
+          <colgroup>
+            <col span="1" style={{ width: 20 + '%' }}></col>
+            <col span="1" style={{ width: 40 + '%' }}></col>
+            <col span="1" style={{ width: 40 + '%' }}></col>
+          </colgroup>
+          <tbody>
+            {props.transactions.map(transaction => (
+              <tr key={transaction._id}>
+                <td>{transaction.date}</td>
+                <td>{transaction.name}</td>
+                <td>{transaction.amount.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       }
     </div>
   );
+};
+
+Transactions.propTypes = {
+  transactions: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Transactions;

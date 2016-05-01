@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
 export class CoreLayout extends Component {
@@ -18,7 +17,9 @@ export class CoreLayout extends Component {
                 <li><Link to="profile">Profile</Link></li>
               </ul>
               <Dropdown className="CoreLayout__nav__mobile-dropdown">
-                <DropdownTrigger><i className="material-icons">menu</i></DropdownTrigger>
+                <DropdownTrigger>
+                  <i className="material-icons">menu</i>
+                </DropdownTrigger>
                 <DropdownContent>
                   <ul>
                     <li><Link to="transactions">Transactions</Link></li>
@@ -38,8 +39,8 @@ export class CoreLayout extends Component {
         <footer>
           <div className="CoreLayout__footer__wrapper">
             <ul className="CoreLayout__links CoreLayout__footer__links">
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/privacy">Privacy</Link></li>
+              <li><Link to="about">About</Link></li>
+              <li><Link to="privacy">Privacy</Link></li>
               <li className=""><span>© 2016 Bettermint</span></li>
             </ul>
           </div>
@@ -51,7 +52,7 @@ export class CoreLayout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
 
@@ -59,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
 
   };
-}
+};
 
 export default connect(
   mapStateToProps,
