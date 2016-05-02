@@ -1,8 +1,7 @@
 import datetime
-
 from plaid import Client
+from flask import current_app
 
-from bettermint.config import PLAID_CLIENT_ID, PLAID_SECRET
 from bettermint.lib.plaid.institutions import PlaidInstitutions
 
 
@@ -19,8 +18,8 @@ class PlaidClient:
         """
 
         self._client = Client(
-            client_id=PLAID_CLIENT_ID,
-            secret=PLAID_SECRET,
+            client_id=current_app.config['PLAID_CLIENT_ID'],
+            secret=current_app.config['PLAID_SECRET'],
             access_token=access_token
         )
 

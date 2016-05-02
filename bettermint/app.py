@@ -1,3 +1,4 @@
+import os
 from logging import StreamHandler
 from sys import stdout
 
@@ -5,15 +6,15 @@ from flask import Flask
 from flask.ext.cors import CORS
 
 from bettermint.database import db
-from bettermint.constants import CONFIG_PY_PATH
+from bettermint.constants import Environment
+from bettermint.config import DevConfig, TestingConfig, ProdConfig
 
 
 def create_app():
     """Initializes everything for the app needs."""
 
     app = Flask(__name__)
-
-    app.config.from_pyfile(CONFIG_PY_PATH)
+    _config_from_environment(app)
 
     db.init_app(app)
 
@@ -50,3 +51,16 @@ def _register_views(app):
         index_view
     ]:
         app.register_blueprint(view)
+
+
+def _config_from_environment(app):
+    """Configures the app based on environment variable ENVIRONMENT."""
+
+    env = os.environ.get('ENVIRONMENT')
+    if env == Environment.TESTING:
+        config = TestingConfig
+    elif env == Environment.PROD:
+        config = ProdConfig
+    else:
+        config = DevConfig
+    app.config.from_object(config)

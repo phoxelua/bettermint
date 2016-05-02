@@ -1,9 +1,34 @@
-SQLALCHEMY_DATABASE_URI = 'postgresql://localhost'
-DEBUG = True
-HOST = '127.0.0.1'
-PORT = 3001
-SECRET_KEY = 'bettermint is cool'
+class Config:
+    CONFIG_NAME = 'base'
 
-# Plaid
-PLAID_CLIENT_ID = 'client id'
-PLAID_SECRET = 'secret'
+    # Flask
+    DEBUG = False
+    TESTING = False
+
+    # Plaid
+    PLAID_CLIENT_ID = 'yo-play-client-id-here'
+    PLAID_SECRET = 'yo-plaid-secret-here'
+
+
+class DevConfig(Config):
+    CONFIG_NAME = 'dev'
+
+    # Flask
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost'
+    HOST = '127.0.0.1'
+    PORT = 3001
+    TOKEN_SECRET_KEY = 'something secret'
+
+
+class TestingConfig(Config):
+    CONFIG_NAME = 'testing'
+
+    # Flask
+    TESTING = True
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
+
+
+class ProdConfig(Config):
+    CONFIG_NAME = 'prod'

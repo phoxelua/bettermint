@@ -1,1 +1,4 @@
-CONFIG_PY_PATH = 'config.py'
+class Environment:
+    DEV = 'dev'
+    TESTING = 'testing'
+    PROD = 'prod'

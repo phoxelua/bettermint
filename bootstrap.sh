@@ -23,11 +23,4 @@ function InstallDependencies {
     pip install -r requirements.txt
 }
 
-function CreatePrePushHooks {
-    echo "Creating pre-push hooks..."
-    isInCorrectEnv
-    pre-commit install --hook-type pre-push
-}
-
 InstallDependencies
-CreatePrePushHooks
