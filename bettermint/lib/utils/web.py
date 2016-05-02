@@ -35,6 +35,13 @@ def camel_to_snake_case(name):
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 
+def is_valid_email(email):
+    """
+    DO NOT USE (temp function): Validates whether `email` is a valid email address.
+    """
+    return re.search('(\w+[.|\w])*@(\w+[.])*\w+', email) is not None
+
+
 def _apply_on_dict_keys_recursively(function, condition: "Callable[[str], bool]", dictionary: dict):
     """
     Applies ``function`` on a JSON-serializable dictionary's keys if ``condition``.

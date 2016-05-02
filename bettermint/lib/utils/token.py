@@ -1,8 +1,7 @@
 import datetime
-
 import jwt
 
-from bettermint.config import SECRET_KEY
+from flask import current_app
 
 
 def generate_token(dictionary: dict, expiration: datetime.timedelta):
@@ -13,8 +12,8 @@ def generate_token(dictionary: dict, expiration: datetime.timedelta):
 
     dictionary['expiration'] = (datetime.datetime.utcnow() + expiration).timestamp()
 
-    return jwt.encode(dictionary, SECRET_KEY, algorithm='HS256')
+    return jwt.encode(dictionary, current_app.config['TOKEN_SECRET_KEY'], algorithm='HS256')
 
 
 def decode_token(token: str):
-    return jwt.decode(token, SECRET_KEY, algorithm='HS256')
+    return jwt.decode(token, current_app.config['TOKEN_SECRET_KEY'], algorithm='HS256')

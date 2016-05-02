@@ -18,4 +18,3 @@ export function parseResponse(response) {
     return json.then(err => Promise.reject(err));
   }
 }
-

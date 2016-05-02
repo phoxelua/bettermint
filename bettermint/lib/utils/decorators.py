@@ -1,7 +1,6 @@
 import functools
 
 import flask
-import jwt
 
 from bettermint.database import db
 from bettermint.models.user import User
