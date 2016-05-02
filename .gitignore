@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Ignore configuration file
-config.py
+bettermint/config.py
 
 # C extensions
 *.so
