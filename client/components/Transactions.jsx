@@ -1,4 +1,15 @@
 import React, { PropTypes } from 'react';
+import { epochToDate } from 'utilities/date';
+
+const transactionSortFunction = (a, b) => {
+  if (a.date > b.date) {
+    return -1;
+  } else if (a.date === b.date) {
+    return 0;
+  } else {
+    return 1;
+  }
+};
 
 const Transactions = (props) => {
   return (
@@ -21,12 +32,20 @@ const Transactions = (props) => {
                 <th>Debit</th>
                 <th>Credit</th>
               </tr>
-            {props.transactions.map(transaction => (
+            {props.transactions.sort(transactionSortFunction).map(transaction => (
               <tr key={transaction._id}>
-                <td>{transaction.date}</td>
+                <td>{epochToDate(transaction.date)}</td>
                 <td>{transaction.name}</td>
-                <td>{transaction.amount.toFixed(2) >= 0 ? transaction.amount.toFixed(2) : ''}</td>
-                <td>{transaction.amount.toFixed(2) < 0 ? (-transaction.amount).toFixed(2) : ''}</td>
+                <td>{
+                  transaction.amount >= 0
+                    ? transaction.amount.toFixed(2)
+                    : ''
+                }</td>
+                <td>{
+                  transaction.amount < 0
+                    ? (-transaction.amount).toFixed(2)
+                    : ''
+                }</td>
               </tr>
             ))}
           </tbody>

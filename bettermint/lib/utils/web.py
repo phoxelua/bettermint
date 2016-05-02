@@ -96,7 +96,7 @@ def write_fail(message, code=None):
 
 
 def write_success():
-    """Returns a simple success object."""
+    """Returns an empty success object."""
 
     return jsonify({
         'success': True

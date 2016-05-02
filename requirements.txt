@@ -17,6 +17,7 @@ pyjwt==1.4.0
 pytz==2015.4
 six==1.9.0
 SQLAlchemy==1.0.4
+titlecase==0.8.1
 Werkzeug==0.10.4
 
 -e git+https://github.com/jjwon0/plaid-python@215a8e289920ecad8d0b075bf0db1ce1a6e3a5bc#egg=plaid_python

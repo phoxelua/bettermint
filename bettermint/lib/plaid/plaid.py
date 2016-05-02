@@ -1,8 +1,12 @@
 import datetime
 from plaid import Client
+
 from flask import current_app
+from titlecase import titlecase
+from werkzeug import exceptions
 
 from bettermint.lib.plaid.institutions import PlaidInstitutions
+from bettermint.lib.utils.web import write_success
 
 
 class PlaidClient:
@@ -58,13 +62,16 @@ class PlaidClient:
         }
 
         response = self._client.connect_get(options)
-        return response.json()
+        return self._process_transactions(response)
 
     def delete_user(self):
         """
         Deletes the user associated with this client from Plaid's cache. They will have to log in again next time.
         """
-        self._client.connect_delete()
+
+        response = self._client.connect_delete()
+        if not response.ok:
+            raise exceptions.BadRequest('TODO: SOMETHING FUCKED UP')
 
     def exchange_token(self, public_token):
         """
@@ -73,5 +80,57 @@ class PlaidClient:
 
         response = self._client.exchange_token(public_token)
 
-        if response.ok:
-            return response.json()['access_token']
+        if not response.ok:
+            raise exceptions.BadRequest('TODO: SOMETHING FUCKED UP')
+
+        return response.json()['access_token']
+
+    def _process_transactions(self, response):
+        """
+        Processes a response with data containing transactions from Plaid to be in a specific format.
+
+        Args:
+            response: A response from plaid.Client.
+
+        Returns:
+            TODO
+
+        Raises:
+            TODO
+        """
+
+        if not response.ok:
+            raise exceptions.BadRequest('TODO: SOMETHING FUCKED UP')
+
+        response_json = response.json()
+        transactions = [
+            {
+                '_id': transaction['_id'],
+                '_account': transaction['_account'],
+                'date': self._process_transaction_date(transaction['date']),
+                'amount': transaction['amount'],
+                'name': self._process_transaction_name(transaction['name']),
+                'pending': transaction['pending']
+            }
+            for transaction
+            in response_json['transactions']
+        ]
+
+        return {
+            'transactions': transactions
+        }
+
+    @staticmethod
+    def _process_transaction_name(name):
+        """
+        Prettify the names of transactions.
+
+        TODO: Should we do this at all, or send whatever we get from Plaid?
+        """
+        return titlecase(name)
+
+    @staticmethod
+    def _process_transaction_date(date):
+        """Converts `date` from YYYY-MM-DD to epoch time."""
+        return datetime.datetime.strptime(date, '%Y-%m-%d').timestamp()
+
