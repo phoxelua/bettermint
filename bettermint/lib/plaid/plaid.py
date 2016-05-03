@@ -3,6 +3,7 @@ import datetime
 from plaid import Client
 
 from flask import current_app
+from titlecase import titlecase
 from werkzeug import exceptions
 
 
