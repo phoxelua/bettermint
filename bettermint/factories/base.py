@@ -12,8 +12,8 @@ class BaseFactory(metaclass=abc.ABCMeta):
 
         return cls()
 
-    instance = Lazy(lambda cls: cls._create_instance())
     """The singleton instance of this class."""
+    instance = Lazy(lambda cls: cls._create_instance())
 
     @abc.abstractmethod
     def create(self):

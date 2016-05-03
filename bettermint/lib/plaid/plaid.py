@@ -1,12 +1,10 @@
 import datetime
+
 from plaid import Client
 
 from flask import current_app
 from titlecase import titlecase
 from werkzeug import exceptions
-
-from bettermint.lib.plaid.institutions import PlaidInstitutions
-from bettermint.lib.utils.web import write_success
 
 
 class PlaidClient:
