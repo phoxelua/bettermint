@@ -15,8 +15,8 @@ class PrimaryKeyIdBase(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        d = OrderedDict([('{} <{}>'.format(c.name, c.type), str(getattr(self, c.name)))
-                         for c in self.__table__.columns])
+        d = OrderedDict(sorted([('{} <{}>'.format(c.name, c.type), str(getattr(self, c.name)))
+                        for c in self.__table__.columns], key=lambda x: x[0]))
         return json.dumps(d, indent=2)
 
 

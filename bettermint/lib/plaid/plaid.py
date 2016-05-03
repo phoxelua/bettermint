@@ -3,7 +3,6 @@ import datetime
 from plaid import Client
 
 from flask import current_app
-from titlecase import titlecase
 from werkzeug import exceptions
 
 
@@ -129,4 +128,3 @@ class PlaidClient:
     def _process_transaction_date(date):
         """Converts `date` from YYYY-MM-DD to epoch time."""
         return datetime.datetime.strptime(date, '%Y-%m-%d').timestamp()
-
