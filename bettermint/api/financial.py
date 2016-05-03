@@ -1,12 +1,13 @@
 import datetime
 
 import flask
+from werkzeug import exceptions
 
 from bettermint.database import db
-from bettermint.models.user import User, UserToInstitution
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication
 from bettermint.lib.utils.web import write_fail, write_success_data, write_success
+from bettermint.models.user import User, UserToInstitution
 
 
 financial_api = flask.Blueprint('financial_api', __name__, url_prefix='/api/financial')
@@ -24,9 +25,31 @@ def get_institutions(user):
     ).all()
 
     institutions = [u2i.institution for u2i in u2is]
+
     return write_success_data({
         'institutions': institutions
     })
+
+
+@financial_api.route('/institution/<institution>', methods=['DELETE'])
+@require_authentication
+def delete_institutions(institution, user):
+    """
+    Deletes an institution associated with `user`.
+    """
+
+    if not institution:
+        raise exceptions.BadRequest('Institution is required.')
+
+    u2i = db.session.query(UserToInstitution).filter(
+        UserToInstitution.user == user,
+        UserToInstitution.institution == institution
+    ).one()
+
+    db.session.delete(u2i)
+    db.session.commit()
+
+    return write_success()
 
 
 @financial_api.route('/transactions/<institution>', defaults={'account_id': None}, methods=['GET'])

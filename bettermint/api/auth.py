@@ -18,6 +18,7 @@ def create_token():
     """
     If the provided email and password combination is valid, generates a JWT for client-use which expires in 7 days.
     """
+
     try:
         request_json = get_json_with_keys(flask.request, ['email', 'password'])
         email = request_json['email']

@@ -28,6 +28,22 @@ export default createReducer(initialState, {
       institutions: [],
     });
   },
+  [financialConstants.DELETE_INSTITUTION]: (state, payload) => {
+    return Object.assign({}, state, {
+      isRequesting: true,
+    });
+  },
+  [financialConstants.DELETE_INSTITUTION_SUCCESS]: (state, payload) => {
+    return Object.assign({}, state, {
+      isRequesting: false,
+      institutions: state.institutions.filter((institution) => institution !== payload.institution),
+    });
+  },
+  [financialConstants.DELETE_INSTITUTION_ERROR]: (state, payload) => {
+    return Object.assign({}, state, {
+      isRequesting: false,
+    });
+  },
   [financialConstants.REQUEST_TRANSACTIONS]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: true,

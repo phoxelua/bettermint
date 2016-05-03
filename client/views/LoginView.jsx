@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import reactMixin from 'react-mixin';
 import * as store from 'store';
-import jwtDecode from 'jwt-decode';
 
 import * as actionCreators from 'actions/auth/emailSignIn';
 import EmailSignInForm from 'containers/EmailSignInForm';

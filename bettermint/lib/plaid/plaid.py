@@ -116,9 +116,7 @@ class PlaidClient:
             in response_json['transactions']
         ]
 
-        return {
-            'transactions': transactions
-        }
+        return transactions
 
     @staticmethod
     def _process_transaction_name(name):

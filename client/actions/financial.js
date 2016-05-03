@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 import { financialConstants } from 'constants/financial';
-import { get } from 'utilities/api';
+import { get, del } from 'utilities/api';
 
 export function requestInstitutions(token) {
   return async (dispatch) => {
@@ -10,7 +10,7 @@ export function requestInstitutions(token) {
     });
 
     try {
-      const endpoint = path.join('/api/financial/institution');
+      const endpoint = '/api/financial/institution';
       const result = await get(endpoint, token);
 
       dispatch({
@@ -22,6 +22,30 @@ export function requestInstitutions(token) {
     } catch (e) {
       dispatch({
         type: financialConstants.REQUEST_INSTITUTIONS_ERROR,
+      });
+    }
+  };
+}
+
+export function deleteInstitution(institution, token) {
+  return async (dispatch) => {
+    dispatch({
+      type: financialConstants.DELETE_INSTITUTION,
+    });
+
+    try {
+      const endpoint = path.join('/api/financial/institution/', institution);
+      await del(endpoint, token);
+
+      dispatch({
+        type: financialConstants.DELETE_INSTITUTION_SUCCESS,
+        payload: {
+          institution,
+        },
+      });
+    } catch (e) {
+      dispatch({
+        type: financialConstants.DELETE_INSTITUTION_ERROR,
       });
     }
   };
