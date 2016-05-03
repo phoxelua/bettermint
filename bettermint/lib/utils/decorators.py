@@ -1,8 +1,6 @@
 import functools
-
 import flask
 
-from bettermint.database import db
 from bettermint.models.user import User
 from bettermint.lib.utils.token import decode_token
 
@@ -30,7 +28,7 @@ def require_authentication(func):
             raise Exception('Bearer token is not present.')
 
         decrypted = decode_token(token)
-        user = User.by_email(db.session, decrypted['email'])
+        user = User.by_email(decrypted['email'])
         kwargs['user'] = user
 
         return func(*args, **kwargs)

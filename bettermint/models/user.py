@@ -12,14 +12,11 @@ class User(TimestampBase):
     email = db.Column(db.String(255), nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
     password_salt = db.Column(db.String(29), nullable=False)
-
     user_to_institutions = db.relationship('UserToInstitution')
 
     @classmethod
-    def by_email(cls, session, email: str) -> 'User':
-        return session.query(cls).filter(
-            cls.email == email
-        ).first()
+    def by_email(cls, email: str) -> 'User':
+        return User.query.filter_by(email=email).first()
 
 
 class UserToInstitution(PrimaryKeyIdBase):

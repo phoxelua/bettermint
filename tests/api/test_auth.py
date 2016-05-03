@@ -1,11 +1,12 @@
 import json
 import unittest
+
 from flask import url_for
-from flask.ext.api import status
 from flask.ext.testing import TestCase
 
 from bettermint.database import db
 from bettermint.factories import UserFactory
+from bettermint.lib.utils import status
 
 
 class TestAuth(TestCase):
@@ -32,10 +33,10 @@ class TestAuth(TestCase):
         db.drop_all()
 
     def test_token_creation_without_email_should_fail(self):
-        self._post_to_endpoint(self.token_url, status.HTTP_400_BAD_REQUEST, password='1234')
+        self._post_to_endpoint(self.token_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234')
 
     def test_token_creation_without_password_should_fail(self):
-        self._post_to_endpoint(self.token_url, status.HTTP_400_BAD_REQUEST, email=self.user.email)
+        self._post_to_endpoint(self.token_url, status.HTTP_422_UNPROCESSABLE_ENTITY, email=self.user.email)
 
     def test_token_creation_with_nonexistant_user_should_fail(self):
         self._post_to_endpoint(self.token_url, status.HTTP_404_NOT_FOUND, email='idontexist@gmail.com', password='1234')
@@ -47,23 +48,23 @@ class TestAuth(TestCase):
         self._post_to_endpoint(self.token_url, email=self.user.email, password='forever10')
 
     def test_signup_without_email_should_fail(self):
-        self._post_to_endpoint(self.signup_url, status.HTTP_400_BAD_REQUEST, password='1234',
+        self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
                                first_name='Joe', last_name='Blow')
 
     def test_signup_without_password_should_fail(self):
-        self._post_to_endpoint(self.signup_url, status.HTTP_400_BAD_REQUEST, email='joeb@gmail.com',
+        self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, email='joeb@gmail.com',
                                first_name='Joe', last_name='Blow')
 
     def test_signup_without_first_name_should_fail(self):
-        self._post_to_endpoint(self.signup_url, status.HTTP_400_BAD_REQUEST, password='1234',
+        self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
                                email='joeb@gmail.com', last_name='Blow')
 
     def test_signup_without_last_name_should_fail(self):
-        self._post_to_endpoint(self.signup_url, status.HTTP_400_BAD_REQUEST, password='1234',
+        self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
                                email='joeb@gmail.com', first_name='Joe')
 
     def test_signup_invalid_email_fails(self):
-        self._post_to_endpoint(self.signup_url, status.HTTP_400_BAD_REQUEST, password='1234',
+        self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
                                email='12a1421,!?', first_name=self.user.first_name, last_name=self.user.last_name)
 
     def test_signup_existing_user_fails(self):
