@@ -33,6 +33,7 @@
     "react-router": "2.x",
     "react-router-redux": "4.0.x",
     "react-simple-dropdown": "1.x",
+    "reactable": "^0.13.0",
     "redux": "3.x",
     "redux-auth-wrapper": "0.3.x",
     "redux-form": "4.x",

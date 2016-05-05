@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import * as actionCreators from 'actions/financial';
 
 const Institution = ({ institution, onDelete }) => {
-  console.log(onDelete);
   const _onDelete = () => {
     onDelete(institution);
   };

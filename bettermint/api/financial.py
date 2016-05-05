@@ -64,8 +64,10 @@ def get_transactions(institution, account_id, user):
 
     if u2i:
         client = PlaidClient(u2i.access_token)
-        json = client.get_transactions(start=datetime.datetime.now() - datetime.timedelta(days=7))
-        return write_success_data(json)
+        transactions = client.get_transactions(start=datetime.datetime.now() - datetime.timedelta(days=7))
+        return write_success_data({
+            'transactions': transactions
+        })
     else:
         return write_fail("That user isn't associated with that institution!")
 

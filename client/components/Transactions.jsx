@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Table, Tr, Td, Sort } from 'reactable';
 import { epochToDate } from 'utilities/date';
 
 const transactionSortFunction = (a, b) => {
@@ -11,46 +12,31 @@ const transactionSortFunction = (a, b) => {
   }
 };
 
-const Transactions = (props) => {
+const Transactions = ({ transactions }) => {
   return (
     <div>
-      {!!props.transactions.length &&
-        <h1>Transactions</h1>
-      }
-      {!!props.transactions.length &&
-        <table>
-          <colgroup>
-            <col span="1" style={{ width: 20 + '%' }}></col>
-            <col span="1" style={{ width: 40 + '%' }}></col>
-            <col span="1" style={{ width: 20 + '%' }}></col>
-            <col span="1" style={{ width: 20 + '%' }}></col>
-          </colgroup>
-          <tbody>
-            <tr>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Debit</th>
-                <th>Credit</th>
-              </tr>
-            {props.transactions.sort(transactionSortFunction).map(transaction => (
-              <tr key={transaction._id}>
-                <td>{epochToDate(transaction.date)}</td>
-                <td>{transaction.name}</td>
-                <td>{
-                  transaction.amount >= 0
-                    ? transaction.amount.toFixed(2)
-                    : ''
-                }</td>
-                <td>{
-                  transaction.amount < 0
-                    ? (-transaction.amount).toFixed(2)
-                    : ''
-                }</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      }
+      <h1>Transactions</h1>
+      <Table
+        columns={[
+          { key: 'date', label: 'Date' },
+          { key: 'name', label: 'Name' },
+          { key: 'amount', label: 'Amount' },
+        ]}
+        sortable={[
+          { column: 'date', sortFunction: Sort.Date },
+          'name',
+          { column: 'amount', sortFunction: Sort.Numeric },
+          'pending',
+        ]}
+      >
+        {transactions.map((transaction) => (
+          <Tr>
+            <Td column="date">{epochToDate(transaction.date)}</Td>
+            <Td column="name">{transaction.name}</Td>
+            <Td column="amount">{transaction.amount.toFixed(2)}</Td>
+          </Tr>
+        ))}
+      </Table>
     </div>
   );
 };
