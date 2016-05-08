@@ -84,31 +84,3 @@ def snake_to_camel_case_dict(dictionary):
 
     _apply_on_dict_keys_recursively(snake_to_camel_case, is_snake_case, dictionary)
     return dictionary
-
-
-def write_fail(message, code=None):
-    """Returns a simple failure object with message and an optional error code"""
-
-    obj = {'success': False, 'message': message}
-    if code is not None:
-        obj['error_code'] = code
-
-    return jsonify(obj)
-
-
-def write_success():
-    """Returns an empty success object."""
-
-    return jsonify({
-        'success': True
-    })
-
-
-def write_success_data(data, message=None):
-    """Returns a success object with data, and optionally, a message."""
-
-    obj = {'success': True, 'data': snake_to_camel_case_dict(data)}
-    if message:
-        obj['message'] = message
-
-    return jsonify(obj)

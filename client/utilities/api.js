@@ -37,7 +37,7 @@ async function request({ url, data, params={}, authToken=null }) {
 
     if (response.status === 200 && contentType.indexOf('application/json') !== -1) {
       const result = await response.json();
-      return result.data;
+      return result;
     }
 
     return -1;
