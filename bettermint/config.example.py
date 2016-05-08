@@ -10,6 +10,9 @@ class Config:
     PLAID_SECRET = 'yo-plaid-secret-here'
     PLAID_URL = 'https://tartan.plaid.com'
 
+    # Security
+    NUM_HASH_ROUNDS = 8000
+
 
 class DevConfig(Config):
     CONFIG_NAME = 'dev'
@@ -30,6 +33,8 @@ class TestingConfig(Config):
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_DATABASE_URI = "sqlite://"
 
+    # Security
+    NUM_HASH_ROUNDS = 1
 
 class ProdConfig(Config):
     CONFIG_NAME = 'prod'

@@ -1,6 +1,6 @@
 from bettermint.models.user import User
 from bettermint.factories.base import BaseFactory
-from bettermint.lib.utils.security import pwd_context
+from bettermint.lib.utils.security import PasswordManager
 
 
 class UserFactory(BaseFactory):
@@ -8,7 +8,7 @@ class UserFactory(BaseFactory):
 
     def create(self, first_name: str, last_name: str, email: str, password: str) -> User:
         """Creates a regular user."""
-        hashed = pwd_context.encrypt(password)
+        hashed = PasswordManager.context.encrypt(password)
 
         user = User(
             first_name=first_name,

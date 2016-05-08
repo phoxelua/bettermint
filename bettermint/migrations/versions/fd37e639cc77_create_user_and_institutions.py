@@ -1,4 +1,4 @@
-"""empty message
+"""Create User and Institutions talb
 
 Revision ID: fd37e639cc77
 Revises: None
