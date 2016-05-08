@@ -16,27 +16,36 @@ const Institution = ({ institution, onDelete }) => {
   );
 };
 
-class Institutions extends Component {
-  handleOnDelete = (institution) => {
-    this.props.actions.deleteInstitution(institution, this.props.token);
-  }
+Institution.propTypes = {
+  institution: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
-  render() {
-    return (
-      <div>
-        {!!this.props.institutions.length &&
-          <div>
-            {this.props.institutions.map(institution => (
-              <div key={institution}>
-                <Institution institution={institution} onDelete={this.handleOnDelete} />
-              </div>
-            ))}
-          </div>
-        }
-      </div>
-    );
-  }
-}
+const Institutions = ({ actions, token, institutions }) => {
+  const handleOnDelete = (institution) => {
+    actions.deleteInstitution(institution, token);
+  };
+
+  return (
+    <div>
+      {!!institutions.length &&
+        <div>
+          {institutions.map(institution => (
+            <div key={institution}>
+              <Institution institution={institution} onDelete={handleOnDelete} />
+            </div>
+          ))}
+        </div>
+      }
+    </div>
+  );
+};
+
+Institutions.propTypes = {
+  actions: PropTypes.object.isRequired,
+  token: PropTypes.string.isRequired,
+  institutions: PropTypes.arrayOf(PropTypes.string),
+};
 
 const mapStateToProps = (state) => {
   return {
