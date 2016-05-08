@@ -1,8 +1,5 @@
 import re
 
-from flask import jsonify
-from werkzeug.exceptions import BadRequest
-
 
 def is_snake_case(name):
     """Determine whether a name is in snake_case."""

@@ -1,19 +1,18 @@
 import datetime
 
-import flask
-from flask import jsonify
+from flask import Blueprint, jsonify
 from webargs import fields
 from werkzeug import exceptions
 
 from bettermint.factories import UserFactory
 from bettermint.models import User
+from bettermint.lib.utils.decorators import use_converted_kwargs
+from bettermint.lib.utils.security import PasswordManager
 from bettermint.lib.utils.token import generate_token
 from bettermint.lib.utils.web import snake_to_camel_case_dict, is_valid_email
-from bettermint.lib.utils.security import PasswordManager
-from bettermint.lib.utils.decorators import use_converted_kwargs
 
 
-auth_api = flask.Blueprint('auth_api', __name__, url_prefix='/api/auth')
+auth_api = Blueprint('auth_api', __name__, url_prefix='/api/auth')
 
 
 @auth_api.route('/token/', methods=['POST'])

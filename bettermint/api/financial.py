@@ -1,17 +1,14 @@
 from datetime import datetime, timedelta
 
-import flask
-from flask import jsonify
-from webargs import fields
-from webargs.flaskparser import use_kwargs
+from flask import Blueprint, jsonify
 from werkzeug import exceptions
 
 from bettermint.lib.plaid.plaid import PlaidClient
-from bettermint.lib.utils.decorators import require_authentication
+from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
 from bettermint.models import Institution
 
 
-financial_api = flask.Blueprint('financial_api', __name__, url_prefix='/api/financial')
+financial_api = Blueprint('financial_api', __name__, url_prefix='/api/financial')
 
 
 @financial_api.route('/institution', methods=['GET'])
@@ -54,7 +51,7 @@ def get_transactions(institution, account_id, user):
 
 @financial_api.route('/token/convert', methods=['POST'])
 @financial_api.route('/signup/', methods=['POST'])
-@use_kwargs({
+@use_converted_kwargs({
     'institution': fields.Str(required=True),
     'token': fields.Str(required=True),
 })

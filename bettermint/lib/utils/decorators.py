@@ -1,13 +1,13 @@
-import functools
 from datetime import datetime
+import functools
 
 import flask
 from webargs.flaskparser import use_kwargs
 from werkzeug import exceptions
 
-from bettermint.models.user import User
 from bettermint.lib.utils.token import decode_token
 from bettermint.lib.utils.web import camel_to_snake_case_dict, snake_to_camel_case_dict
+from bettermint.models.user import User
 
 
 def require_authentication(func):
