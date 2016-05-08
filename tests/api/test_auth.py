@@ -49,31 +49,31 @@ class TestAuth(TestCase):
 
     def test_signup_without_email_should_fail(self):
         self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
-                               first_name='Joe', last_name='Blow')
+                               firstName='Joe', lastName='Blow')
 
     def test_signup_without_password_should_fail(self):
         self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, email='joeb@gmail.com',
-                               first_name='Joe', last_name='Blow')
+                               firstName='Joe', lastName='Blow')
 
     def test_signup_without_first_name_should_fail(self):
         self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
-                               email='joeb@gmail.com', last_name='Blow')
+                               email='joeb@gmail.com', lastName='Blow')
 
     def test_signup_without_last_name_should_fail(self):
         self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
-                               email='joeb@gmail.com', first_name='Joe')
+                               email='joeb@gmail.com', firstName='Joe')
 
     def test_signup_invalid_email_fails(self):
         self._post_to_endpoint(self.signup_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234',
-                               email='12a1421,!?', first_name=self.user.first_name, last_name=self.user.last_name)
+                               email='12a1421,!?', firstName=self.user.first_name, lastName=self.user.last_name)
 
     def test_signup_existing_user_fails(self):
         self._post_to_endpoint(self.signup_url, status.HTTP_409_CONFLICT, password='1234',
-                               email=self.user.email, first_name=self.user.first_name, last_name=self.user.last_name)
+                               email=self.user.email, firstName=self.user.first_name, lastName=self.user.last_name)
 
     def test_signup_new_user_succeeds(self):
         self._post_to_endpoint(self.signup_url, password='1234', email='newdude@gmail.com',
-                               first_name='New', last_name='Dude')
+                               firstName='New', lastName='Dude')
 
     def _post_to_endpoint(self, url, expected_status_code=status.HTTP_200_OK, **payload):
         response = self.client.post(url, data=json.dumps(payload), content_type='application/json')

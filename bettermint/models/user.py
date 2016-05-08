@@ -10,8 +10,7 @@ class User(TimestampBase):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False)
-    password_hash = db.Column(db.String(60), nullable=False)
-    password_salt = db.Column(db.String(29), nullable=False)
+    password_hash = db.Column(db.String(100), nullable=False)
     user_to_institutions = db.relationship('UserToInstitution')
 
     @classmethod

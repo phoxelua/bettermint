@@ -51,8 +51,8 @@ export function signUpUser(firstName, lastName, email, password, redirect = '/')
     .then(parseResponse)
     .then(response => {
       try {
-        jwtDecode(response.data.token);
-        dispatch(signUpUserSuccess(response.data.token));
+        jwtDecode(response.token);
+        dispatch(signUpUserSuccess(response.token));
         dispatch(push(redirect));
       } catch (e) {
         dispatch(signUpUserFailure({

@@ -8,9 +8,10 @@ from webargs.flaskparser import use_kwargs
 
 from bettermint.factories import UserFactory
 from bettermint.models import User
-from bettermint.lib.utils.bcrypt import hashpw
 from bettermint.lib.utils.token import generate_token
 from bettermint.lib.utils.web import snake_to_camel_case_dict, is_valid_email
+from bettermint.lib.utils.security import pwd_context
+from bettermint.lib.utils.decorators import use_converted_kwargs
 
 
 auth_api = flask.Blueprint('auth_api', __name__, url_prefix='/api/auth')
@@ -30,7 +31,7 @@ def create_token(email, password):
     if not existing_user:
         raise exceptions.NotFound(description='User does not exist.')
 
-    if hashpw(password, existing_user.password_salt) != existing_user.password_hash:
+    if not pwd_context.verify(password, existing_user.password_hash):
         raise exceptions.Unauthorized(description='Email and password were not correct.')
 
     token = generate_token({'email': email}, datetime.timedelta(days=7))
@@ -38,13 +39,13 @@ def create_token(email, password):
 
 
 @auth_api.route('/signup/', methods=['POST'])
-@use_kwargs({
+@use_converted_kwargs({
     'first_name': fields.Str(required=True),
     'last_name': fields.Str(required=True),
     'email': fields.Str(required=True, validate=is_valid_email),
     'password': fields.Str(required=True),
 })
-def signup(first_name, last_name, email, password, ):
+def signup(first_name, last_name, email, password):
     """
     Creates a new user with the provided credentials, and returns a token.
     """

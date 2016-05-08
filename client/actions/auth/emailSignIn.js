@@ -63,8 +63,8 @@ export function signInUserWithCredentials(email, password, redirect='/') {
     .then(parseResponse)
     .then(response => {
       try {
-        jwtDecode(response.data.token);
-        dispatch(signInUserSuccess(response.data.token));
+        jwtDecode(response.token);
+        dispatch(signInUserSuccess(response.token));
         dispatch(push(redirect));
       } catch (e) {
         dispatch(signInUserFailure({

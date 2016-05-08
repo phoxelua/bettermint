@@ -2,16 +2,6 @@ import React, { PropTypes } from 'react';
 import { Table, Tr, Td, Sort } from 'reactable';
 import { epochToDate } from 'utilities/date';
 
-const transactionSortFunction = (a, b) => {
-  if (a.date > b.date) {
-    return -1;
-  } else if (a.date === b.date) {
-    return 0;
-  } else {
-    return 1;
-  }
-};
-
 const Transactions = ({ transactions }) => {
   return (
     <div>
