@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Ignore configuration file
-server/config.py
+bettermint/config.py
 
 # C extensions
 *.so
@@ -19,7 +19,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -91,7 +90,9 @@ node_modules
 
 venv/
 
-server/static/scripts/
-server/templates/
+bettermint/static/scripts/
+bettermint/templates/
 dev/
 logfile
+
+plaid_test.py

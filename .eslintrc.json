@@ -1,0 +1,19 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "babel"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+        "arrow-body-style": [0, "always"],
+        "consistent-return": 1,
+        "eqeqeq": [2, "allow-null"],
+        "indent": [1, 2],
+        "max-len": [1, {"code": 120, "tabWidth": 2, "ignoreUrls": true}],
+        "no-else-return": 0,
+        "no-param-reassign": 0,
+        "no-unused-vars": [2, {"args": "none"}],
+        "space-infix-ops": 0
+    }
+}

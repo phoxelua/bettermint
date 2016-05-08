@@ -27,9 +27,8 @@ class EmailSignInForm extends Component {
   };
 
   handleSubmit ({ email, password }) {
-    console.log(this.props);
     var redirectRoute = this.props.redirectRoute || '/';
-    this.props.actions.signInUser(email, password, redirectRoute);
+    this.props.actions.signInUserWithCredentials(email, password, redirectRoute);
   }
 
   render () {

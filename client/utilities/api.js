@@ -1,16 +1,32 @@
 import 'whatwg-fetch';
 
-async function request({ url, data, params = {} }) {
+async function request({ url, data, params={}, authToken=null }) {
   try {
-    const response = await fetch(url, {
+    let body;
+
+    if (data) {
+      if (data instanceof FormData) {
+        body = data;
+      } else {
+        body = JSON.stringify(data);
+      }
+    }
+
+    const req = {
       credentials: 'include',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: data ? ((data instanceof FormData) ? data : JSON.stringify(data)) : undefined,
-      ...params
-    })
+      body,
+      ...params,
+    };
+
+    if (authToken) {
+      req.headers.Authorization = `Bearer ${authToken}`;
+    }
+
+    const response = await fetch(url, req);
     const contentType = response.headers.get('content-type');
 
     if (response.status < 200 || response.status >= 400) {
@@ -20,23 +36,26 @@ async function request({ url, data, params = {} }) {
     }
 
     if (response.status === 200 && contentType.indexOf('application/json') !== -1) {
-      return await response.json();
+      const result = await response.json();
+      return result.data;
     }
+
+    return -1;
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
-    window.alert(JSON.stringify(await err.response.json()));
-    throw  err;
+    console.error(JSON.stringify(await err.response.json())); // eslint-disable-line no-console
+    throw err;
   }
 }
 
-export function get(url) {
-  return request({ url });
+export function get(url, authToken) {
+  return request({ url, authToken });
 }
 
-export function post(url, data) {
-  return request({ url, data, params: { method: 'post' } });
+export function post(url, data, authToken) {
+  return request({ url, data, params: { method: 'post' }, authToken });
 }
 
-export function del(url) {
-  return request({ url, params: { method: 'delete' } });
+export function del(url, authToken) {
+  return request({ url, params: { method: 'delete' }, authToken });
 }

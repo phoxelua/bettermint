@@ -6,21 +6,19 @@ import {
   TransactionsView,
   GoalsView,
   ProfileView,
-  KittensView,
-  LoginView
+  LoginView,
 } from 'views';
-import { requireAuthentication } from 'utilities';
+import { requireAuthentication } from 'utilities/routes';
 
 
-export default (store) => {
+export default () => {
   return (
-    <Route path='/' component={CoreLayout}>
+    <Route path="/" component={CoreLayout}>
       <IndexRoute component={IndexView} />
-      <Route path='transactions' component={TransactionsView} />
-      <Route path='goals' component={GoalsView} />
-      <Route path='profile' component={requireAuthentication(ProfileView)} />
-      <Route path='kittens' component={KittensView} />
-      <Route path='login' component={LoginView} />
+      <Route path="transactions" component={requireAuthentication(TransactionsView)} />
+      <Route path="goals" component={GoalsView} />
+      <Route path="profile" component={requireAuthentication(ProfileView)} />
+      <Route path="login" component={LoginView} />
     </Route>
   );
 };

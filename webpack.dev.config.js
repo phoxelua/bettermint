@@ -12,9 +12,9 @@ if (process.env.NODE_ENV !== 'test') {
       $set: [
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/dev-server',
-        './client/entry'
-      ]
-    }
+        './client/entry',
+      ],
+    },
   });
 }
 
@@ -27,11 +27,11 @@ config = update(config, {
 
   output: {
     $set: {
-      path: path.join(process.cwd(), '/dev/static/scripts'),
+      path: path.join(process.cwd(), 'dev'),
       pathInfo: true,
-      publicPath: 'http://localhost:3000/static/scripts/',
-      filename: 'main.js'
-    }
+      publicPath: 'http://localhost:3000/',
+      filename: 'main.js',
+    },
   },
 
   plugins: {
@@ -39,24 +39,22 @@ config = update(config, {
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         inject: true,
-        filename: 'dev/index.html',
-        template: 'client/index.html'
-      })
-    ]
+        filename: './index.html',
+        template: 'client/index.html',
+      }),
+    ],
   },
 
   module: {
     loaders: {
       $push: [
-        { test: /\.jsx?$/, loaders: [ 'babel' ], exclude: /node_modules/ }
-      ]
-    }
+        { test: /\.jsx?$/, loaders: ['babel'], exclude: /node_modules/ },
+      ],
+    },
   },
 
   devServer: {
     $set: {
-      publicPath: '/static/scripts/',
-
       port: 3000,
 
       contentBase: './dev',
@@ -66,21 +64,20 @@ config = update(config, {
       hot: true,
 
       stats: {
-        colors: true
+        colors: true,
       },
 
       historyApiFallback: true,
 
       headers: {
         'Access-Control-Allow-Origin': 'http://localhost:3001',
-        'Access-Control-Allow-Headers': 'X-Requested-With'
       },
 
       proxy: {
-        '/api/*': 'http://localhost:3001'
-      }
-    }
-  }
+        '/api/*': 'http://localhost:3001',
+      },
+    },
+  },
 });
 
 module.exports = config;

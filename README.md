@@ -25,3 +25,13 @@ Unify all finance related accounts into a flexible dashboard.
 - YNAB: lots of features but ugly af and costs money
 - Personal Capital: better for investing and savings than budgetting, costs money
 - Powerwallet: decently pretty, closest to MVP but can't split transactions
+
+## Setup
+- Clone repo
+- (optional) Make a virtualenv for this repo
+- (optional) Use pyenv to manage the python versions, we're using 3.5 for this repo
+- (optional) Use nvm to manage the node versions, any recent node version should work
+- `pip install -r requirements.txt`
+- `npm install`
+- Run the Webpack server which runs the frontend with `./manage.py webpack`
+- Run the API server with `./manage.py runserver`

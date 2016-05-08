@@ -1,5 +1,5 @@
 import { kittenConstants } from 'constants/kitten';
-import { get, post, del } from 'utilities';
+import { get, post, del } from 'utilities/api';
 
 export function addKitten() {
   return async (dispatch) => {
