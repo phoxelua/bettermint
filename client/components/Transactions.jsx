@@ -36,7 +36,7 @@ Transactions.propTypes = {
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
   })).isRequired,
 };
 

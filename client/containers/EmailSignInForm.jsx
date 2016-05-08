@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import * as actionCreators from 'actions/auth/emailSignIn';
@@ -23,15 +22,15 @@ const validate = values => {
 
 class EmailSignInForm extends Component {
   static propTypes = {
-    fields: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
   };
 
-  handleSubmit ({ email, password }) {
-    var redirectRoute = this.props.redirectRoute || '/';
+  handleSubmit({ email, password }) {
+    const redirectRoute = this.props.redirectRoute || '/';
     this.props.actions.signInUserWithCredentials(email, password, redirectRoute);
   }
 
-  render () {
+  render() {
     const { fields: { email, password }, handleSubmit, submitting } = this.props;
 
     return (

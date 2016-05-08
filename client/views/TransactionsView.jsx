@@ -2,25 +2,28 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial/transactions';
+import * as transactionActionCreators from 'actions/financial/transactions';
+import * as institutionActionCreators from 'actions/financial/institutions';
 import Transactions from 'components/Transactions';
+import { simpleEquals } from 'utilities/equality';
 
 export default class TransactionsView extends Component {
   static propTypes = {
-    actions: PropTypes.object.isRequired,
+    institutionActions: PropTypes.object.isRequired,
+    transactionActions: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,
     institutions: PropTypes.array,
     transactions: PropTypes.array,
   }
 
   componentDidMount() {
-    this.props.actions.requestInstitutions(this.props.token);
+    this.props.institutionActions.requestInstitutions(this.props.token);
   }
 
   componentWillReceiveProps({ institutions }) {
-    if (JSON.stringify(institutions) !== JSON.stringify(this.props.institutions)) {
+    if (!simpleEquals(institutions, this.props.institutions)) {
       for (const institution of institutions) {
-        this.props.actions.requestTransactions(institution, this.props.token);
+        this.props.transactionActions.requestTransactions(institution, this.props.token);
       }
     }
   }
@@ -44,7 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(actionCreators, dispatch),
+    institutionActions: bindActionCreators(institutionActionCreators, dispatch),
+    transactionActions: bindActionCreators(transactionActionCreators, dispatch),
   };
 };
 

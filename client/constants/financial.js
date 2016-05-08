@@ -14,3 +14,12 @@ export const transactionConstants = createConstants(
   'REQUEST_TRANSACTIONS_SUCCESS',
   'REQUEST_TRANSACTIONS_ERROR',
 );
+
+export const goalConstants = createConstants(
+  'REQUEST_GOALS',
+  'REQUEST_GOALS_SUCCESS',
+  'REQUEST_GOALS_ERROR',
+  'CREATE_GOAL',
+  'CREATE_GOAL_SUCCESS',
+  'CREATE_GOAL_ERROR',
+);
