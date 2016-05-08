@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from flask import Blueprint, jsonify
+from webargs import fields
 from werkzeug import exceptions
 
 from bettermint.lib.plaid.plaid import PlaidClient
@@ -45,12 +46,13 @@ def get_transactions(institution, account_id, user):
     """
     instn = Institution.query.filter_by(user=user, name=institution).first_or_404()
     client = PlaidClient(instn.access_token)
-    json = client.get_transactions(start=datetime.now() - timedelta(days=7))
-    return jsonify(json)
+    transactions = client.get_transactions(start=datetime.now() - timedelta(days=7))
+    return jsonify({
+        'transactions': transactions
+    })
 
 
 @financial_api.route('/token/convert', methods=['POST'])
-@financial_api.route('/signup/', methods=['POST'])
 @use_converted_kwargs({
     'institution': fields.Str(required=True),
     'token': fields.Str(required=True),

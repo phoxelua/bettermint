@@ -91,10 +91,10 @@ class TestFinancial(BettermintTestCase):
         url = url_for('financial_api.get_transactions', institution=self.institution.name)
         headers = self._create_headers(email=self.user.email)
         with mock.patch('bettermint.lib.plaid.plaid.PlaidClient.__init__', return_value=None) as mock_client, \
-            mock.patch('bettermint.lib.plaid.plaid.PlaidClient.get_transactions') as mock_get_trasactions:
+                mock.patch('bettermint.lib.plaid.plaid.PlaidClient.get_transactions', return_value=[]) as mock_get_transactions:
             self._request_endpoint('GET', url, headers)
             self.assertEqual(mock_client.call_count, 1)
-            self.assertEqual(mock_get_trasactions.call_count, 1)
+            self.assertEqual(mock_get_transactions.call_count, 1)
 
     def test_convert_token_with_nonexistent_user_should_fail(self):
         url = url_for('financial_api.convert_token')
@@ -114,8 +114,8 @@ class TestFinancial(BettermintTestCase):
         url = url_for('financial_api.convert_token')
         headers = self._create_headers(email=self.user.email)
         with mock.patch('bettermint.lib.plaid.plaid.PlaidClient.__init__', return_value=None) as mock_client, \
-            mock.patch('bettermint.lib.plaid.plaid.PlaidClient.exchange_token', return_value='axestoken') as mock_token:
-            self._request_endpoint('POST', url, headers, institution='bofa  ', token=self.token)
+                mock.patch('bettermint.lib.plaid.plaid.PlaidClient.exchange_token', return_value='axestoken') as mock_token:
+            self._request_endpoint('POST', url, headers, institution='bofa', token=self.token)
             self.assertEqual(mock_client.call_count, 1)
             self.assertEqual(mock_token.call_count, 1)
         self.assertEqual(Institution.query.count(), 2)
