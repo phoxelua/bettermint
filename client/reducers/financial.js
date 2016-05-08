@@ -1,5 +1,5 @@
 import { createReducer } from 'utilities/redux';
-import { financialConstants } from 'constants/financial';
+import { institutionConstants, transactionConstants } from 'constants/financial';
 
 const initialState = {
   isRequesting: true,
@@ -10,46 +10,46 @@ const initialState = {
 
 
 export default createReducer(initialState, {
-  [financialConstants.REQUEST_INSTITUTIONS]: (state, payload) => {
+  [institutionConstants.REQUEST_INSTITUTIONS]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: true,
       institutions: [],
     });
   },
-  [financialConstants.REQUEST_INSTITUTIONS_SUCCESS]: (state, payload) => {
+  [institutionConstants.REQUEST_INSTITUTIONS_SUCCESS]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: false,
       institutions: payload.institutions,
     });
   },
-  [financialConstants.REQUEST_INSTITUTIONS_ERROR]: (state, payload) => {
+  [institutionConstants.REQUEST_INSTITUTIONS_ERROR]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: false,
       institutions: [],
     });
   },
-  [financialConstants.DELETE_INSTITUTION]: (state, payload) => {
+  [institutionConstants.DELETE_INSTITUTION]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: true,
     });
   },
-  [financialConstants.DELETE_INSTITUTION_SUCCESS]: (state, payload) => {
+  [institutionConstants.DELETE_INSTITUTION_SUCCESS]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: false,
       institutions: state.institutions.filter((institution) => institution !== payload.institution),
     });
   },
-  [financialConstants.DELETE_INSTITUTION_ERROR]: (state, payload) => {
+  [institutionConstants.DELETE_INSTITUTION_ERROR]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: false,
     });
   },
-  [financialConstants.REQUEST_TRANSACTIONS]: (state, payload) => {
+  [transactionConstants.REQUEST_TRANSACTIONS]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: true,
     });
   },
-  [financialConstants.REQUEST_TRANSACTIONS_SUCCESS]: (state, payload) => {
+  [transactionConstants.REQUEST_TRANSACTIONS_SUCCESS]: (state, payload) => {
     const oldTransactions = state
       .transactions
       .slice()
@@ -65,7 +65,7 @@ export default createReducer(initialState, {
       accounts: oldAccounts,
     });
   },
-  [financialConstants.REQUEST_TRANSACTIONS_ERROR]: (state, payload) => {
+  [transactionConstants.REQUEST_TRANSACTIONS_ERROR]: (state, payload) => {
     return Object.assign({}, state, {
       isRequesting: false,
       transactions: [],

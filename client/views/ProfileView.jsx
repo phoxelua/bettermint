@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial';
+import * as actionCreators from 'actions/financial/institutions';
 import Institutions from 'components/Institutions';
 import PlaidLink from 'components/PlaidLink';
 

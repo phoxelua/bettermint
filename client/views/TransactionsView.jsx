@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial';
+import * as actionCreators from 'actions/financial/transactions';
 import Transactions from 'components/Transactions';
 
 export default class TransactionsView extends Component {

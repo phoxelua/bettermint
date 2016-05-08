@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial';
+import * as actionCreators from 'actions/financial/institutions';
 
 const Institution = ({ institution, onDelete }) => {
   const _onDelete = () => {
