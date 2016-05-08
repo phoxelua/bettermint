@@ -8,7 +8,7 @@ from werkzeug import exceptions
 
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication
-from bettermint.models.user import UserToInstitution
+from bettermint.models import Institution
 
 
 financial_api = flask.Blueprint('financial_api', __name__, url_prefix='/api/financial')
@@ -20,7 +20,7 @@ def get_institutions(user):
     """
     Gets all institutions associated with `user`.
     """
-    institutions = UserToInstitution.query.with_entities(UserToInstitution.institution).filter_by(user=user)
+    institutions = Institution.query.with_entities(Institution.name).filter_by(user=user)
     return jsonify({
         'institutions': [i[0] for i in institutions]
     })
@@ -34,8 +34,8 @@ def delete_institutions(institution, user):
     """
     if not institution:
         raise exceptions.BadRequest('Institution is required.')
-    u2i = UserToInstitution.query.filter_by(institution=institution, user=user).first_or_404()
-    u2i.delete()
+    instn = Institution.query.filter_by(name=institution, user=user).first_or_404()
+    instn.delete()
     return jsonify({})
 
 
@@ -46,8 +46,8 @@ def get_transactions(institution, account_id, user):
     """
     Get transactions associated with an institution.
     """
-    u2i = UserToInstitution.query.filter_by(user=user, institution=institution).first_or_404()
-    client = PlaidClient(u2i.access_token)
+    instn = Institution.query.filter_by(user=user, name=institution).first_or_404()
+    client = PlaidClient(instn.access_token)
     json = client.get_transactions(start=datetime.now() - timedelta(days=7))
     return jsonify(json)
 
@@ -65,10 +65,5 @@ def convert_token(institution, token, user):
     """
     client = PlaidClient()
     access_token = client.exchange_token(token)
-    UserToInstitution(
-        user=user,
-        institution=institution,
-        access_token=access_token
-    ).save()
-
+    Institution(user=user, name=institution, access_token=access_token).save()
     return jsonify({})

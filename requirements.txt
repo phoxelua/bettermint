@@ -12,6 +12,7 @@ gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.7.3
 MarkupSafe==0.23
+mock==2.0.0
 psycopg2==2.6
 pyjwt==1.4.0
 pytz==2015.4

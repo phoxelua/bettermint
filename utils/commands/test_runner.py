@@ -24,6 +24,7 @@ class TestRunner(Command):
         return fail_fast, args[0].split('.')
 
     def run(self, remaining_args):
+        """TODO: learn how to actually use unittest"""
         path_to_test = str(Path(__file__).parents[2]) + '/tests/'
         if remaining_args:
             fail_fast, path = self.extract_flags_and_path(remaining_args)
@@ -38,5 +39,5 @@ class TestRunner(Command):
                     runner.run(testsuite)
                     return
         testsuite = unittest.TestLoader().discover(path_to_test)
-        runner = unittest.TextTestRunner(verbosity=2, failfast=fail_fast)
+        runner = unittest.TextTestRunner(verbosity=2)
         runner.run(testsuite)
