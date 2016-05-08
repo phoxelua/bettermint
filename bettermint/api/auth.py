@@ -3,7 +3,6 @@ import datetime
 import flask
 from flask import jsonify
 from webargs import fields
-from webargs.flaskparser import use_kwargs
 from werkzeug import exceptions
 
 from bettermint.factories import UserFactory
@@ -18,7 +17,7 @@ auth_api = flask.Blueprint('auth_api', __name__, url_prefix='/api/auth')
 
 
 @auth_api.route('/token/', methods=['POST'])
-@use_kwargs({
+@use_converted_kwargs({
     'email': fields.Str(required=True),
     'password': fields.Str(required=True),
 })
