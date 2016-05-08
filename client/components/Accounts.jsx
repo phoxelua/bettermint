@@ -1,40 +1,36 @@
 import React, { PropTypes } from 'react';
+import { Table, Tr, Td, Sort } from 'reactable';
 
-const Accounts = (props) => {
+const Accounts = ({ accounts }) => {
   return (
     <div>
-      {!!props.accounts.length &&
-        <h1>Accounts</h1>
-      }
-      {!!props.accounts.length &&
-        <table>
-          <colgroup>
-            <col span="1" style={{ width: 10 + '%' }}></col>
-            <col span="1" style={{ width: 30 + '%' }}></col>
-            <col span="1" style={{ width: 10 + '%' }}></col>
-            <col span="1" style={{ width: 25 + '%' }}></col>
-            <col span="1" style={{ width: 25 + '%' }}></col>
-          </colgroup>
-          <tbody>
-            <tr>
-              <th>Institution</th>
-              <th>Name</th>
-              <th>Number</th>
-              <th>Available Balance</th>
-              <th>Current Balance</th>
-            </tr>
-            {props.accounts.map(account => (
-              <tr key={account._id}>
-                <td>{account.institutionType}</td>
-                <td>{account.meta.name}</td>
-                <td>...{account.meta.number}</td>
-                <td>${account.balance.available.toFixed(2)}</td>
-                <td>${account.balance.current.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      }
+      <h1>Accounts</h1>
+      <Table
+        columns={[
+          { key: 'institution', label: 'Institution' },
+          { key: 'name', label: 'Name' },
+          { key: 'number', label: 'Number' },
+          { key: 'available', label: 'Available Balance' },
+          { key: 'current', label: 'Current Balance' },
+        ]}
+        sortable={[
+          'institution',
+          'name',
+          'number',
+          { column: 'available', sortFunction: Sort.Numeric },
+          { column: 'current', sortFunction: Sort.Numeric },
+        ]}
+      >
+        {accounts.map((account) => (
+          <Tr>
+            <Td column="institution">{account.institutionType}</Td>
+            <Td column="name">{account.meta.name}</Td>
+            <Td column="number">...{account.meta.number}</Td>
+            <Td column="available">${account.balance.available.toFixed(2)}</Td>
+            <Td column="current">${account.balance.current.toFixed(2)}</Td>
+          </Tr>
+        ))}
+      </Table>
     </div>
   );
 };
