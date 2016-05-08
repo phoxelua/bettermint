@@ -5,6 +5,7 @@ from flask import url_for
 
 from bettermint.factories import UserFactory
 from bettermint.lib.utils import status
+from bettermint.lib.utils.web import snake_to_camel_case_dict
 from bettermint.models import User
 from tests.bettermint_test_case import BettermintTestCase
 
@@ -73,7 +74,8 @@ class TestAuth(BettermintTestCase):
         self.assertEqual(User.query.count(), 2)
 
     def _post_to_endpoint(self, url, expected_status_code=status.HTTP_200_OK, **payload):
-        response = self.client.post(url, data=json.dumps(payload), content_type='application/json')
+        response = self.client.post(url, data=json.dumps(snake_to_camel_case_dict(payload)),
+                                    content_type='application/json')
         self.assertEqual(response.status_code, expected_status_code)
 
 

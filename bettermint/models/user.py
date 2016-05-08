@@ -10,7 +10,7 @@ class User(TimestampBase):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
     institutions = db.relationship('Institution', backref="post",
                                    cascade="all, delete-orphan", lazy='dynamic')
 

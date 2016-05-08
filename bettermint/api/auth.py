@@ -26,11 +26,7 @@ def create_token(email, password):
     """
     If the provided email and password combination is valid, generates a JWT for client-use which expires in 7 days.
     """
-
-    existing_user = User.by_email(email)
-    if not existing_user:
-        raise exceptions.NotFound(description='User does not exist.')
-
+    existing_user = User.query.filter_by(email=email).first_or_404()
     if not pwd_context.verify(password, existing_user.password_hash):
         raise exceptions.Unauthorized(description='Email and password were not correct.')
 
@@ -49,7 +45,6 @@ def signup(first_name, last_name, email, password):
     """
     Creates a new user with the provided credentials, and returns a token.
     """
-
     if User.by_email(email):
         raise exceptions.Conflict(description='User already exists.')
 

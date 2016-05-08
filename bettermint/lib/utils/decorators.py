@@ -35,11 +35,7 @@ def require_authentication(func):
         if decrypted['expiration'] < datetime.utcnow().timestamp():
             raise exceptions.Unauthorized('Token has expired.')
 
-        user = User.by_email(decrypted['email'])
-        if not user:
-            raise exceptions.NotFound(description='User does not exist.')
-        kwargs['user'] = user
-
+        kwargs['user'] = User.query.filter_by(email=decrypted['email']).first_or_404()
         return func(*args, **kwargs)
     return wrapped
 
