@@ -6,8 +6,9 @@ class Config:
     TESTING = False
 
     # Plaid
-    PLAID_CLIENT_ID = 'yo-play-client-id-here'
+    PLAID_CLIENT_ID = 'yo-plaid-client-id-here'
     PLAID_SECRET = 'yo-plaid-secret-here'
+    PLAID_URL = 'https://tartan.plaid.com'
 
 
 class DevConfig(Config):

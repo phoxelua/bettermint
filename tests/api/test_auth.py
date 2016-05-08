@@ -2,35 +2,24 @@ import json
 import unittest
 
 from flask import url_for
-from flask.ext.testing import TestCase
 
-from bettermint.database import db
 from bettermint.factories import UserFactory
 from bettermint.lib.utils import status
+from tests.bettermint_test_case import BettermintTestCase
 
 
-class TestAuth(TestCase):
-
-    def create_app(self):
-        from flask import current_app
-        from bettermint.config import TestingConfig
-        current_app.config.from_object(TestingConfig)
-        return current_app
+class TestAuth(BettermintTestCase):
 
     @classmethod
     def setUpClass(cls):
+        BettermintTestCase.setUpClass()
         cls.token_url = url_for('auth_api.create_token')
         cls.signup_url = url_for('auth_api.signup')
 
     def setUp(self):
-        db.create_all()
+        BettermintTestCase.setUp(self)
         self.user = UserFactory.instance.create('Ash', 'Ketchum', 'ashk@gmail.com', 'forever10')
-        db.session.add(self.user)
-        db.session.commit()
-
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        self.user.save()
 
     def test_token_creation_without_email_should_fail(self):
         self._post_to_endpoint(self.token_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234')

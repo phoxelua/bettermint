@@ -1,13 +1,14 @@
-import datetime
+from datetime import datetime, timedelta
 
 import flask
+from flask import jsonify
+from webargs import fields
+from webargs.flaskparser import use_kwargs
 from werkzeug import exceptions
 
-from bettermint.database import db
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication
-from bettermint.lib.utils.web import write_fail, write_success_data, write_success
-from bettermint.models.user import User, UserToInstitution
+from bettermint.models.user import UserToInstitution
 
 
 financial_api = flask.Blueprint('financial_api', __name__, url_prefix='/api/financial')
@@ -19,15 +20,9 @@ def get_institutions(user):
     """
     Gets all institutions associated with `user`.
     """
-
-    u2is = db.session.query(UserToInstitution).filter(
-        UserToInstitution.user == user
-    ).all()
-
-    institutions = [u2i.institution for u2i in u2is]
-
-    return write_success_data({
-        'institutions': institutions
+    institutions = UserToInstitution.query.with_entities(UserToInstitution.institution).filter_by(user=user)
+    return jsonify({
+        'institutions': [i[0] for i in institutions]
     })
 
 
@@ -37,19 +32,11 @@ def delete_institutions(institution, user):
     """
     Deletes an institution associated with `user`.
     """
-
     if not institution:
         raise exceptions.BadRequest('Institution is required.')
-
-    u2i = db.session.query(UserToInstitution).filter(
-        UserToInstitution.user == user,
-        UserToInstitution.institution == institution
-    ).one()
-
-    db.session.delete(u2i)
-    db.session.commit()
-
-    return write_success()
+    u2i = UserToInstitution.query.filter_by(institution=institution, user=user).first_or_404()
+    u2i.delete()
+    return jsonify({})
 
 
 @financial_api.route('/transactions/<institution>', defaults={'account_id': None}, methods=['GET'])
@@ -59,38 +46,29 @@ def get_transactions(institution, account_id, user):
     """
     Get transactions associated with an institution.
     """
-
-    u2i = UserToInstitution.by_user_id_and_institution(db.session, user.id, institution)
-
-    if u2i:
-        client = PlaidClient(u2i.access_token)
-        transactions = client.get_transactions(start=datetime.datetime.now() - datetime.timedelta(days=7))
-        return write_success_data({
-            'transactions': transactions
-        })
-    else:
-        return write_fail("That user isn't associated with that institution!")
+    u2i = UserToInstitution.query.filter_by(user=user, institution=institution).first_or_404()
+    client = PlaidClient(u2i.access_token)
+    json = client.get_transactions(start=datetime.now() - timedelta(days=7))
+    return jsonify(json)
 
 
 @financial_api.route('/token/convert', methods=['POST'])
+@financial_api.route('/signup/', methods=['POST'])
+@use_kwargs({
+    'institution': fields.Str(required=True),
+    'token': fields.Str(required=True),
+})
 @require_authentication
-def convert_token(user: User):
+def convert_token(institution, token, user):
     """
     Converts a Plaid public key token to an access token.
     """
-
-    request_json = flask.request.get_json()
-
-    institution = request_json['institution']
     client = PlaidClient()
-    access_token = client.exchange_token(request_json['token'])
-    u2i = UserToInstitution(
+    access_token = client.exchange_token(token)
+    UserToInstitution(
         user=user,
         institution=institution,
         access_token=access_token
-    )
+    ).save()
 
-    db.session.add(u2i)
-    db.session.commit()
-
-    return write_success()
+    return jsonify({})

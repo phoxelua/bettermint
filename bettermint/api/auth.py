@@ -2,9 +2,9 @@ import datetime
 
 import flask
 from flask import jsonify
-from werkzeug import exceptions
 from webargs import fields
 from webargs.flaskparser import use_kwargs
+from werkzeug import exceptions
 
 from bettermint.factories import UserFactory
 from bettermint.models import User

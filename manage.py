@@ -3,6 +3,7 @@ from flask_script import Manager, Server
 from flask_shellplus import Shell
 from flask_migrate import Migrate, MigrateCommand
 from utils.commands import WebpackServer, InitDB, TestRunner
+
 from bettermint.app import create_app
 from bettermint.database import db
 from bettermint import models
@@ -20,7 +21,9 @@ manager.add_command('runserver', Server(host=app.config['HOST'], port=app.config
 manager.add_command('webpack', WebpackServer())
 manager.add_command('initdb', InitDB())
 manager.add_command('db', MigrateCommand)
-manager.add_command('test', TestRunner())
+
+TestRunner.capture_all_args = True
+manager.add_command('test', TestRunner)
 
 if __name__ == '__main__':
     manager.run()

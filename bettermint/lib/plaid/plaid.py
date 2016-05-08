@@ -26,7 +26,7 @@ class PlaidClient:
         )
 
         self._client.config({
-            'url': 'https://tartan.plaid.com'
+            'url': current_app.config['PLAID_URL']
         })
 
     def get_transactions(

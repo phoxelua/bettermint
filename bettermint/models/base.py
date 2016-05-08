@@ -14,6 +14,10 @@ class PrimaryKeyIdBase(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     def __repr__(self):
         d = OrderedDict(sorted([('{} <{}>'.format(c.name, c.type), str(getattr(self, c.name)))
                         for c in self.__table__.columns], key=lambda x: x[0]))
