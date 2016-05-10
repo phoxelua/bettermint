@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from flask import Blueprint, jsonify
+from webargs import fields
 from werkzeug import exceptions
 
 from bettermint.lib.plaid.plaid import PlaidClient
