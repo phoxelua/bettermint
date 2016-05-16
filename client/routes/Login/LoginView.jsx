@@ -27,7 +27,7 @@ class LoginView extends Component {
     const redirectRoute = this.props.location.query.redirect || '/login';
 
     return (
-      <div className="col-xs-12 col-md-6 col-md-offset-3">
+      <div>
         <p>This is the sign in form</p>
         <EmailSignInForm redirectRoute={redirectRoute} />
         <p>This is the sign up form</p>

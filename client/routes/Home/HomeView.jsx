@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const IndexView = () => {
+const HomeView = () => {
   return (
     <div>
       <h1>Mint, but better</h1>
@@ -39,4 +39,4 @@ const IndexView = () => {
   );
 };
 
-export default IndexView;
+export default HomeView;
