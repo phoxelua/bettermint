@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import zxcvbn from 'zxcvbn';
 
@@ -30,7 +29,7 @@ const validate = values => {
   if (!values.password) {
     errors.password = 'Required';
   } else {
-    let passwordStrength = zxcvbn(values.password).score;
+    const passwordStrength = zxcvbn(values.password).score;
     if (passwordStrength < 2) {
       errors.password = 'Password is too weak';
     }
@@ -41,15 +40,19 @@ const validate = values => {
 
 class EmailSignUpForm extends Component {
   static propTypes = {
-    fields: PropTypes.object.isRequired
+    redirectRoute: PropTypes.string,
+    actions: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
   };
 
-  handleSubmit ({ firstName, lastName, email, password }) {
-    var redirectRoute = this.props.redirectRoute || '/';
+  handleSubmit({ firstName, lastName, email, password }) {
+    const redirectRoute = this.props.redirectRoute || '/';
     this.props.actions.signUpUser(firstName, lastName, email, password, redirectRoute);
   }
 
-  render () {
+  render() {
     const { fields: { firstName, lastName, email, password }, handleSubmit, submitting } = this.props;
 
     return (
@@ -57,7 +60,7 @@ class EmailSignUpForm extends Component {
         <div className="EmailSignUpForm__input-group">
           <label>First Name</label>
           <div className="EmailSignUpForm__input-wrapper">
-            <input type="text" placeholder="John" {...firstName}/>
+            <input type="text" placeholder="John" {...firstName} />
             {
               firstName.touched &&
               firstName.error &&
@@ -112,20 +115,20 @@ class EmailSignUpForm extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticating: state.auth.isAuthenticating,
-    statusText: state.auth.statusText
+    statusText: state.auth.statusText,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions : bindActionCreators(actionCreators, dispatch)
+    actions: bindActionCreators(actionCreators, dispatch),
   };
 };
 
 export default reduxForm({
   form: 'emailSignUpForm',
   fields,
-  validate
+  validate,
 },
 mapStateToProps,
 mapDispatchToProps

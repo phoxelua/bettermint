@@ -22,7 +22,11 @@ const validate = values => {
 
 class EmailSignInForm extends Component {
   static propTypes = {
+    redirectRoute: PropTypes.string,
+    actions: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
   };
 
   handleSubmit({ email, password }) {
@@ -70,20 +74,20 @@ class EmailSignInForm extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticating: state.auth.isAuthenticating,
-    statusText: state.auth.statusText
+    statusText: state.auth.statusText,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions : bindActionCreators(actionCreators, dispatch)
+    actions : bindActionCreators(actionCreators, dispatch),
   };
 };
 
 export default reduxForm({
   form: 'emailSignInForm',
   fields,
-  validate
+  validate,
 },
 mapStateToProps,
 mapDispatchToProps
