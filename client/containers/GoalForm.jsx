@@ -97,6 +97,17 @@ class GoalForm extends Component {
             }
           </div>
         </div>
+        <div className="GoalForm__input-group">
+          <label>End Date</label>
+          <div className="GoalForm__input-wrapper">
+            <input type="date" {...endDate} />
+            {
+              endDate.touched &&
+              endDate.error &&
+              <span className="GoalForm__input-wrapper__error">{endDate.error}</span>
+            }
+          </div>
+        </div>
         <div className="GoalForm__input-group GoalForm__submit">
           <button type="submit" className="" disabled={submitting}>
             {submitting ? <i/> : <i/>} Submit

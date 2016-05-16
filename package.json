@@ -32,6 +32,7 @@
     "react-redux": "~4.4.0",
     "react-router": "2.x",
     "react-router-redux": "4.0.x",
+    "react-select": "^1.0.0-beta13",
     "react-simple-dropdown": "1.x",
     "reactable": "^0.13.0",
     "redux": "3.x",
