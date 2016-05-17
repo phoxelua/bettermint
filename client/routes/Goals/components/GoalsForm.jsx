@@ -1,34 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
 
-import * as actionCreators from 'actions/financial/goals';
-
-const fields = ['name', 'amount', 'startDate', 'endDate'];
-
-const validate = values => {
-  const errors = {};
-
-  if (!values.name) {
-    errors.name = 'Required';
-  }
-
-  if (!values.amount) {
-    errors.amount = 'Required';
-  }
-
-  if (!values.startDate) {
-    errors.startDate = 'Required';
-  }
-
-  if (!values.endDate) {
-    errors.endDate = 'Required';
-  }
-
-  return errors;
-};
-
-class GoalForm extends Component {
+class GoalsForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,
@@ -118,23 +90,4 @@ class GoalForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.auth.token,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(actionCreators, dispatch),
-  };
-};
-
-export default reduxForm({
-  form: 'goalForm',
-  fields,
-  validate,
-},
-mapStateToProps,
-mapDispatchToProps
-)(GoalForm);
+export default GoalsForm;

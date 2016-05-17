@@ -1,26 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
 
-import * as actionCreators from 'actions/auth/emailSignIn';
-
-const fields = ['email', 'password'];
-
-const validate = values => {
-  const errors = {};
-
-  if (!values.email) {
-    errors.email = 'Required';
-  }
-
-  if (!values.password) {
-    errors.password = 'Required';
-  }
-
-  return errors;
-};
-
-class EmailSignInForm extends Component {
+class EmailSignUpForm extends Component {
   static propTypes = {
     redirectRoute: PropTypes.string,
     actions: PropTypes.object.isRequired,
@@ -29,16 +9,38 @@ class EmailSignInForm extends Component {
     submitting: PropTypes.bool.isRequired,
   };
 
-  handleSubmit({ email, password }) {
+  handleSubmit({ firstName, lastName, email, password }) {
     const redirectRoute = this.props.redirectRoute || '/';
-    this.props.actions.signInUserWithCredentials(email, password, redirectRoute);
+    this.props.actions.signUpUser(firstName, lastName, email, password, redirectRoute);
   }
 
   render() {
-    const { fields: { email, password }, handleSubmit, submitting } = this.props;
+    const { fields: { firstName, lastName, email, password }, handleSubmit, submitting } = this.props;
 
     return (
       <form className="EmailSignUpForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
+        <div className="EmailSignUpForm__input-group">
+          <label>First Name</label>
+          <div className="EmailSignUpForm__input-wrapper">
+            <input type="text" placeholder="John" {...firstName} />
+            {
+              firstName.touched &&
+              firstName.error &&
+              <span className="EmailSignUpForm__input-wrapper__error">{firstName.error}</span>
+            }
+          </div>
+        </div>
+        <div className="EmailSignUpForm__input-group">
+          <label>Last Name</label>
+          <div className="EmailSignUpForm__input-wrapper">
+            <input type="text" placeholder="Doe" {...lastName} />
+            {
+              lastName.touched &&
+              lastName.error &&
+              <span className="EmailSignUpForm__input-wrapper__error">{lastName.error}</span>
+            }
+          </div>
+        </div>
         <div className="EmailSignUpForm__input-group">
           <label>Email</label>
           <div className="EmailSignUpForm__input-wrapper">
@@ -67,28 +69,8 @@ class EmailSignInForm extends Component {
           </button>
         </div>
       </form>
-    )
+    );
   }
-};
+}
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticating: state.auth.isAuthenticating,
-    statusText: state.auth.statusText,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions : bindActionCreators(actionCreators, dispatch),
-  };
-};
-
-export default reduxForm({
-  form: 'emailSignInForm',
-  fields,
-  validate,
-},
-mapStateToProps,
-mapDispatchToProps
-)(EmailSignInForm);
+export default EmailSignUpForm;

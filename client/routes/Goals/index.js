@@ -1,3 +1,3 @@
-import GoalsView from './GoalsView';
+import GoalsViewContainer from './containers/GoalsViewContainer';
 
-export default GoalsView;
+export default GoalsViewContainer;

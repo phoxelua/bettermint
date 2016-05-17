@@ -1,10 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import * as transactionActionCreators from 'actions/financial/transactions';
-import * as institutionActionCreators from 'actions/financial/institutions';
-import Transactions from 'components/Transactions';
+import Transactions from './Transactions';
 import { simpleEquals } from 'utilities/equality';
 
 export default class TransactionsView extends Component {
@@ -36,23 +31,3 @@ export default class TransactionsView extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    institutions: state.financial.institutions,
-    transactions: state.financial.transactions,
-    token: state.auth.token,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    institutionActions: bindActionCreators(institutionActionCreators, dispatch),
-    transactionActions: bindActionCreators(transactionActionCreators, dispatch),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TransactionsView);

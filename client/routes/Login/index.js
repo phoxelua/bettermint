@@ -1,3 +1,3 @@
-import LoginView from './LoginView';
+import LoginViewContainer from './containers/LoginViewContainer';
 
-export default LoginView;
+export default LoginViewContainer;

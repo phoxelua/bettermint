@@ -1,13 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial/institutions';
-import ProfileView from '../components/ProfileView';
+import * as actionCreators from 'actions/auth/emailSignIn';
+import LoginView from '../components/LoginView';
 
 const mapStateToProps = (state) => {
   return {
-    token: state.auth.token,
-    institutions: state.financial.institutions,
+
   };
 };
 
@@ -20,4 +19,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProfileView);
+)(LoginView);

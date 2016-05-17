@@ -1,3 +1,3 @@
-import TransactionsView from './TransactionsView';
+import TransactionsViewContainer from './containers/TransactionsViewContainer';
 
-export default TransactionsView;
+export default TransactionsViewContainer;

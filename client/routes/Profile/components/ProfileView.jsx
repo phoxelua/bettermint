@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Institutions from 'components/Institutions';
+import Institutions from '../containers/InstitutionsContainer';
 import PlaidLink from 'components/PlaidLink';
 
 class ProfileView extends Component {

@@ -68,7 +68,7 @@ def convert_token(institution, token, user):
     Institution(user=user, name=institution, access_token=access_token).save()
     return jsonify({})
 
-
+# TODO: Replace with real shit
 @financial_api.route('/goals', methods=['GET', 'POST'])
 def goals():
     if request.method == 'GET':

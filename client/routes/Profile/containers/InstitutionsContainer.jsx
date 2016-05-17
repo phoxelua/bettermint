@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actionCreators from 'actions/financial/institutions';
-import ProfileView from '../components/ProfileView';
+import Institutions from '../components/Institutions';
 
 const mapStateToProps = (state) => {
   return {
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProfileView);
+)(Institutions);

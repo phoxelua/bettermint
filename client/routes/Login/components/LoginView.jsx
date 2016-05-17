@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import * as store from 'store';
 
-import * as actionCreators from 'actions/auth/emailSignIn';
-import EmailSignInForm from 'containers/EmailSignInForm';
-import EmailSignUpForm from 'containers/EmailSignUpForm';
+import EmailSignInFormContainer from '../containers/EmailSignInFormContainer';
+import EmailSignUpFormContainer from '../containers/EmailSignUpFormContainer';
 
 class LoginView extends Component {
   static propTypes = {
@@ -29,28 +26,12 @@ class LoginView extends Component {
     return (
       <div>
         <p>This is the sign in form</p>
-        <EmailSignInForm redirectRoute={redirectRoute} />
+        <EmailSignInFormContainer redirectRoute={redirectRoute} />
         <p>This is the sign up form</p>
-        <EmailSignUpForm redirectRoute={redirectRoute} />
+        <EmailSignUpFormContainer redirectRoute={redirectRoute} />
       </div>
     );
   }
 }
 
-
-const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(actionCreators, dispatch),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginView);
+export default LoginView;
