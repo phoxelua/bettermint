@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as transactionActionCreators from 'actions/financial/transactions';
 import * as institutionActionCreators from 'actions/financial/institutions';
 import Transactions from 'components/Transactions';
+import { simpleEquals } from 'utilities/equality';
 
 export default class TransactionsView extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ export default class TransactionsView extends Component {
   }
 
   componentWillReceiveProps({ institutions }) {
-    if (JSON.stringify(institutions) !== JSON.stringify(this.props.institutions)) {
+    if (!simpleEquals(institutions, this.props.institutions)) {
       for (const institution of institutions) {
         this.props.transactionActions.requestTransactions(institution, this.props.token);
       }
@@ -46,8 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    transactionActions: bindActionCreators(transactionActionCreators, dispatch),
     institutionActions: bindActionCreators(institutionActionCreators, dispatch),
+    transactionActions: bindActionCreators(transactionActionCreators, dispatch),
   };
 };
 

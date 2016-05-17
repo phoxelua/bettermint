@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from webargs import fields
 from werkzeug import exceptions
 
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
+from bettermint.lib.utils.web import snake_to_camel_case_dict
 from bettermint.models import Institution
 
 
@@ -46,12 +47,13 @@ def get_transactions(institution, account_id, user):
     """
     instn = Institution.query.filter_by(user=user, name=institution).first_or_404()
     client = PlaidClient(instn.access_token)
-    json = client.get_transactions(start=datetime.now() - timedelta(days=7))
-    return jsonify(json)
+    transactions = client.get_transactions(start=datetime.now() - timedelta(days=7))
+    return jsonify({
+        'transactions': transactions
+    })
 
 
 @financial_api.route('/token/convert', methods=['POST'])
-@financial_api.route('/signup/', methods=['POST'])
 @use_converted_kwargs({
     'institution': fields.Str(required=True),
     'token': fields.Str(required=True),
@@ -65,3 +67,27 @@ def convert_token(institution, token, user):
     access_token = client.exchange_token(token)
     Institution(user=user, name=institution, access_token=access_token).save()
     return jsonify({})
+
+
+@financial_api.route('/goals', methods=['GET', 'POST'])
+def goals():
+    if request.method == 'GET':
+        return jsonify(snake_to_camel_case_dict({
+            'goals': [{
+                'id': 1,
+                'amount': 1000,
+                'name': 'Cool Goal 1',
+                'start_date': datetime.now().timestamp(),
+                'end_date': (datetime.now() + timedelta(days=30)).timestamp(),
+            }],
+        }))
+    elif request.method == 'POST':
+        return jsonify(snake_to_camel_case_dict({
+            'goal': {
+                'id': 1,
+                'amount': 1000,
+                'name': 'Cool Goal 1',
+                'start_date': datetime.now().timestamp(),
+                'end_date': (datetime.now() + timedelta(days=30)).timestamp(),
+            },
+        }))
