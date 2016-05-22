@@ -21,7 +21,7 @@ const Goals = ({ goals }) => {
         ]}
       >
         {goals.map((goal) => (
-          <Tr>
+          <Tr key={goal.id}>
             <Td column="name">{goal.name}</Td>
             <Td column="amount">{goal.amount.toFixed(2)}</Td>
             <Td column="start">{epochToDate(goal.startDate)}</Td>

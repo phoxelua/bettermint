@@ -20,7 +20,7 @@ const Transactions = ({ transactions }) => {
         ]}
       >
         {transactions.map((transaction) => (
-          <Tr>
+          <Tr key={transaction._id}>
             <Td column="date">{epochToDate(transaction.date)}</Td>
             <Td column="name">{transaction.name}</Td>
             <Td column="amount">{transaction.amount.toFixed(2)}</Td>
