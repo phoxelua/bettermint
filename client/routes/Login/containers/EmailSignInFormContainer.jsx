@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import * as actionCreators from 'actions/auth/emailSignIn';
+import * as actionCreators from '../actions';
 import EmailSignInForm from '../components/EmailSignInForm';
 
 const fields = ['email', 'password'];

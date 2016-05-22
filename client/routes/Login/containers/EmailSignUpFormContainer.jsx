@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import zxcvbn from 'zxcvbn';
 
-import * as actionCreators from 'actions/auth/emailSignUp';
+import * as actionCreators from '../actions';
 import EmailSignUpForm from '../components/EmailSignUpForm';
 
 const fields = ['firstName', 'lastName', 'email', 'password'];

@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import Goals from './Goals';
 import GoalsForm from '../containers/GoalsFormContainer';
 
-console.log(GoalsForm);
-
 class GoalsView extends Component {
   static defaultProps = {
     fields: {
