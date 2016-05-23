@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
+const Header = ({ isAuthenticated, onLogOut }) => {
+  const logOutButton = <li onClick={onLogOut}>Log out</li>;
 
-const Header = () => {
   return (
     <header>
       <nav className="CoreLayout__nav">
@@ -13,6 +14,10 @@ const Header = () => {
             <li><Link to="transactions">Transactions</Link></li>
             <li><Link to="goals">Goals</Link></li>
             <li><Link to="profile">Profile</Link></li>
+            { isAuthenticated
+              ? logOutButton
+              : null
+            }
           </ul>
           <Dropdown className="CoreLayout__nav__mobile-dropdown">
             <DropdownTrigger>
@@ -23,6 +28,10 @@ const Header = () => {
                 <li><Link to="transactions">Transactions</Link></li>
                 <li><Link to="goals">Goals</Link></li>
                 <li><Link to="profile">Profile</Link></li>
+                { isAuthenticated
+                  ? logOutButton
+                  : null
+                }
               </ul>
             </DropdownContent>
           </Dropdown>
@@ -30,6 +39,11 @@ const Header = () => {
       </nav>
     </header>
   );
+};
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  onLogOut: PropTypes.func.isRequired,
 };
 
 export default Header;

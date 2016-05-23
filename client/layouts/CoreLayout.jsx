@@ -1,16 +1,25 @@
+import { bindActionCreators } from 'redux';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import * as actionCreators from 'actions/auth';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-export const CoreLayout = (props) => {
+export const CoreLayout = ({ actions, children, isAuthenticated }) => {
+  const handleLogOut = () => {
+    actions.signOutAndRedirect();
+  };
+
   return (
     <div className="CoreLayout">
-      <Header />
+      <Header
+        isAuthenticated={isAuthenticated}
+        onLogOut={handleLogOut}
+      />
 
       <main>
-        { props.children }
+        { children }
       </main>
 
       <Footer />
@@ -19,7 +28,9 @@ export const CoreLayout = (props) => {
 };
 
 CoreLayout.propTypes = {
+  actions: PropTypes.object,
   children: PropTypes.object,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -30,7 +41,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    actions: bindActionCreators(actionCreators, dispatch),
   };
 };
 
