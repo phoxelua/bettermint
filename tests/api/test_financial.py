@@ -8,7 +8,7 @@ from flask import url_for
 from bettermint.factories import UserFactory
 from bettermint.lib.utils import status
 from bettermint.lib.utils.token import generate_token
-from bettermint.models import Institution
+from bettermint.models import Institution, AccessToken
 from tests.bettermint_test_case import BettermintTestCase
 
 
@@ -23,9 +23,11 @@ class TestFinancial(BettermintTestCase):
         BettermintTestCase.setUp(self)
         self.user = UserFactory.instance.create('Ash', 'Ketchum', 'ashk@gmail.com', 'forever10')
         self.token = generate_token({'email': self.user.email}, timedelta(days=7))
-        self.institution = Institution(user=self.user, name='amex', access_token='wontworkinreallife')
+        self.institution = Institution(name='amex')
+        self.access_token = AccessToken(value='abc', user=self.user, institution=self.institution)
         self.user.save()
         self.institution.save()
+        self.access_token.save()
 
     def test_get_institutions_without_authorization_header_should_fail(self):
         self._request_endpoint('GET', self.get_institutions_url, {}, status.HTTP_401_UNAUTHORIZED)

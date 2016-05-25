@@ -3,8 +3,8 @@ from bettermint.app import create_app
 from bettermint.database import db
 
 
-class InitDB(Command):
-    """Initialize database by creating tables."""
+class DropDB(Command):
+    """Drops all databases."""
 
     def run(self):
         """Runs this command."""
@@ -14,4 +14,3 @@ class InitDB(Command):
         with app.app_context():
             db.reflect()
             db.drop_all()
-            db.create_all()

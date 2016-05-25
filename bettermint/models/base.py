@@ -5,10 +5,8 @@ from collections import OrderedDict
 from bettermint.database import db
 
 
-class PrimaryKeyIdBase(db.Model):
+class Base(db.Model):
     __abstract__ = True
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     def save(self):
         db.session.add(self)
@@ -22,6 +20,12 @@ class PrimaryKeyIdBase(db.Model):
         d = OrderedDict(sorted([('{} <{}>'.format(c.name, c.type), str(getattr(self, c.name)))
                         for c in self.__table__.columns], key=lambda x: x[0]))
         return json.dumps(d, indent=2)
+
+
+class PrimaryKeyIdBase(Base):
+    __abstract__ = True
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
 
 class TimestampBase(PrimaryKeyIdBase):

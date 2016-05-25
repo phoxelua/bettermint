@@ -5,13 +5,13 @@ from bettermint.models import PrimaryKeyIdBase
 class Institution(PrimaryKeyIdBase):
     """
     A representation of a basic Institution object.
-    A User has multiple Institutions.
     """
 
-    __tablename__ = 'Institution'
-    __table_args__ = (db.UniqueConstraint('user_id', 'name'),)
+    __tablename__ = 'institutions'
 
-    user = db.relationship('User')
-    user_id = db.Column(db.ForeignKey('User.id'), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-    access_token = db.Column(db.String(160), nullable=False)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+
+    @property
+    def users(self):
+        from bettermint.models import AccessToken, User
+        return User.query.filter(User.id.in_(self.access_tokens.with_entities(AccessToken.user_id)))
