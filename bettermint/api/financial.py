@@ -45,7 +45,7 @@ def get_transactions(institution, account_id, user):
     Get transactions associated with an institution.
     """
     access_token = AccessToken.query.filter_by(user=user).join(Institution).filter_by(name=institution).first_or_404()
-    client = PlaidClient(access_token)
+    client = PlaidClient(access_token.value)
     transactions = client.get_transactions(start=datetime.now() - timedelta(days=7))
     return jsonify({
         'transactions': transactions
@@ -64,6 +64,7 @@ def convert_token(institution, token, user):
     """
     AccessToken(user=user, institution=Institution(name=institution), value=PlaidClient().exchange_token(token)).save()
     return jsonify({})
+
 
 # TODO: Replace with real shit
 @financial_api.route('/goals', methods=['GET', 'POST'])

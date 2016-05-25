@@ -96,6 +96,7 @@ class TestFinancial(BettermintTestCase):
                 mock.patch('bettermint.lib.plaid.plaid.PlaidClient.get_transactions', return_value=[]) as mock_get_transactions:
             self._request_endpoint('GET', url, headers)
             self.assertEqual(mock_client.call_count, 1)
+            self.assertEqual(mock_client.call_args[0][0], self.access_token.value)
             self.assertEqual(mock_get_transactions.call_count, 1)
 
     def test_convert_token_with_nonexistent_user_should_fail(self):
