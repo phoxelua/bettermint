@@ -104,7 +104,7 @@ class TestFinancial(BettermintTestCase):
         url = url_for('financial_api.convert_token')
         headers = self._create_headers(user=self.deleted_user)
         self._request_endpoint('POST', url, headers, expected_status_code=status.HTTP_404_NOT_FOUND,
-                                institution=self.institution.name, token=self.token)
+                               institution=self.institution.name, token=self.token)
         self.assertEqual(Institution.query.count(), 1)
 
     def test_convert_token_with_expired_token_should_fail(self):

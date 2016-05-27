@@ -34,10 +34,12 @@ def _register_apis(app):
 
     from bettermint.api.auth import auth_api
     from bettermint.api.financial import financial_api
+    from bettermint.api.profile import profile_api
 
     for blueprint in [
         auth_api,
         financial_api,
+        profile_api,
     ]:
         app.register_blueprint(blueprint)
 

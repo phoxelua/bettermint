@@ -1,7 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial/institutions';
+import * as institutionActions from 'actions/financial/institutions';
+import * as profileActions from '../actions';
 import ProfileView from '../components/ProfileView';
 
 const mapStateToProps = (state) => {
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(actionCreators, dispatch),
+    institutionActions: bindActionCreators(institutionActions, dispatch),
+    profileActions: bindActionCreators(profileActions, dispatch),
   };
 };
 
