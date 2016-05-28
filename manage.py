@@ -2,7 +2,7 @@
 from flask_script import Manager, Server
 from flask_shellplus import Shell
 from flask_migrate import Migrate, MigrateCommand
-from utils.commands import WebpackServer, InitDB, TestRunner, DropDB
+from utils.commands import WebpackServer, InitDB, TestRunner, DropDB, MakePlayground
 
 from bettermint.app import create_app
 from bettermint.database import db
@@ -22,6 +22,7 @@ manager.add_command('webpack', WebpackServer)
 manager.add_command('initdb', InitDB)
 manager.add_command('dropdb', DropDB)
 manager.add_command('db', MigrateCommand)
+manager.add_command('make_playground', MakePlayground)
 
 TestRunner.capture_all_args = True
 manager.add_command('test', TestRunner)

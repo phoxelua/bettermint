@@ -6,8 +6,9 @@ class AccessToken(Base):
     """
     A representation of a User Institution's access token.
     Granted to the User via Plaid.
-    Users have multiple AccessTokens.
-    AccessTokens have one and only one Institution.
+
+    Users have many AccessTokens but an AccessToken has only one User.
+    Institutions have many AccessTokens but an AccessToken has only one Institution.
     """
 
     __tablename__ = 'access_tokens'
