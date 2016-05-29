@@ -14,12 +14,12 @@ class TestAuth(BettermintTestCase):
 
     @classmethod
     def setUpClass(cls):
-        BettermintTestCase.setUpClass()
+        super().setUpClass()
         cls.token_url = url_for('auth_api.create_token')
         cls.signup_url = url_for('auth_api.signup')
 
     def setUp(self):
-        BettermintTestCase.setUp(self)
+        super().setUp()
         self.user = UserFactory.create()
 
     def test_token_creation_without_email_should_fail(self):

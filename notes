@@ -1,0 +1,46 @@
+AccessToken(value='abc', user=User(first_name='a', last_name='a', email='a@gmail.com', password_hash='forever10'), institution=Institution(name='amex')).save()
+AccessToken(value='bce', user=User.query.filter_by(email='a@gmail.com').one(), institution=Institution(name='bofa')).save()
+AccessToken(value='def', user=User(first_name='a', last_name='a', email='b@gmail.com', password_hash='forever10'), institution=Institution.query.filter_by(name='amex').one()).save()
+User.query.count(), AccessToken.query.count(), Institution.query.count()
+
+rn
+  deleting user
+    deletes access tokens correctly
+    does not delete institutions correctly
+  delete institution
+    deletes access token correctly
+    deletes user INCORRECTLY
+
+deleting a user should
+  DELETE that users access tokens
+  KEEP that users related institutions
+
+deleting an access token should
+  KEEP its user
+  KEEP its institution
+  user's token list should NOT contain that token
+  institutions's token list should NOT contain that token
+
+deleting an institution should
+  DELETE all access tokens that point to it
+  KEEP associated users
+
+
+
+remove all id nonsense?
+  make institution pkey=name
+  make user pkey=email
+
+tune string lengths of models
+  goal name
+
+
+ENSURE ATOKEN user and institution is NON NULLABLE
+
+unique together GOAL model
+
+Factory boy create doesnt seem to actually save
+http://stackoverflow.com/questions/8306506/deleting-an-object-from-an-sqlalchemy-session-before-its-been-persisted
+  auto flushing
+    https://github.com/rbarrois/factory_boy/issues/81
+    https://github.com/rbarrois/factory_boy/pull/262

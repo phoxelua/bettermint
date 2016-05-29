@@ -4,7 +4,7 @@ from bettermint.models import TimestampBase
 
 class Transaction(TimestampBase):
     """
-    A representation of a transaction object. Transactions incorporate any USD payment or exchange.
+    A representation of a transaction object. Transactions are any USD payment or exchange.
 
     A User has many Transactions but a Transaction has only one User.
     An Institution has many Transactoins but a Transaction has only one Institution.

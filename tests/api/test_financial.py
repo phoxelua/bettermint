@@ -9,18 +9,18 @@ from bettermint.lib.utils import status
 from bettermint.lib.utils.token import generate_token
 from bettermint.models import Institution
 from tests.bettermint_test_case import BettermintTestCase
+from tests.factories import AccessTokenFactory
 
 
 class TestFinancial(BettermintTestCase):
 
     @classmethod
     def setUpClass(cls):
-        BettermintTestCase.setUpClass()
+        super().setUpClass()
         cls.get_institutions_url = url_for('financial_api.get_institutions')
 
     def setUp(self):
-        BettermintTestCase.setUp(self)
-        from tests.factories import AccessTokenFactory
+        super().setUp()
         self.access_token = AccessTokenFactory.create()
         self.user = self.access_token.user
         self.token = generate_token({'email': self.user.email}, timedelta(days=7))
@@ -44,7 +44,7 @@ class TestFinancial(BettermintTestCase):
     def test_get_institutions_with_valid_user_and_expiration_should_succeed(self):
         headers = self._create_headers(email=self.user.email)
         response = self._request_endpoint('GET', self.get_institutions_url, headers)
-        self.assertEqual(json.loads(response.data.decode('utf-8'))['institutions'], [self.institution.name])
+        self.assertListEqual(json.loads(response.data.decode('utf-8'))['institutions'], [self.institution.name])
 
     def test_delete_institution_with_nonexistent_user_should_fail(self):
         url = url_for('financial_api.delete_institutions', institution=self.institution.name)
