@@ -3,25 +3,24 @@ import unittest
 
 from flask import url_for
 
-from bettermint.factories import UserFactory
 from bettermint.lib.utils import status
 from bettermint.lib.utils.web import snake_to_camel_case_dict
 from bettermint.models import User
 from tests.bettermint_test_case import BettermintTestCase
+from tests.factories import UserFactory
 
 
 class TestAuth(BettermintTestCase):
 
     @classmethod
     def setUpClass(cls):
-        BettermintTestCase.setUpClass()
+        super().setUpClass()
         cls.token_url = url_for('auth_api.create_token')
         cls.signup_url = url_for('auth_api.signup')
 
     def setUp(self):
-        BettermintTestCase.setUp(self)
-        self.user = UserFactory.instance.create('Ash', 'Ketchum', 'ashk@gmail.com', 'forever10')
-        self.user.save()
+        super().setUp()
+        self.user = UserFactory.create()
 
     def test_token_creation_without_email_should_fail(self):
         self._post_to_endpoint(self.token_url, status.HTTP_422_UNPROCESSABLE_ENTITY, password='1234')
