@@ -2,7 +2,7 @@ import unittest
 
 from bettermint.models import User, AccessToken, Institution, Goal, Transaction, Account
 from tests.bettermint_test_case import BettermintTestCase
-from tests.factories import UserFactory, AccessTokenFactory, InstitutionFactory, GoalFactory, TransactionFactory, AccountFactory
+from tests.factories import UserFactory, AccessTokenFactory, GoalFactory, TransactionFactory, AccountFactory
 
 
 class TestUserDeletion(BettermintTestCase):
@@ -63,9 +63,16 @@ class TestGoalDeletion(BettermintTestCase):
         user = UserFactory.create()
         goal = GoalFactory(user=user, transactions=[TransactionFactory.create(user=user)])
         goal.delete()
-        self.assertEqual(User.query.count(), 1)
         self.assertEqual(Goal.query.count(), 0)
         self.assertEqual(Transaction.query.count(), 1)
+        self.assertEqual(User.query.count(), 1)
+
+    def test_should_not_delete_related_accounts(self):
+        account = AccountFactory.create()
+        goal = GoalFactory(accounts=[account], user=account.user)
+        goal.delete()
+        self.assertEqual(Goal.query.count(), 0)
+        self.assertEqual(Account.query.count(), 1)
 
 
 class TestTransactionDeletion(BettermintTestCase):
@@ -83,7 +90,12 @@ class TestTransactionDeletion(BettermintTestCase):
 class TestAccountDeletion(BettermintTestCase):
     """Mainly sanity check: Transaction deletes should/should not cascade to appropiate associations."""
 
-    pass
+    def test_should_not_delete_related_goal(self):
+        account = AccountFactory.create()
+        GoalFactory(accounts=[account], user=account.user)
+        account.delete()
+        self.assertEqual(Goal.query.count(), 1)
+        self.assertEqual(Account.query.count(), 0)
 
 
 if __name__ == '__main__':

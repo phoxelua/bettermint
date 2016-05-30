@@ -133,9 +133,7 @@ class TestFinancial(BettermintTestCase):
             token = generate_token_for_user(user, timedelta(days=expire_in)).decode('utf-8')
         else:
             token = ''
-        return {
-            'Authorization': 'Bearer {}'.format(token)
-        }
+        return {'Authorization': 'Bearer {}'.format(token)}
 
     def _request_endpoint(self, method, url, headers, expected_status_code=status.HTTP_200_OK, **payload):
         if method == 'GET':
