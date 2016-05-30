@@ -27,47 +27,44 @@ const ProfileInfoForm = (props) => {
   };
 
   return (
-    <form
-      className="ProfileInfoForm"
-      onSubmit={handleSubmit(_handleSubmit)}
-    >
+    <form onSubmit={handleSubmit(_handleSubmit)}>
       {
         didUpdate ? <div>Profile Updated</div> : null
       }
-      <div className="ProfileInfoForm__input-group">
+      <div>
         <label>Email</label>
-        <div className="ProfileInfoForm__input-wrapper">
+        <div>
           <input type="email" placeholder="john@doe.com" {...email} />
           {
             email.touched &&
             email.error &&
-            <span className="ProfileInfoForm__input-wrapper__error">{email.error}</span>
+            <span>{email.error}</span>
           }
         </div>
       </div>
-      <div className="ProfileInfoForm__input-group">
+      <div>
         <label>Password</label>
-        <div className="ProfileInfoForm__input-wrapper">
+        <div>
           <input type="password" placeholder="hunter2" {...password} />
           {
             password.touched &&
             password.error &&
-            <span className="ProfileInfoForm__input-wrapper__error">{password.error}</span>
+            <span>{password.error}</span>
           }
         </div>
       </div>
-      <div className="ProfileInfoForm__input-group">
+      <div>
         <label>Birthday</label>
-        <div className="ProfileInfoForm__input-wrapper">
+        <div>
           <input type="date" {...birthday} />
           {
             birthday.touched &&
             birthday.error &&
-            <span className="ProfileInfoForm__input-wrapper__error">{birthday.error}</span>
+            <span>{birthday.error}</span>
           }
         </div>
       </div>
-      <div className="ProfileInfoForm__input-group ProfileInfoForm__submit">
+      <div>
         <button type="submit" className="" disabled={isUpdating}>
           Submit
         </button>

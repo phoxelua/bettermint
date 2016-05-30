@@ -9,34 +9,31 @@ const EmailSignInForm = (props) => {
   };
 
   return (
-    <form
-      className="EmailSignUpForm"
-      onSubmit={handleSubmit(_handleSubmit)}
-    >
-      <div className="EmailSignUpForm__input-group">
+    <form onSubmit={handleSubmit(_handleSubmit)}>
+      <div>
         <label>Email</label>
-        <div className="EmailSignUpForm__input-wrapper">
+        <div>
           <input type="email" placeholder="john@doe.com" {...email} />
           {
             email.touched &&
             email.error &&
-            <span className="EmailSignUpForm__input-wrapper__error">{email.error}</span>
+            <span>{email.error}</span>
           }
         </div>
       </div>
-      <div className="EmailSignUpForm__input-group">
+      <div>
         <label>Password</label>
-        <div className="EmailSignUpForm__input-wrapper">
+        <div>
           <input type="password" placeholder="hunter2" {...password} />
           {
             password.touched &&
             password.error &&
-            <span className="EmailSignUpForm__input-wrapper__error">{password.error}</span>
+            <span>{password.error}</span>
           }
         </div>
       </div>
-      <div className="EmailSignUpForm__input-group EmailSignUpForm__submit">
-        <button type="submit" className="" disabled={submitting}>
+      <div>
+        <button type="submit" disabled={submitting}>
           Submit
         </button>
       </div>
@@ -51,7 +48,5 @@ EmailSignInForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
-
-
 
 export default EmailSignInForm;

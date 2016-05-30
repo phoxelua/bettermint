@@ -38,7 +38,7 @@
     "reactable": "^0.13.0",
     "redux": "3.x",
     "redux-auth-wrapper": "0.3.x",
-    "redux-form": "4.x",
+    "redux-form": "5.x",
     "redux-logger": "~2.6.1",
     "redux-promise": "~0.5.1",
     "redux-thunk": "~2.0.1",
