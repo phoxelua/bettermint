@@ -1,5 +1,6 @@
 import { checkHttpStatus, parseResponse } from 'utilities/http';
 import { authConstants as authConstants } from 'constants/auth';
+import { post } from 'utilities/api';
 import { push } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
 
@@ -68,9 +69,11 @@ export function signInUserWithCredentials(email, password, redirect='/') {
 }
 
 export function signInUserWithToken(token, redirect='/') {
-  return function action(dispatch) {
+  return async function action(dispatch) {
     try {
       jwtDecode(token);
+
+      await post('/api/auth/token/is_valid', {}, token);
       dispatch(signInUserSuccess(token));
       dispatch(push(redirect));
     } catch (e) {

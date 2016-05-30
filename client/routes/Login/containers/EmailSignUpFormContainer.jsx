@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default reduxForm({
-  form: 'emailSignUpForm',
+  form: 'EmailSignUpForm',
   fields,
   validate,
 },
