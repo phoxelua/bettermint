@@ -39,7 +39,7 @@ def require_authentication(func):
         if decrypted['expiration'] < datetime.utcnow().timestamp():
             raise exceptions.Unauthorized('Token has expired.')
 
-        user = User.query.get(decrypted['id'])
+        user = 'id' in decrypted and User.query.get(decrypted['id'])
         if not user:
             raise exceptions.NotFound('User does not exist.')
 

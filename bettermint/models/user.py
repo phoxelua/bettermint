@@ -12,6 +12,8 @@ class User(TimestampBase):
     email = db.Column(db.String(255), nullable=False, unique=True)
     password_hash = db.Column(db.String(256), nullable=False)
 
+    profile = db.relationship('UserProfile', uselist=False)
+
     @property
     def institutions(self):
         from bettermint.models import AccessToken, Institution
@@ -20,3 +22,15 @@ class User(TimestampBase):
     @classmethod
     def by_email(cls, email: str) -> 'User':
         return User.query.filter_by(email=email).first()
+
+
+class UserProfile(TimestampBase):
+    """Associated information with a User."""
+
+    __tablename__ = 'user_profiles'
+
+    birthday = db.Column(db.Date, nullable=True)
+
+    user_id = db.Column(db.ForeignKey('users.id'), nullable=False)
+
+    user = db.relationship('User')

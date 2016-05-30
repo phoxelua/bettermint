@@ -12,7 +12,7 @@ class LoginView extends Component {
 
 
   componentDidMount() {
-    const redirectRoute = this.props.location.query.redirect || '/login';
+    const redirectRoute = this.props.location.query.redirect || '/';
     const token = store.get('token');
 
     if (!!token) {
@@ -21,7 +21,7 @@ class LoginView extends Component {
   }
 
   render() {
-    const redirectRoute = this.props.location.query.redirect || '/login';
+    const redirectRoute = this.props.location.query.redirect || '/';
 
     return (
       <div>

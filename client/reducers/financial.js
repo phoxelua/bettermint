@@ -99,7 +99,6 @@ export default createReducer(initialState, {
     });
   },
   [goalConstants.CREATE_GOAL_SUCCESS]: (state, payload) => {
-    console.log(payload);
     return Object.assign({}, state, {});
   },
   [goalConstants.CREATE_GOAL_ERROR]: (state, payload) => {

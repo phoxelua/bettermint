@@ -1,21 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import Institutions from '../containers/InstitutionsContainer';
+import ProfileInfoForm from '../containers/ProfileInfoFormContainer';
 import PlaidLink from 'components/PlaidLink';
 
 class ProfileView extends Component {
   static propTypes = {
     token: PropTypes.string.isRequired,
     institutions: PropTypes.array,
-    actions: PropTypes.object,
+    institutionActions: PropTypes.object,
+    profileActions: PropTypes.object,
   }
 
   componentDidMount() {
-    this.props.actions.requestInstitutions(this.props.token);
+    this.props.institutionActions.requestInstitutions(this.props.token);
+    this.props.profileActions.fetchUserProfile(this.props.token);
   }
 
 
   handleSuccess = () => {
-    this.props.actions.requestInstitutions(this.props.token);
+    this.props.institutionActions.requestInstitutions(this.props.token);
   }
 
   render() {
@@ -31,6 +34,7 @@ class ProfileView extends Component {
           onSuccess={this.handleSuccess}
           authToken={this.props.token}
         />
+        <ProfileInfoForm />
       </div>
     );
   }

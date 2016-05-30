@@ -36,8 +36,6 @@ export function createGoal(fields, token) {
       const endpoint = '/api/financial/goals';
       const result = await post(endpoint, fields, token);
 
-      console.log(result);
-
       dispatch({
         type: goalConstants.CREATE_GOAL_SUCCESS,
         payload: {
