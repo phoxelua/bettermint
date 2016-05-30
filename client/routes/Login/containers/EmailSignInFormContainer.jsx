@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default reduxForm({
-  form: 'emailSignInForm',
+  form: 'EmailSignInForm',
   fields,
   validate,
 },

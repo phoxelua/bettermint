@@ -3,6 +3,8 @@ import jwt
 
 from flask import current_app
 
+from bettermint.models import User
+
 
 def generate_token(dictionary: dict, expiration: datetime.timedelta):
     """
@@ -17,3 +19,9 @@ def generate_token(dictionary: dict, expiration: datetime.timedelta):
 
 def decode_token(token: str):
     return jwt.decode(token, current_app.config['TOKEN_SECRET_KEY'], algorithm='HS256')
+
+
+def generate_token_for_user(user: User, expiration: datetime.timedelta=datetime.timedelta(days=7)):
+    """Generates a JWT for a particular user."""
+
+    return generate_token({'id': user.id}, expiration)

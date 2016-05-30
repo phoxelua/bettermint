@@ -1,5 +1,7 @@
 aniso8601==1.0.0
 bcrypt==2.0.0
+factory-boy==2.7.0
+fake-factory==0.5.7
 Flask==0.10.1
 flask-cors==2.1.2
 Flask-API==0.6.5
@@ -16,6 +18,7 @@ mock==2.0.0
 passlib==1.6.5
 psycopg2==2.6
 pyjwt==1.4.0
+python-dateutil==2.5.3
 pytz==2015.4
 six==1.9.0
 SQLAlchemy==1.0.4

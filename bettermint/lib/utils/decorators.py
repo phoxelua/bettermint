@@ -31,11 +31,19 @@ def require_authentication(func):
         if not token:
             raise exceptions.Unauthorized('Bearer token is not present.')
 
-        decrypted = decode_token(token)
+        try:
+            decrypted = decode_token(token)
+        except:
+            raise exceptions.Unauthorized('Token is malformed.')
+
         if decrypted['expiration'] < datetime.utcnow().timestamp():
             raise exceptions.Unauthorized('Token has expired.')
 
-        kwargs['user'] = User.query.filter_by(email=decrypted['email']).first_or_404()
+        user = User.query.get(decrypted['id'])
+        if not user:
+            raise exceptions.NotFound('User does not exist.')
+
+        kwargs['user'] = user
         return func(*args, **kwargs)
     return wrapped
 
