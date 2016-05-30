@@ -33,6 +33,12 @@ class UserFactory(ForceFlushModel):
             for account in extracted:
                 self.accounts.append(account)
 
+    @factory.post_generation
+    def goals(self, create, extracted, **kwargs):
+        if create and extracted:
+            for goal in extracted:
+                self.goals.append(goal)
+
 
 class InstitutionFactory(ForceFlushModel):
     class Meta:
@@ -78,6 +84,12 @@ class GoalFactory(ForceFlushModel):
         if create and extracted:
             for transaction in extracted:
                 self.transactions.append(transaction)
+
+    @factory.post_generation
+    def accounts(self, create, extracted, **kwargs):
+        if create and extracted:
+            for account in extracted:
+                self.accounts.append(account)
 
 
 class AccountFactory(ForceFlushModel):

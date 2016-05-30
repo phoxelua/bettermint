@@ -28,5 +28,4 @@ class Transaction(TimestampBase):
     institution = db.relationship('Institution', backref=db.backref('transactions', cascade='all, delete-orphan', lazy='dynamic'))
 
     def serialize(self):
-        # TODO: should use an actual serializer?
-        return {'id': self.id, 'name': self.name, 'amount': self.amount, 'pending': self.pending, 'post_date': str(self.post_date)}
+        return {'id': self.id, 'name': self.name, 'amount': self.amount, 'pending': self.pending, 'post_date': self.post_date.timestamp()}

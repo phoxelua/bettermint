@@ -9,11 +9,6 @@ class Account(Base):
     A User has many Accounts but an Account has only one User.
     An Institution has many Accounts but an Account has only one Institution.
     An Account has many Transactions but a Transaction can have only one Account.
-
-
-
-
-    IMPLEMENT:*************
     A Goal has many Accounts and an Account has many Goals.
     """
 

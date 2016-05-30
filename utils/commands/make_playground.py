@@ -1,3 +1,4 @@
+from faker import Faker
 from flask_script import Command
 
 from bettermint.models import User
@@ -16,11 +17,24 @@ class MakePlayground(Command):
         user = UserFactory.instance.create(first_name='John', last_name='Smith', email='matcha@gmail.com', password=('matcha'))
         user.save()
         print('Created user `matcha@gmail.com` with password `matcha`')
-        tokens = AccessTokenFactory.create_batch(2, user=user)
-        print('Created example institutions: {}'.format(', '.join(token.institution.name for token in tokens)))
+        amex = AccessTokenFactory.create(user=user, institution__name='amex').institution
+        bofa = AccessTokenFactory.create(user=user, institution__name='bofa').institution
+        print('Created example institutions: amex, boa')
 
-        for i in range(2):
-            goal = GoalFactory.create(user=user)
-            TransactionFactory.create_batch(50, goals=[goal], institution=tokens[i].institution)
-            goal.save()
-            print('Created goal `{}` with `{}` Transactions'.format(goal.name, 100))
+        fake = Faker()
+
+        goal = GoalFactory.create(user=user, name='Roth IRA', amount=5500)
+        for i in range(51):
+            TransactionFactory.create(goals=[goal], institution=amex,
+                                      name=fake.bs(), amount=fake.pydecimal(right_digits=2),
+                                      post_date=fake.date_time_this_year())
+        goal.save()
+        print('Created goal `{}` with `{}` Transactions'.format(goal.name, 50))
+
+        goal = GoalFactory.create(user=user, name='Spend less on food', amount=1000)
+        for j in range(51):
+            TransactionFactory.create(goals=[goal], institution=bofa,
+                                      name=fake.bs(), amount=fake.pydecimal(right_digits=2),
+                                      post_date=fake.date_time_this_month())
+        goal.save()
+        print('Created goal `{}` with `{}` Transactions'.format(goal.name, 30))

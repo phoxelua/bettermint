@@ -7,7 +7,7 @@ goal_transactions = db.Table('goal_transactions',
                              db.Column('transaction_id', db.Integer, db.ForeignKey('transactions.id')))
 goal_accounts = db.Table('goal_accounts',
                          db.Column('goal_id', db.Integer, db.ForeignKey('goals.id')),
-                         db.Column('account_id', db.Integer, db.ForeignKey('accounts.id')))
+                         db.Column('account_id', db.Text, db.ForeignKey('accounts.id')))
 
 
 class Goal(TimestampBase):
@@ -32,3 +32,12 @@ class Goal(TimestampBase):
     user = db.relationship('User', backref=db.backref('goals', cascade='all, delete-orphan', lazy='dynamic'))
     transactions = db.relationship('Transaction', secondary=goal_transactions, backref='goals')
     accounts = db.relationship('Account', secondary=goal_accounts, backref='goals')
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'amount': self.amount,
+            'name': self.name,
+            'start_date': self.start_date.timestamp(),
+            'end_date': self.end_date.timestamp()
+        }

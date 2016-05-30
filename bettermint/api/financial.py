@@ -7,7 +7,7 @@ from werkzeug import exceptions
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
 from bettermint.lib.utils.web import snake_to_camel_case_dict
-from bettermint.models import Institution, AccessToken, Transaction
+from bettermint.models import Institution, AccessToken, Transaction, Goal
 
 
 financial_api = Blueprint('financial_api', __name__, url_prefix='/api/financial')
@@ -72,13 +72,7 @@ def convert_token(institution, token, user):
 def goals():
     if request.method == 'GET':
         return jsonify(snake_to_camel_case_dict({
-            'goals': [{
-                'id': 1,
-                'amount': 1000,
-                'name': 'Cool Goal 1',
-                'start_date': datetime.now().timestamp(),
-                'end_date': (datetime.now() + timedelta(days=30)).timestamp(),
-            }],
+            'goals': [goal.serialize() for goal in Goal.query.all()],
         }))
     elif request.method == 'POST':
         return jsonify(snake_to_camel_case_dict({
