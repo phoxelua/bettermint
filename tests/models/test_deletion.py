@@ -1,8 +1,8 @@
 import unittest
 
-from bettermint.models import User, AccessToken, Institution, Goal, Transaction
+from bettermint.models import User, AccessToken, Institution, Goal, Transaction, Account
 from tests.bettermint_test_case import BettermintTestCase
-from tests.factories import UserFactory, AccessTokenFactory, GoalFactory, TransactionFactory
+from tests.factories import UserFactory, AccessTokenFactory, InstitutionFactory, GoalFactory, TransactionFactory, AccountFactory
 
 
 class TestUserDeletion(BettermintTestCase):
@@ -26,6 +26,12 @@ class TestUserDeletion(BettermintTestCase):
         self.assertEqual(Goal.query.count(), 1)
         self.assertEqual(Transaction.query.count(), 1)
 
+    def test_should_delete_accounts(self):
+        user = AccountFactory.create().user
+        user.delete()
+        self.assertEqual(User.query.count(), 0)
+        self.assertEqual(Account.query.count(), 0)
+
 
 class TestInstitutionDeletion(BettermintTestCase):
     """Mainly sanity check: Institution deletes should/should not cascade to appropiate associations."""
@@ -36,6 +42,18 @@ class TestInstitutionDeletion(BettermintTestCase):
         self.assertEqual(User.query.count(), 1)
         self.assertEqual(AccessToken.query.count(), 0)
         self.assertEqual(Institution.query.count(), 0)
+
+    def test_should_delete_transactions_belonging_to_it(self):
+        institution = TransactionFactory.create().institution
+        institution.delete()
+        self.assertEqual(Institution.query.count(), 0)
+        self.assertEqual(Transaction.query.count(), 0)
+
+    def test_should_delete_accounts_belonging_to_it(self):
+        institution = AccountFactory.create().institution
+        institution.delete()
+        self.assertEqual(Institution.query.count(), 0)
+        self.assertEqual(Account.query.count(), 0)
 
 
 class TestGoalDeletion(BettermintTestCase):
@@ -60,6 +78,12 @@ class TestTransactionDeletion(BettermintTestCase):
         self.assertEqual(User.query.count(), 1)
         self.assertEqual(Transaction.query.count(), 0)
         self.assertEqual(Goal.query.count(), 1)
+
+
+class TestAccountDeletion(BettermintTestCase):
+    """Mainly sanity check: Transaction deletes should/should not cascade to appropiate associations."""
+
+    pass
 
 
 if __name__ == '__main__':

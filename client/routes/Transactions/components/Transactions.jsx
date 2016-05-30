@@ -33,10 +33,10 @@ const Transactions = ({ transactions }) => {
 
 Transactions.propTypes = {
   transactions: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
-    date: PropTypes.number.isRequired,
+    post_date: PropTypes.number.isRequired,
   })).isRequired,
 };
 

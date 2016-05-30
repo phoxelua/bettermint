@@ -5,3 +5,4 @@ from .access_token import AccessToken
 from .goal import Goal
 from .transaction import Transaction
 from .category import Category
+from .account import Account
