@@ -3,7 +3,7 @@ from datetime import datetime
 
 from bettermint.database import db
 from bettermint.lib.utils.security import PasswordManager
-from bettermint.models import User, UserProfile, Institution, AccessToken, Goal, Transaction
+from bettermint.models import User, UserProfile, Institution, AccessToken, Goal, Transaction, Account
 
 
 class ForceFlushModel(factory.alchemy.SQLAlchemyModelFactory):
@@ -35,6 +35,12 @@ class UserFactory(ForceFlushModel):
             for transaction in extracted:
                 self.transactions.append(transaction)
 
+    @factory.post_generation
+    def accounts(self, create, extracted, **kwargs):
+        if create and extracted:
+            for account in extracted:
+                self.accounts.append(account)
+
 
 class InstitutionFactory(ForceFlushModel):
     class Meta:
@@ -47,6 +53,12 @@ class InstitutionFactory(ForceFlushModel):
         if create and extracted:
             for transaction in extracted:
                 self.transactions.append(transaction)
+
+    @factory.post_generation
+    def accounts(self, create, extracted, **kwargs):
+        if create and extracted:
+            for account in extracted:
+                self.accounts.append(account)
 
 
 class AccessTokenFactory(ForceFlushModel):
@@ -76,6 +88,20 @@ class GoalFactory(ForceFlushModel):
                 self.transactions.append(transaction)
 
 
+class AccountFactory(ForceFlushModel):
+    class Meta:
+        model = Account
+
+    id = factory.Sequence(lambda n: str(n))
+    name = factory.Sequence(lambda n: 'Account {}'.format(n))
+    type = 'Savings'
+    available_balance = 0.00
+    current_balance = 0.00
+
+    user = factory.SubFactory(UserFactory)
+    institution = factory.SubFactory(InstitutionFactory)
+
+
 class TransactionFactory(ForceFlushModel):
     class Meta:
         model = Transaction
@@ -86,6 +112,8 @@ class TransactionFactory(ForceFlushModel):
     post_date = datetime.utcnow()
     user = factory.SubFactory(UserFactory)
     institution = factory.SubFactory(InstitutionFactory)
+    account = factory.SubFactory(AccountFactory, user=factory.SelfAttribute('..user'),
+                                 institution=factory.SelfAttribute('..institution'))
 
     @factory.post_generation
     def goals(self, create, extracted, **kwargs):

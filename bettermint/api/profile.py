@@ -63,5 +63,3 @@ def edit_profile(user, email, current_password, new_password, birthday):
     user_profile.save()
 
     return ('', HTTP_204_NO_CONTENT)
-
-

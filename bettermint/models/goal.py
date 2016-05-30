@@ -5,6 +5,9 @@ from bettermint.models import TimestampBase
 goal_transactions = db.Table('goal_transactions',
                              db.Column('goal_id', db.Integer, db.ForeignKey('goals.id')),
                              db.Column('transaction_id', db.Integer, db.ForeignKey('transactions.id')))
+goal_accounts = db.Table('goal_accounts',
+                         db.Column('goal_id', db.Integer, db.ForeignKey('goals.id')),
+                         db.Column('account_id', db.Integer, db.ForeignKey('accounts.id')))
 
 
 class Goal(TimestampBase):
@@ -28,3 +31,4 @@ class Goal(TimestampBase):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('goals', cascade='all, delete-orphan', lazy='dynamic'))
     transactions = db.relationship('Transaction', secondary=goal_transactions, backref='goals')
+    accounts = db.relationship('Account', secondary=goal_accounts, backref='goals')

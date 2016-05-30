@@ -7,7 +7,7 @@ class Transaction(TimestampBase):
     A representation of a transaction object. Transactions are any USD payment or exchange.
 
     A User has many Transactions but a Transaction has only one User.
-    An Institution has many Transactoins but a Transaction has only one Institution.
+    An Institution has many Transaction but a Transaction has only one Institution.
 
     A Goal has many Transactions and a Transaction can have many Goals.
     A Transaction has many Categories and a Category has many Transactions.
@@ -20,10 +20,13 @@ class Transaction(TimestampBase):
     pending = db.Column(db.Boolean, nullable=False)
     post_date = db.Column(db.DateTime, nullable=False)
 
-    # TODO: swap for account model laterz
-    account_id = db.Column(db.Integer, nullable=True)
-
+    account_id = db.Column(db.Text, db.ForeignKey('accounts.id'), nullable=False)
+    account = db.relationship('Account', backref=db.backref('transactions', cascade='all, delete-orphan', lazy='dynamic'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('transactions', cascade='all, delete-orphan', lazy='dynamic'))
     institution_id = db.Column(db.Integer, db.ForeignKey('institutions.id'), nullable=False)
     institution = db.relationship('Institution', backref=db.backref('transactions', cascade='all, delete-orphan', lazy='dynamic'))
+
+    def serialize(self):
+        # TODO: should use an actual serializer?
+        return {'id': self.id, 'name': self.name, 'amount': self.amount, 'pending': self.pending, 'post_date': str(self.post_date)}

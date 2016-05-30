@@ -7,7 +7,7 @@ from werkzeug import exceptions
 from bettermint.lib.plaid.plaid import PlaidClient
 from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
 from bettermint.lib.utils.web import snake_to_camel_case_dict
-from bettermint.models import Institution, AccessToken
+from bettermint.models import Institution, AccessToken, Transaction
 
 
 financial_api = Blueprint('financial_api', __name__, url_prefix='/api/financial')
@@ -37,18 +37,19 @@ def delete_institutions(institution, user):
     return jsonify({})
 
 
-@financial_api.route('/transactions/<institution>', defaults={'account_id': None}, methods=['GET'])
-@financial_api.route('/transactions/<institution>/<account_id>', methods=['GET'])
+@financial_api.route('/transactions', defaults={'institution': None}, methods=['GET'])
+@financial_api.route('/transactions/<institution>', methods=['GET'])
 @require_authentication
-def get_transactions(institution, account_id, user):
+def get_transactions(institution, user):
     """
     Get transactions associated with an institution.
     """
-    access_token = AccessToken.query.filter_by(user=user).join(Institution).filter_by(name=institution).first_or_404()
-    client = PlaidClient(access_token.value)
-    transactions = client.get_transactions(start=datetime.now() - timedelta(days=7))
+    transactions = Transaction.query.filter(Transaction.post_date >= datetime.now() - timedelta(days=7))
+    if institution:
+        instn = Institution.query.filter_by(name=institution).first_or_404()
+        transactions = transactions.filter_by(institution=instn)
     return jsonify({
-        'transactions': transactions
+        'transactions': [transaction.serialize() for transaction in transactions]
     })
 
 
