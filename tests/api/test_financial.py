@@ -6,6 +6,7 @@ from datetime import timedelta
 from flask import url_for
 
 from bettermint.lib.utils import status
+from bettermint.lib.utils.web import snake_to_camel_case_dict
 from bettermint.lib.utils.token import generate_token_for_user
 from bettermint.models import Institution
 from tests.bettermint_test_case import BettermintTestCase
@@ -96,13 +97,15 @@ class TestFinancial(BettermintTestCase):
         url = url_for('financial_api.get_transactions')
         headers = self._create_headers(user=self.user)
         response = self._request_endpoint('GET', url, headers, expected_status_code=status.HTTP_200_OK)
-        self.assertListEqual(json.loads(response.data.decode('utf-8'))['transactions'], [self.transaction.serialize(), other_transaction.serialize()])
+        self.assertListEqual(json.loads(response.data.decode('utf-8'))['transactions'],
+                             list(map(snake_to_camel_case_dict, [self.transaction.serialize(), other_transaction.serialize()])))
 
     def test_get_transactions_with_valid_user_institution_should_succeed(self):
         url = url_for('financial_api.get_transactions', institution=self.institution.name)
         headers = self._create_headers(user=self.user)
         response = self._request_endpoint('GET', url, headers, expected_status_code=status.HTTP_200_OK)
-        self.assertListEqual(json.loads(response.data.decode('utf-8'))['transactions'], [self.transaction.serialize()])
+        self.assertListEqual(json.loads(response.data.decode('utf-8'))['transactions'],
+                             [snake_to_camel_case_dict(self.transaction.serialize())])
 
     def test_convert_token_with_nonexistent_user_should_fail(self):
         url = url_for('financial_api.convert_token')
