@@ -12,7 +12,8 @@ class User(TimestampBase):
     email = db.Column(db.String(255), nullable=False, unique=True)
     password_hash = db.Column(db.String(256), nullable=False)
 
-    profile = db.relationship('UserProfile', uselist=False)
+    profile = db.relationship('UserProfile')
+    profile_id = db.Column(db.ForeignKey('user_profiles.id'), nullable=True)
 
     @property
     def institutions(self):
@@ -30,7 +31,4 @@ class UserProfile(TimestampBase):
     __tablename__ = 'user_profiles'
 
     birthday = db.Column(db.Date, nullable=True)
-
-    user_id = db.Column(db.ForeignKey('users.id'), nullable=False)
-
     user = db.relationship('User')

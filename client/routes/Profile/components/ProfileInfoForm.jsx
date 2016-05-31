@@ -12,14 +12,16 @@ const ProfileInfoForm = (props) => {
 
   const {
     email,
-    password,
+    currentPassword,
+    newPassword,
     birthday,
   } = fields;
 
   const _handleSubmit = () => {
     const attributes = {
       email: fields.email.value,
-      password: fields.password.value,
+      currentPassword: fields.currentPassword.value,
+      newPassword: fields.newPassword.value,
       birthday: fields.birthday.value,
     };
 
@@ -43,13 +45,24 @@ const ProfileInfoForm = (props) => {
         </div>
       </div>
       <div>
-        <label>Password</label>
+        <label>Existing Password</label>
         <div>
-          <input type="password" placeholder="hunter2" {...password} />
+          <input type="password" placeholder="hunter2" {...currentPassword} />
           {
-            password.touched &&
-            password.error &&
-            <span>{password.error}</span>
+            currentPassword.touched &&
+            currentPassword.error &&
+            <span>{currentPassword.error}</span>
+          }
+        </div>
+      </div>
+      <div>
+        <label>New Password</label>
+        <div>
+          <input type="password" placeholder="hunter2" {...newPassword} />
+          {
+            newPassword.touched &&
+            newPassword.error &&
+            <span>{newPassword.error}</span>
           }
         </div>
       </div>

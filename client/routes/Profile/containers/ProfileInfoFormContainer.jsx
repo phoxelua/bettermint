@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import ProfileInfoForm from '../components/ProfileInfoForm';
 import * as actionCreators from '../actions';
 
-const fields = ['email', 'password', 'birthday'];
+const fields = ['email', 'currentPassword', 'newPassword', 'birthday'];
 
 const validate = values => {
   const errors = {};
