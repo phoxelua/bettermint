@@ -3,13 +3,20 @@ from datetime import datetime
 
 from bettermint.database import db
 from bettermint.lib.utils.security import PasswordManager
-from bettermint.models import User, Institution, AccessToken, Goal, Transaction
+from bettermint.models import User, UserProfile, Institution, AccessToken, Goal, Transaction
 
 
 class ForceFlushModel(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         sqlalchemy_session = db.session
         force_flush = True
+
+
+class UserProfileFactory(ForceFlushModel):
+    class Meta:
+        model = UserProfile
+
+    birthday = datetime.today()
 
 
 class UserFactory(ForceFlushModel):
@@ -20,6 +27,7 @@ class UserFactory(ForceFlushModel):
     last_name = factory.Sequence(lambda n: str(n))
     email = factory.LazyAttribute(lambda a: '{0}.{1}@fake.com'.format(a.first_name, a.last_name).lower())
     password_hash = factory.LazyAttribute(lambda h: PasswordManager.context.encrypt('forever10'))
+    profile = factory.SubFactory(UserProfileFactory)
 
     @factory.post_generation
     def transactions(self, create, extracted, **kwargs):

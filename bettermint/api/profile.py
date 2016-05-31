@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify
 from webargs import fields, missing
+from werkzeug import exceptions
 
 from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
 from bettermint.lib.utils.security import PasswordManager
@@ -30,17 +31,21 @@ def get_profile(user):
     }))
 
 
-@profile_api.route('/edit', methods=['POST'])
+@profile_api.route('/edit', methods=['PUT'])
 @use_converted_kwargs({
     'birthday': fields.Date(required=False),
     'email': fields.Str(required=False),
-    'password': fields.Str(required=False),
+    'current_password': fields.Str(required=True),
+    'new_password': fields.Str(required=False),
 })
 @require_authentication
-def edit_profile(user, email, password, birthday):
+def edit_profile(user, email, current_password, new_password, birthday):
     """
     Edit profile things.
     """
+
+    if not PasswordManager.context.verify(current_password, user.password_hash):
+        raise exceptions.Unauthorized('Existing password was not correct.')
 
     user_profile = user.profile if user.profile else UserProfile(user=user)
 
@@ -50,8 +55,8 @@ def edit_profile(user, email, password, birthday):
     if email:
         user.email = email
 
-    if password:
-        hashed = PasswordManager.context.encrypt(password)
+    if new_password:
+        hashed = PasswordManager.context.encrypt(new_password)
         user.password_hash = hashed
 
     user.save()

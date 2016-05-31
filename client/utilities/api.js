@@ -56,6 +56,10 @@ export function post(url, data, authToken) {
   return request({ url, data, params: { method: 'post' }, authToken });
 }
 
+export function put(url, data, authToken) {
+  return request({ url, data, params: { method: 'put' }, authToken });
+}
+
 export function del(url, authToken) {
   return request({ url, params: { method: 'delete' }, authToken });
 }

@@ -1,6 +1,6 @@
 import check from 'check-types';
 
-import { post } from 'utilities/api';
+import { put } from 'utilities/api';
 import { updateUserProfileConstants as constants } from '../constants';
 
 function updateUserProfileFailure(error) {
@@ -26,7 +26,7 @@ export function updateUserProfile(attributes, token) {
     }
 
     try {
-      await post('/api/profile/edit', attributes, token);
+      await put('/api/profile/edit', attributes, token);
       dispatch({
         type: constants.UPDATE_USER_PROFILE_SUCCESS,
       });

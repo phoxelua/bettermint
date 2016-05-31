@@ -102,8 +102,6 @@ class PlaidClient:
 
         response_json = response.json()
 
-        print(response_json['transactions'])
-
         transactions = [
             {
                 '_id': transaction['_id'],
@@ -131,4 +129,4 @@ class PlaidClient:
     @staticmethod
     def _process_transaction_date(date):
         """Converts `date` from YYYY-MM-DD to epoch time."""
-        return datetime.datetime.strptime(date, '%Y-%m-%d').timestamp()
+        return datetime.datetime.strptime(date, '%Y-%m-%d')
