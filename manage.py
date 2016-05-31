@@ -13,7 +13,7 @@ def _make_context():
     return dict(app=app, db=db, models=models)
 
 app = create_app()
-migrate = Migrate(app, db, directory='bettermint/migrations')
+migrate = Migrate(app, db, directory='alembic')
 
 manager = Manager(app)
 manager.add_command('shell', Shell(make_context=_make_context))
