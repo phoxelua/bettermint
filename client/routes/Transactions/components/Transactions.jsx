@@ -8,7 +8,7 @@ const Transactions = ({ transactions }) => {
       <h1>Transactions</h1>
       <Table
         columns={[
-          { key: 'post_date', label: 'Post Date' },
+          { key: 'postDate', label: 'Post Date' },
           { key: 'name', label: 'Name' },
           { key: 'amount', label: 'Amount' },
         ]}
@@ -21,7 +21,7 @@ const Transactions = ({ transactions }) => {
       >
         {transactions.map((transaction) => (
           <Tr key={transaction._id}>
-            <Td column="post_date">{epochToDate(transaction.post_date)}</Td>
+            <Td column="postDate">{epochToDate(transaction.postDate)}</Td>
             <Td column="name">{transaction.name}</Td>
             <Td column="amount">{transaction.amount.toFixed(2)}</Td>
           </Tr>
@@ -36,7 +36,7 @@ Transactions.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
-    post_date: PropTypes.number.isRequired,
+    postDate: PropTypes.number.isRequired,
   })).isRequired,
 };
 

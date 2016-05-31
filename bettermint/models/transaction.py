@@ -7,7 +7,7 @@ class Transaction(TimestampBase):
     A representation of a transaction object. Transactions are any USD payment or exchange.
 
     A User has many Transactions but a Transaction has only one User.
-    An Institution has many Transaction but a Transaction has only one Institution.
+    An Institution has many Transactions but a Transaction has only one Institution.
 
     A Goal has many Transactions and a Transaction can have many Goals.
     A Transaction has many Categories and a Category has many Transactions.
