@@ -14,7 +14,7 @@ class Account(Base):
 
     __tablename__ = 'accounts'
 
-    id = db.Column(db.Text, primary_key=True)
+    id = db.Column(db.String(50), primary_key=True)
     name = db.Column(db.Text, nullable=False)
     type = db.Column(db.Text, nullable=False)
     available_balance = db.Column(db.Float(scale=2), nullable=True)

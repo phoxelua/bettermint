@@ -48,9 +48,9 @@ def get_transactions(institution, user):
     if institution:
         instn = Institution.query.filter_by(name=institution).first_or_404()
         transactions = transactions.filter_by(institution=instn)
-    return jsonify({
+    return jsonify(snake_to_camel_case_dict({
         'transactions': [transaction.serialize() for transaction in transactions]
-    })
+    }))
 
 
 @financial_api.route('/token/convert', methods=['POST'])
