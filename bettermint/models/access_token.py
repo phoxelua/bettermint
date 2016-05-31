@@ -13,11 +13,10 @@ class AccessToken(Base):
 
     __tablename__ = 'access_tokens'
 
-    value = db.Column(db.String(160), nullable=False, unique=True)\
+    value = db.Column(db.String(160), nullable=False, unique=True)
 
     institution_id = db.Column(db.Integer, db.ForeignKey('institutions.id'), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
-    institution = db.relationship('Institution', backref=db.backref('access_tokens',
-                                  cascade='all, delete-orphan', lazy='dynamic', single_parent=True))
+    institution = db.relationship('Institution', backref=db.backref('access_tokens', cascade='all, delete-orphan', lazy='dynamic'))
     user = db.relationship('User', backref=db.backref('access_tokens', cascade='all, delete-orphan', lazy='dynamic'))

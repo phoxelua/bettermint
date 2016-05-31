@@ -26,5 +26,4 @@ class Transaction(TimestampBase):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('transactions', cascade='all, delete-orphan', lazy='dynamic'))
     institution_id = db.Column(db.Integer, db.ForeignKey('institutions.id'), nullable=False)
-    institution = db.relationship('Institution', backref=db.backref('transactions',
-                                  cascade='all, delete-orphan', lazy='dynamic', single_parent=True))
+    institution = db.relationship('Institution', backref=db.backref('transactions', cascade='all, delete-orphan', lazy='dynamic'))
