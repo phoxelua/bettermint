@@ -11,7 +11,6 @@ from bettermint.lib.utils.token import generate_token_for_user
 from bettermint.lib.utils.web import snake_to_camel_case_dict, is_valid_email
 
 
-
 auth_api = Blueprint('auth_api', __name__, url_prefix='/api/auth')
 
 

@@ -83,17 +83,17 @@ class TestProfile(BettermintTestCase):
         self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_401_UNAUTHORIZED,
                                self.valid_edit_profile_payload)
 
-    def test_edit_profile_with_valid_payload(self):
+    def test_edit_profile_with_valid_payload_should_succeed(self):
         headers = self._create_headers(user=self.user)
         self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_204_NO_CONTENT,
                                self.valid_edit_profile_payload)
 
-    def test_edit_profile_with_payload_with_bad_password(self):
+    def test_edit_profile_with_payload_with_bad_password_should_fail(self):
         headers = self._create_headers(user=self.user)
         self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_401_UNAUTHORIZED,
                                self.edit_profile_payload_with_bad_password)
 
-    def test_edit_profile_with_payload_with_bad_birthday(self):
+    def test_edit_profile_with_payload_with_bad_birthday_should_fail(self):
         headers = self._create_headers(user=self.user)
         self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_422_UNPROCESSABLE_ENTITY,
                                self.edit_profile_payload_with_bad_birthday)

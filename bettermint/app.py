@@ -2,8 +2,10 @@ import os
 from logging import StreamHandler
 from sys import stdout
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
+from werkzeug.exceptions import default_exceptions
+from werkzeug.exceptions import HTTPException
 
 from bettermint.database import db
 from bettermint.constants import Environment
@@ -20,6 +22,7 @@ def create_app():
 
     _register_apis(app)
     _register_views(app)
+    _register_as_json(app)
 
     handler = StreamHandler(stdout)
     app.logger.addHandler(handler)
@@ -27,6 +30,17 @@ def create_app():
     CORS(app, supports_credentials=True)
 
     return app
+
+
+def _register_as_json(app):
+
+    def make_json_error(ex):
+        response = jsonify(status=ex.code, message=str(ex.description))
+        response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+        return response
+
+    for code in default_exceptions.keys():
+        app.register_error_handler(code, make_json_error)
 
 
 def _register_apis(app):
