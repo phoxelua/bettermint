@@ -4,6 +4,7 @@ class Config:
     # Flask
     DEBUG = False
     TESTING = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Plaid
     PLAID_CLIENT_ID = 'yo-plaid-client-id-here'
@@ -35,6 +36,7 @@ class TestingConfig(Config):
 
     # Security
     NUM_HASH_ROUNDS = 1
+
 
 class ProdConfig(Config):
     CONFIG_NAME = 'prod'
