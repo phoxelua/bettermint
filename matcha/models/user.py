@@ -31,4 +31,4 @@ class UserProfile(TimestampBase):
     __tablename__ = 'user_profiles'
 
     birthday = db.Column(db.Date, nullable=True)
-    user = db.relationship('User')
+    user = db.relationship('User', uselist=False)
