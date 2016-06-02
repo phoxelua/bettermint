@@ -2,7 +2,7 @@
 
 set -e
 
-ENV_NAME="bettermint"
+ENV_NAME="matcha"
 if [[ -z $VIRTUAL_ENV ]]; then
     CURR_VIRTUAL_ENV=""
 else

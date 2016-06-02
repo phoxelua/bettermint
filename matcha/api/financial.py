@@ -4,10 +4,10 @@ from flask import Blueprint, jsonify, request
 from webargs import fields
 from werkzeug import exceptions
 
-from bettermint.lib.plaid.plaid import PlaidClient
-from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
-from bettermint.lib.utils.web import snake_to_camel_case_dict
-from bettermint.models import Institution, AccessToken, Transaction, Goal
+from matcha.lib.plaid.plaid import PlaidClient
+from matcha.lib.utils.decorators import require_authentication, use_converted_kwargs
+from matcha.lib.utils.web import snake_to_camel_case_dict
+from matcha.models import Institution, AccessToken, Transaction, Goal
 
 
 financial_api = Blueprint('financial_api', __name__, url_prefix='/api/financial')

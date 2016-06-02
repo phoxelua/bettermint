@@ -1,5 +1,5 @@
-from bettermint.database import db
-from bettermint.models import PrimaryKeyIdBase
+from matcha.database import db
+from matcha.models import PrimaryKeyIdBase
 
 
 class Institution(PrimaryKeyIdBase):
@@ -13,5 +13,5 @@ class Institution(PrimaryKeyIdBase):
 
     @property
     def users(self):
-        from bettermint.models import AccessToken, User
+        from matcha.models import AccessToken, User
         return User.query.filter(User.id.in_(self.access_tokens.with_entities(AccessToken.user_id)))

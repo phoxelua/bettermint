@@ -7,9 +7,9 @@ from flask_cors import CORS
 from werkzeug.exceptions import default_exceptions
 from werkzeug.exceptions import HTTPException
 
-from bettermint.database import db
-from bettermint.constants import Environment
-from bettermint.config import DevConfig, TestingConfig, ProdConfig
+from matcha.database import db
+from matcha.constants import Environment
+from matcha.config import DevConfig, TestingConfig, ProdConfig
 
 
 def create_app():
@@ -46,9 +46,9 @@ def _register_as_json(app):
 def _register_apis(app):
     """Register all of the separate api endpoints."""
 
-    from bettermint.api.auth import auth_api
-    from bettermint.api.financial import financial_api
-    from bettermint.api.profile import profile_api
+    from matcha.api.auth import auth_api
+    from matcha.api.financial import financial_api
+    from matcha.api.profile import profile_api
 
     for blueprint in [
         auth_api,
@@ -61,7 +61,7 @@ def _register_apis(app):
 def _register_views(app):
     """Register all of the separate views."""
 
-    from bettermint.views.index import index_view
+    from matcha.views.index import index_view
 
     for view in [
         index_view

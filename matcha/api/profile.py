@@ -2,11 +2,11 @@ from flask import Blueprint, jsonify
 from webargs import fields, missing
 from werkzeug import exceptions
 
-from bettermint.lib.utils.decorators import require_authentication, use_converted_kwargs
-from bettermint.lib.utils.security import PasswordManager
-from bettermint.lib.utils.status import HTTP_204_NO_CONTENT
-from bettermint.lib.utils.web import snake_to_camel_case_dict
-from bettermint.models import UserProfile
+from matcha.lib.utils.decorators import require_authentication, use_converted_kwargs
+from matcha.lib.utils.security import PasswordManager
+from matcha.lib.utils.status import HTTP_204_NO_CONTENT
+from matcha.lib.utils.web import snake_to_camel_case_dict
+from matcha.models import UserProfile
 
 
 profile_api = Blueprint('profile_api', __name__, url_prefix='/api/profile')

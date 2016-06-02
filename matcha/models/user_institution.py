@@ -1,5 +1,5 @@
-from bettermint.database import db
-from bettermint.models import PrimaryKeyIdBase, User, Institution
+from matcha.database import db
+from matcha.models import PrimaryKeyIdBase, User, Institution
 
 
 class AccessToken(PrimaryKeyIdBase):

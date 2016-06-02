@@ -2,7 +2,7 @@ import datetime
 import json
 from collections import OrderedDict
 
-from bettermint.database import db
+from matcha.database import db
 
 
 class Base(db.Model):

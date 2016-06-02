@@ -7,7 +7,6 @@ flask-cors==2.1.2
 Flask-API==0.6.5
 Flask-Migrate==1.8.0
 Flask-Script==2.0.5
-Flask-Shellplus==0.0.3
 Flask-SQLAlchemy==2.1
 Flask-Testing==0.4.2
 gunicorn==19.3.0
@@ -27,3 +26,4 @@ Werkzeug==0.10.4
 webargs==1.3.2
 
 -e git+https://github.com/jjwon0/plaid-python@215a8e289920ecad8d0b075bf0db1ce1a6e3a5bc#egg=plaid_python
+-e git+https://github.com/phoxelua/flask-shellplus@04ac9a9349a944311a4b6615ebf41713870f74e1#egg=flask-shellplus

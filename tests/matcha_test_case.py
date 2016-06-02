@@ -1,12 +1,12 @@
 from flask_testing import TestCase
-from bettermint.database import db
+from matcha.database import db
 
 
-class BettermintTestCase(TestCase):
+class MatchaTestCase(TestCase):
 
     def create_app(self):
         from flask import current_app
-        from bettermint.config import TestingConfig
+        from matcha.config import TestingConfig
         current_app.config.from_object(TestingConfig)
         return current_app
 

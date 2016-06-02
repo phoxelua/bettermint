@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Ignore configuration file
-bettermint/config.py
+matcha/config.py
 
 # C extensions
 *.so
@@ -90,8 +90,8 @@ node_modules
 
 venv/
 
-bettermint/static/scripts/
-bettermint/templates/
+matcha/static/scripts/
+matcha/templates/
 dev/
 logfile
 

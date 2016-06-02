@@ -1,5 +1,5 @@
-from bettermint.database import db
-from bettermint.models import TimestampBase
+from matcha.database import db
+from matcha.models import TimestampBase
 
 
 class Transaction(TimestampBase):

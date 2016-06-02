@@ -1,6 +1,6 @@
-from bettermint.models.user import User
-from bettermint.factories.base import BaseFactory
-from bettermint.lib.utils.security import PasswordManager
+from matcha.models.user import User
+from matcha.factories.base import BaseFactory
+from matcha.lib.utils.security import PasswordManager
 
 
 class UserFactory(BaseFactory):

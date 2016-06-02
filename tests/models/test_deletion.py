@@ -1,11 +1,11 @@
 import unittest
 
-from bettermint.models import User, AccessToken, Institution, Goal, Transaction, Account
-from tests.bettermint_test_case import BettermintTestCase
+from matcha.models import User, AccessToken, Institution, Goal, Transaction, Account
+from tests.matcha_test_case import MatchaTestCase
 from tests.factories import UserFactory, AccessTokenFactory, GoalFactory, TransactionFactory, AccountFactory
 
 
-class TestUserDeletion(BettermintTestCase):
+class TestUserDeletion(MatchaTestCase):
     """Mainly sanity check: User deletes should/should not cascade to appropiate associations."""
 
     def test_should_delete_users_access_tokens(self):
@@ -33,7 +33,7 @@ class TestUserDeletion(BettermintTestCase):
         self.assertEqual(Account.query.count(), 0)
 
 
-class TestInstitutionDeletion(BettermintTestCase):
+class TestInstitutionDeletion(MatchaTestCase):
     """Mainly sanity check: Institution deletes should/should not cascade to appropiate associations."""
 
     def test_should_not_delete_users_belonging_to_it(self):
@@ -56,7 +56,7 @@ class TestInstitutionDeletion(BettermintTestCase):
         self.assertEqual(Account.query.count(), 0)
 
 
-class TestGoalDeletion(BettermintTestCase):
+class TestGoalDeletion(MatchaTestCase):
     """Mainly sanity check: Goal deletes should/should not cascade to appropiate associations."""
 
     def test_should_not_delete_related_transactions_or_user(self):
@@ -75,7 +75,7 @@ class TestGoalDeletion(BettermintTestCase):
         self.assertEqual(Account.query.count(), 1)
 
 
-class TestTransactionDeletion(BettermintTestCase):
+class TestTransactionDeletion(MatchaTestCase):
     """Mainly sanity check: Transaction deletes should/should not cascade to appropiate associations."""
 
     def test_should_not_delete_related_goals_or_user(self):
@@ -87,7 +87,7 @@ class TestTransactionDeletion(BettermintTestCase):
         self.assertEqual(Goal.query.count(), 1)
 
 
-class TestAccountDeletion(BettermintTestCase):
+class TestAccountDeletion(MatchaTestCase):
     """Mainly sanity check: Transaction deletes should/should not cascade to appropiate associations."""
 
     def test_should_not_delete_related_goal(self):

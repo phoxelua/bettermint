@@ -5,15 +5,15 @@ from datetime import timedelta
 
 from flask import url_for
 
-from bettermint.lib.utils import status
-from bettermint.lib.utils.web import snake_to_camel_case_dict
-from bettermint.lib.utils.token import generate_token_for_user
-from bettermint.models import Institution
-from tests.bettermint_test_case import BettermintTestCase
+from matcha.lib.utils import status
+from matcha.lib.utils.web import snake_to_camel_case_dict
+from matcha.lib.utils.token import generate_token_for_user
+from matcha.models import Institution
+from tests.matcha_test_case import MatchaTestCase
 from tests.factories import AccessTokenFactory, UserFactory, TransactionFactory
 
 
-class TestFinancial(BettermintTestCase):
+class TestFinancial(MatchaTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -125,8 +125,8 @@ class TestFinancial(BettermintTestCase):
     def test_convert_token_with_valid_institution_should_succeed(self):
         url = url_for('financial_api.convert_token')
         headers = self._create_headers(user=self.user)
-        with mock.patch('bettermint.lib.plaid.plaid.PlaidClient.__init__', return_value=None) as mock_client, \
-                mock.patch('bettermint.lib.plaid.plaid.PlaidClient.exchange_token', return_value='axestoken') as mock_token:
+        with mock.patch('matcha.lib.plaid.plaid.PlaidClient.__init__', return_value=None) as mock_client, \
+                mock.patch('matcha.lib.plaid.plaid.PlaidClient.exchange_token', return_value='axestoken') as mock_token:
             self._request_endpoint('POST', url, headers, institution='bofa', token=self.token)
             self.assertEqual(mock_client.call_count, 1)
             self.assertEqual(mock_token.call_count, 1)

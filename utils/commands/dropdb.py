@@ -1,6 +1,6 @@
 from flask_script import Command
-from bettermint.app import create_app
-from bettermint.database import db
+from matcha.app import create_app
+from matcha.database import db
 
 
 class DropDB(Command):

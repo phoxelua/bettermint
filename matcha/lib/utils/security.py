@@ -1,7 +1,7 @@
 from flask import current_app
 from passlib.context import CryptContext
 
-from bettermint.lib.utils.lazy import Lazy
+from matcha.lib.utils.lazy import Lazy
 
 
 class PasswordManager:

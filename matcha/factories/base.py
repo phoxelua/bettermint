@@ -1,6 +1,6 @@
 import abc
 
-from bettermint.lib.utils.lazy import Lazy
+from matcha.lib.utils.lazy import Lazy
 
 
 class BaseFactory(metaclass=abc.ABCMeta):

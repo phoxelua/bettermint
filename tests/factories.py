@@ -1,9 +1,9 @@
 import factory
 from datetime import datetime
 
-from bettermint.database import db
-from bettermint.lib.utils.security import PasswordManager
-from bettermint.models import User, UserProfile, Institution, AccessToken, Goal, Transaction, Account
+from matcha.database import db
+from matcha.lib.utils.security import PasswordManager
+from matcha.models import User, UserProfile, Institution, AccessToken, Goal, Transaction, Account
 
 
 class ForceFlushModel(factory.alchemy.SQLAlchemyModelFactory):

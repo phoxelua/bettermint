@@ -7,8 +7,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
-var SCRIPTS_PATH = 'bettermint/static/scripts';
-var TEMPLATES_PATH = 'bettermint/templates';
+var SCRIPTS_PATH = 'matcha/static/scripts';
+var TEMPLATES_PATH = 'matcha/templates';
 
 config = update(config, {
   bail: { $set: true },

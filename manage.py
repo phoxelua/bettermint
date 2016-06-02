@@ -4,9 +4,9 @@ from flask_shellplus import Shell
 from flask_migrate import Migrate, MigrateCommand
 from utils.commands import WebpackServer, TestRunner, DropDB, MakePlayground
 
-from bettermint.app import create_app
-from bettermint.database import db
-from bettermint import models
+from matcha.app import create_app
+from matcha.database import db
+from matcha import models
 
 
 def _make_context():

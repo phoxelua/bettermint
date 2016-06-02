@@ -1,4 +1,4 @@
-# Bettermint
+# Matcha
 
 ## Goals
 Unify all finance related accounts into a flexible dashboard.
@@ -18,7 +18,7 @@ Unify all finance related accounts into a flexible dashboard.
 - Write some user scenarios
 - Research the competition and try to define why exactly we want this and how to distinguish/be better than what exists
 - Start dumping these TODOs into Github Issues and flesh them out more.
-- Bettermint is a shitty name LOL
+- Matcha is a shitty name LOL
 
 ## What's out there
 - Mint: nice and free but really ugly and sucks at Venmo splitting

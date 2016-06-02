@@ -4,13 +4,13 @@ from datetime import timedelta
 
 from flask import url_for
 
-from bettermint.lib.utils import status
-from bettermint.lib.utils.token import generate_token_for_user
-from tests.bettermint_test_case import BettermintTestCase
+from matcha.lib.utils import status
+from matcha.lib.utils.token import generate_token_for_user
+from tests.matcha_test_case import MatchaTestCase
 from tests.factories import UserFactory
 
 
-class TestProfile(BettermintTestCase):
+class TestProfile(MatchaTestCase):
 
     @classmethod
     def setUpClass(cls):

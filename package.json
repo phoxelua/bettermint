@@ -1,17 +1,17 @@
 {
-  "name": "bettermint",
+  "name": "matcha",
   "version": "0.0.1",
   "description": "TODO",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phoxelua/bettermint"
+    "url": "https://github.com/phoxelua/matcha"
   },
   "engines": {
     "node": "^5.7.1",
     "npm": "^3.6.0"
   },
   "authors": [
-    "bettermint"
+    "matcha"
   ],
   "license": "MIT",
   "dependencies": {

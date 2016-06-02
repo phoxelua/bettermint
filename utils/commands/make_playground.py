@@ -1,8 +1,8 @@
 from faker import Faker
 from flask_script import Command
 
-from bettermint.models import User
-from bettermint.factories import UserFactory
+from matcha.models import User
+from matcha.factories import UserFactory
 from tests.factories import AccessTokenFactory, GoalFactory, TransactionFactory
 
 

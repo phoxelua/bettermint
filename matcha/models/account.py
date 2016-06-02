@@ -1,5 +1,5 @@
-from bettermint.database import db
-from bettermint.models import Base
+from matcha.database import db
+from matcha.models import Base
 
 
 class Account(Base):

@@ -1,5 +1,5 @@
-from bettermint.database import db
-from bettermint.models import TimestampBase
+from matcha.database import db
+from matcha.models import TimestampBase
 
 
 class User(TimestampBase):
@@ -17,7 +17,7 @@ class User(TimestampBase):
 
     @property
     def institutions(self):
-        from bettermint.models import AccessToken, Institution
+        from matcha.models import AccessToken, Institution
         return Institution.query.filter(Institution.id.in_(self.access_tokens.with_entities(AccessToken.institution_id)))
 
     @classmethod

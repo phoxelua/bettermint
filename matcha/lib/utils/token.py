@@ -3,7 +3,7 @@ import jwt
 
 from flask import current_app
 
-from bettermint.models import User
+from matcha.models import User
 
 
 def generate_token(dictionary: dict, expiration: datetime.timedelta):

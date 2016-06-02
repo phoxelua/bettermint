@@ -3,14 +3,14 @@ import unittest
 
 from flask import url_for
 
-from bettermint.lib.utils import status
-from bettermint.lib.utils.web import snake_to_camel_case_dict
-from bettermint.models import User
-from tests.bettermint_test_case import BettermintTestCase
+from matcha.lib.utils import status
+from matcha.lib.utils.web import snake_to_camel_case_dict
+from matcha.models import User
+from tests.matcha_test_case import MatchaTestCase
 from tests.factories import UserFactory
 
 
-class TestAuth(BettermintTestCase):
+class TestAuth(MatchaTestCase):
 
     @classmethod
     def setUpClass(cls):
