@@ -26,7 +26,7 @@ def create_token(email, password):
 
     existing_user = User.query.filter_by(email=email).first_or_404()
     if not PasswordManager.context.verify(password, existing_user.password_hash):
-        raise exceptions.Unauthorized(description='Email and password were not correct.')
+        raise exceptions.Unauthorized(description='Email or password were not correct.')
 
     token = generate_token_for_user(existing_user)
     return jsonify(snake_to_camel_case_dict({'token': token.decode("utf-8")}))

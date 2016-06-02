@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from flask import url_for
 
+from matcha.constants import MatchaErrors
 from matcha.lib.utils import status
 from matcha.lib.utils.token import generate_token_for_user
 from tests.matcha_test_case import MatchaTestCase
@@ -43,60 +44,60 @@ class TestProfile(MatchaTestCase):
         self.deleted_user.delete()
 
     def test_get_profile_without_authorization_header_should_fail(self):
-        self._request_endpoint('GET', self.get_profile_url, {}, status.HTTP_401_UNAUTHORIZED)
+        self._request_endpoint('GET', self.get_profile_url, {}, {}, status.HTTP_401_UNAUTHORIZED, MatchaErrors.AUTHORIZATION_HEADER_REQUIRED)
 
     def test_get_profile_without_bearer_token_should_fail(self):
         headers = self._create_headers()
-        self._request_endpoint('GET', self.get_profile_url, headers, status.HTTP_401_UNAUTHORIZED)
+        self._request_endpoint('GET', self.get_profile_url, headers, {}, status.HTTP_401_UNAUTHORIZED, MatchaErrors.BEARER_TOKEN_REQUIRED)
 
     def test_get_profile_with_nonexistent_user_should_fail(self):
         headers = self._create_headers(user=self.deleted_user)
-        self._request_endpoint('GET', self.get_profile_url, headers, status.HTTP_404_NOT_FOUND)
+        self._request_endpoint('GET', self.get_profile_url, headers, {}, status.HTTP_404_NOT_FOUND, MatchaErrors.USER_DOES_NOT_EXIST)
 
     def test_get_profile_with_expired_token_should_fail(self):
         headers = self._create_headers(user=self.user, expire_in=-100)
-        self._request_endpoint('GET', self.get_profile_url, headers, status.HTTP_401_UNAUTHORIZED)
+        self._request_endpoint('GET', self.get_profile_url, headers, {}, status.HTTP_401_UNAUTHORIZED, MatchaErrors.EXPIRED_TOKEN)
 
     def test_get_profile_with_valid_user_and_expiration_should_succeed(self):
         headers = self._create_headers(user=self.user)
-        response = self._request_endpoint('GET', self.get_profile_url, headers)
+        response = self._request_endpoint('GET', self.get_profile_url, headers, {})
 
         response_json = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_json['userProfile']['email'], self.user.email)
 
     def test_edit_profile_without_authorization_header_should_fail(self):
-        self._request_endpoint('PUT', self.edit_profile_url, {}, status.HTTP_401_UNAUTHORIZED,
-                               self.valid_edit_profile_payload)
+        self._request_endpoint('PUT', self.edit_profile_url, {}, self.valid_edit_profile_payload,
+                               status.HTTP_401_UNAUTHORIZED, MatchaErrors.AUTHORIZATION_HEADER_REQUIRED)
 
     def test_edit_profile_without_bearer_token_should_fail(self):
         headers = self._create_headers()
-        self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_401_UNAUTHORIZED,
-                               self.valid_edit_profile_payload)
+        self._request_endpoint('PUT', self.edit_profile_url, headers, self.valid_edit_profile_payload,
+                               status.HTTP_401_UNAUTHORIZED, MatchaErrors.BEARER_TOKEN_REQUIRED)
 
     def test_edit_profile_with_nonexistent_user_should_fail(self):
         headers = self._create_headers(user=self.deleted_user)
-        self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_404_NOT_FOUND,
-                               self.valid_edit_profile_payload)
+        self._request_endpoint('PUT', self.edit_profile_url, headers, self.valid_edit_profile_payload,
+                               status.HTTP_404_NOT_FOUND, MatchaErrors.USER_DOES_NOT_EXIST)
 
     def test_edit_profile_with_expired_token_should_fail(self):
         headers = self._create_headers(user=self.user, expire_in=-100)
-        self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_401_UNAUTHORIZED,
-                               self.valid_edit_profile_payload)
+        self._request_endpoint('PUT', self.edit_profile_url, headers, self.valid_edit_profile_payload,
+                               status.HTTP_401_UNAUTHORIZED, MatchaErrors.EXPIRED_TOKEN)
 
     def test_edit_profile_with_valid_payload_should_succeed(self):
         headers = self._create_headers(user=self.user)
-        self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_204_NO_CONTENT,
-                               self.valid_edit_profile_payload)
+        self._request_endpoint('PUT', self.edit_profile_url, headers,
+                               self.valid_edit_profile_payload, status.HTTP_204_NO_CONTENT)
 
     def test_edit_profile_with_payload_with_bad_password_should_fail(self):
         headers = self._create_headers(user=self.user)
-        self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_401_UNAUTHORIZED,
-                               self.edit_profile_payload_with_bad_password)
+        self._request_endpoint('PUT', self.edit_profile_url, headers,
+                               self.edit_profile_payload_with_bad_password, status.HTTP_401_UNAUTHORIZED, MatchaErrors.INVALID_PASSWORD)
 
     def test_edit_profile_with_payload_with_bad_birthday_should_fail(self):
         headers = self._create_headers(user=self.user)
-        self._request_endpoint('PUT', self.edit_profile_url, headers, status.HTTP_422_UNPROCESSABLE_ENTITY,
-                               self.edit_profile_payload_with_bad_birthday)
+        self._request_endpoint('PUT', self.edit_profile_url, headers,
+                               self.edit_profile_payload_with_bad_birthday, status.HTTP_422_UNPROCESSABLE_ENTITY, MatchaErrors.GENERIC_422)
 
     def _create_headers(self, user=None, expire_in=7):
         if user is not None:
@@ -107,7 +108,7 @@ class TestProfile(MatchaTestCase):
             'Authorization': 'Bearer {}'.format(token)
         }
 
-    def _request_endpoint(self, method, url, headers, expected_status_code=status.HTTP_200_OK, payload={}):
+    def _request_endpoint(self, method, url, headers, payload, expected_status_code=status.HTTP_200_OK, expected_error_msg=None):
         if method == 'GET':
             response = self.client.get(url, headers=headers)
         elif method == 'DELETE':
@@ -117,6 +118,8 @@ class TestProfile(MatchaTestCase):
         elif method == 'PUT':
             response = self.client.put(url, headers=headers, data=payload)
         self.assertEqual(response.status_code, expected_status_code)
+        if expected_error_msg:
+            self.assertEqual(response.json['message'], expected_error_msg)
         return response
 
 
