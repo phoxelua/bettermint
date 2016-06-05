@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'test') {
       $set: [
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/dev-server',
-        './client/entry',
+        './app/entry',
       ],
     },
   });
@@ -40,7 +40,7 @@ config = update(config, {
       new HtmlWebpackPlugin({
         inject: true,
         filename: './index.html',
-        template: 'client/index.html',
+        template: 'app/index.html',
       }),
     ],
   },

@@ -13,7 +13,7 @@ var TEMPLATES_PATH = 'matcha/templates';
 config = update(config, {
   bail: { $set: true },
 
-  entry: { $set: ['./client/entry'] },
+  entry: { $set: ['./app/entry'] },
 
   debug: { $set: false },
 
@@ -38,7 +38,7 @@ config = update(config, {
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../templates/index.html',
-        template: 'client/index.html'
+        template: 'app/index.html'
       })
     ]
   },

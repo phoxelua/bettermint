@@ -26,7 +26,7 @@ class MakePlayground(Command):
         goal = GoalFactory.create(user=user, name='Roth IRA', amount=5500)
         for i in range(51):
             TransactionFactory.create(goals=[goal], institution=amex,
-                                      name=fake.bs(), amount=fake.pydecimal(right_digits=2),
+                                      name=fake.bs(), amount=fake.pydecimal(left_digits=3, right_digits=2),
                                       post_date=fake.date_time_this_year())
         goal.save()
         print('Created goal `{}` with `{}` Transactions'.format(goal.name, 50))

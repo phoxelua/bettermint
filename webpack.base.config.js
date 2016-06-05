@@ -11,7 +11,7 @@ module.exports = {
     modulesDirectories: [
       'bower_components',
       'node_modules',
-      'client'
+      'app'
     ],
     extensions: ['', '.js', '.jsx', '.css', '.scss'],
     root: path.resolve(__dirname, 'client')
