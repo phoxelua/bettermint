@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import { Table, Tr, Td, Sort } from 'reactable';
 import { epochToDate } from 'utilities/date';
 
-const Goals = ({ goals }) => {
+const GoalsTable = ({ goals }) => {
   return (
     <div>
-      <h1>Goals</h1>
+      <h1>GoalsTable</h1>
       <Table
         columns={[
           { key: 'name', label: 'Name' },
@@ -22,7 +23,7 @@ const Goals = ({ goals }) => {
       >
         {goals.map((goal) => (
           <Tr key={goal.id}>
-            <Td column="name">{goal.name}</Td>
+            <Td column="name"><Link to={`/goals/${goal.id}`}>{goal.name}</Link></Td>
             <Td column="amount">{goal.amount.toFixed(2)}</Td>
             <Td column="start">{epochToDate(goal.startDate)}</Td>
             <Td column="end">{epochToDate(goal.endDate)}</Td>
@@ -33,7 +34,7 @@ const Goals = ({ goals }) => {
   );
 };
 
-Goals.propTypes = {
+GoalsTable.propTypes = {
   goals: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
@@ -42,4 +43,4 @@ Goals.propTypes = {
   })),
 };
 
-export default Goals;
+export default GoalsTable;

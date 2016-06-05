@@ -19,8 +19,8 @@ function signInUserFailure(error) {
   return {
     type: authConstants.SIGN_IN_USER_FAILURE,
     payload: {
-      status: error.response.status,
-      statusText: error.response.statusText,
+      status: error.status,
+      statusText: error.statusText,
     },
   };
 }

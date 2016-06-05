@@ -11,9 +11,9 @@ const Header = ({ isAuthenticated, onLogOut }) => {
         <div className="CoreLayout__nav__wrapper">
           <Link to="/" className="home-link">$$$</Link>
           <ul className="CoreLayout__links CoreLayout__nav__links--desktop">
-            <li><Link to="transactions">Transactions</Link></li>
-            <li><Link to="goals">Goals</Link></li>
-            <li><Link to="profile">Profile</Link></li>
+            <li><Link to="/transactions">Transactions</Link></li>
+            <li><Link to="/goals">Goals</Link></li>
+            <li><Link to="/profile">Profile</Link></li>
             { isAuthenticated
               ? logOutButton
               : null

@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actionCreators from 'actions/financial/goals';
-import GoalsView from '../components/GoalsView';
+import GoalsListView from '../components/GoalsListView';
 
 const mapStateToProps = (state) => {
   return {
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GoalsView);
+)(GoalsListView);

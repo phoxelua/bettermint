@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Goals from './Goals';
+import GoalsTable from './GoalsTable';
 import GoalsForm from '../containers/GoalsFormContainer';
 
-class GoalsView extends Component {
+class Goals extends Component {
   static defaultProps = {
     fields: {
       name: {},
@@ -24,11 +24,11 @@ class GoalsView extends Component {
   render() {
     return (
       <div>
-        <Goals goals={this.props.goals} />
+        <GoalsTable goals={this.props.goals} />
         <GoalsForm />
       </div>
     );
   }
 }
 
-export default GoalsView;
+export default Goals;
