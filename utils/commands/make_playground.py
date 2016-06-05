@@ -34,7 +34,7 @@ class MakePlayground(Command):
         goal = GoalFactory.create(user=user, name='Spend less on food', amount=1000)
         for j in range(51):
             TransactionFactory.create(goals=[goal], institution=bofa,
-                                      name=fake.bs(), amount=fake.pydecimal(right_digits=2),
+                                      name=fake.bs(), amount=fake.pydecimal(left_digits=3, right_digits=2),
                                       post_date=fake.date_time_this_month())
         goal.save()
         print('Created goal `{}` with `{}` Transactions'.format(goal.name, 30))
