@@ -80,7 +80,7 @@ def goals():
                 'id': 1,
                 'amount': 1000,
                 'name': 'Cool Goal 1',
-                'start_date': datetime.now().timestamp(),
-                'end_date': (datetime.now() + timedelta(days=30)).timestamp(),
+                'start_date': datetime.now(),
+                'end_date': (datetime.now() + timedelta(days=30)),
             },
         }))

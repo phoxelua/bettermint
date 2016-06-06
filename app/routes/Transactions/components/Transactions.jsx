@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Table, Tr, Td, Sort } from 'reactable';
-import { epochToDate } from 'utilities/date';
+import parse from 'date-fns/parse';
+import format from 'date-fns/format';
 
 const Transactions = ({ transactions }) => {
   return (
@@ -21,7 +22,7 @@ const Transactions = ({ transactions }) => {
       >
         {transactions.map((transaction) => (
           <Tr key={transaction.id}>
-            <Td column="postDate">{epochToDate(transaction.postDate)}</Td>
+            <Td column="postDate">{format(parse(transaction.postDate), 'MM/DD/YY')}</Td>
             <Td column="name">{transaction.name}</Td>
             <Td column="amount">{transaction.amount.toFixed(2)}</Td>
           </Tr>

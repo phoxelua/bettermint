@@ -1,8 +1,10 @@
-import os
+from datetime import datetime
 from logging import StreamHandler
+import os
 from sys import stdout
 
 from flask import Flask, jsonify
+from flask.json import JSONEncoder
 from flask_cors import CORS
 from werkzeug.exceptions import default_exceptions
 from werkzeug.exceptions import HTTPException
@@ -12,10 +14,20 @@ from matcha.constants import Environment
 from matcha.config import DevConfig, TestingConfig, ProdConfig
 
 
+class MatchaJSONEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        else:
+            return JSONEncoder.default(self, obj)
+
+
 def create_app():
     """Initializes everything for the app needs."""
 
     app = Flask(__name__)
+    app.json_encoder = MatchaJSONEncoder
+
     _config_from_environment(app)
 
     db.init_app(app)

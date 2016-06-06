@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Table, Tr, Td, Sort } from 'reactable';
-import { epochToDate } from 'utilities/date';
+import parse from 'date-fns/parse';
+import format from 'date-fns/format';
 
 const GoalsTable = ({ goals }) => {
   return (
@@ -25,8 +26,8 @@ const GoalsTable = ({ goals }) => {
           <Tr key={goal.id}>
             <Td column="name"><Link to={`/goals/${goal.id}`}>{goal.name}</Link></Td>
             <Td column="amount">{goal.amount.toFixed(2)}</Td>
-            <Td column="start">{epochToDate(goal.startDate)}</Td>
-            <Td column="end">{epochToDate(goal.endDate)}</Td>
+            <Td column="start">{format(parse(goal.startDate), 'MM/DD/YY')}</Td>
+            <Td column="end">{format(parse(goal.endDate), 'MM/DD/YY')}</Td>
           </Tr>
         ))}
       </Table>
@@ -38,8 +39,8 @@ GoalsTable.propTypes = {
   goals: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
-    startDate: PropTypes.number.isRequired,
-    endDate: PropTypes.number.isRequired,
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
   })),
 };
 

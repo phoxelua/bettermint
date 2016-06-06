@@ -38,6 +38,6 @@ class Goal(TimestampBase):
             'id': self.id,
             'amount': self.amount,
             'name': self.name,
-            'start_date': self.start_date.timestamp(),
-            'end_date': self.end_date.timestamp()
+            'start_date': self.start_date,
+            'end_date': self.end_date
         }
