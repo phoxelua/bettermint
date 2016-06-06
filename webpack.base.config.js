@@ -1,7 +1,7 @@
-import path from 'path';
-import webpack from 'webpack';
+var path = require('path');
+var webpack = require('webpack');
 
-const webpackConfig = {
+module.exports = {
   target: 'web',
 
   resolve: {
@@ -51,4 +51,3 @@ const webpackConfig = {
   }
 };
 
-export default webpackConfig;
