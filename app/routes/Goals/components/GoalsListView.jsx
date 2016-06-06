@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 import GoalsTable from './GoalsTable';
 import GoalsForm from '../containers/GoalsFormContainer';
 
 class Goals extends Component {
+  static propTypes = {
+    actions: PropTypes.shape({
+      requestGoals: PropTypes.func.isRequired,
+    }).isRequired,
+    goals: PropTypes.array.isRequired,
+  }
+
   static defaultProps = {
     fields: {
       name: {},
@@ -14,12 +21,8 @@ class Goals extends Component {
   }
 
   componentDidMount() {
-    this.props.actions.requestGoals(this.props.token);
+    this.props.actions.requestGoals();
   }
-
-  handleSubmit = () => {
-    console.log(this.props.fields);
-  };
 
   render() {
     return (

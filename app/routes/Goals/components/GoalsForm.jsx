@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 const GoalsForm = (props) => {
   const _handleSubmit = (_fields) => {
     console.log(_fields);
-    props.actions.createGoal(_fields, props.token);
+    props.actions.createGoal(_fields);
   };
 
   const {
@@ -74,9 +74,11 @@ const GoalsForm = (props) => {
 
 GoalsForm.propTypes = {
   fields: PropTypes.object.isRequired,
-  token: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+    createGoal: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default GoalsForm;

@@ -1,7 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
 
-module.exports = {
+const webpackConfig = {
   target: 'web',
 
   resolve: {
@@ -30,18 +30,13 @@ module.exports = {
   module: {
     preLoaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'eslint-loader',
-        exclude: /(node_modules|bower_components|client\/vendor)/
+        exclude: /(node_modules|bower_components)/
       }
     ],
 
     loaders: [
-      {
-        test: /\.svg$/,
-        loaders: ['babel', 'react-svg'],
-        exclude: /(node_modules|bower_components|client\/styles\/font)/
-      },
       {
         test: /\.css$/,
         loaders: ['style', 'css']
@@ -49,14 +44,11 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
-      },
-      {
-        test: /\.(woff|ttf|eot|svg)([\?]?.*)$/,
-        loader: "file-loader?name=[name].[ext]",
-        include: /client\/styles\/font/
       }
     ],
 
     noParse: /\.min\.js/
   }
 };
+
+export default webpackConfig;

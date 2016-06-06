@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-async function request({ url, data, params={}, authToken=null }) {
+async function request({ url, data, params={} }) {
   try {
     let body;
 
@@ -22,6 +22,7 @@ async function request({ url, data, params={}, authToken=null }) {
       ...params,
     };
 
+    const authToken = localStorage.getItem('token');
     if (authToken) {
       req.headers.Authorization = `Bearer ${authToken}`;
     }
@@ -48,18 +49,18 @@ async function request({ url, data, params={}, authToken=null }) {
   }
 }
 
-export function get(url, authToken) {
-  return request({ url, authToken });
+export function get(url) {
+  return request({ url });
 }
 
-export function post(url, data, authToken) {
-  return request({ url, data, params: { method: 'post' }, authToken });
+export function post(url, data) {
+  return request({ url, data, params: { method: 'post' } });
 }
 
-export function put(url, data, authToken) {
-  return request({ url, data, params: { method: 'put' }, authToken });
+export function put(url, data) {
+  return request({ url, data, params: { method: 'put' } });
 }
 
-export function del(url, authToken) {
-  return request({ url, params: { method: 'delete' }, authToken });
+export function del(url) {
+  return request({ url, params: { method: 'delete' } });
 }

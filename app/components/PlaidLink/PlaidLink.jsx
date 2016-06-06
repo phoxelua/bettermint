@@ -116,7 +116,7 @@ class PlaidLink extends Component {
     const institution = metadata.institution.type;
 
     try {
-      await post('/api/financial/token/convert', { token, institution }, this.props.authToken);
+      await post('/api/financial/token/convert', { token, institution });
       this.props.onSuccess();
     } catch (e) {
       console.error(e);

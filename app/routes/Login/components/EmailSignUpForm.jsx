@@ -65,7 +65,7 @@ class EmailSignUpForm extends Component {
         </div>
         <div>
           <button type="submit" disabled={submitting}>
-            {submitting ? <i/> : <i/>} Submit
+            Submit
           </button>
         </div>
       </form>
