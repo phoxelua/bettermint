@@ -100,3 +100,4 @@ plaid_test.py
 npm-debug.log
 
 .vscode
+typings/
