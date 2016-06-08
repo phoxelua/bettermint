@@ -2,7 +2,7 @@
 from flask_script import Manager, Server
 from flask_shellplus import Shell
 from flask_migrate import Migrate, MigrateCommand
-from utils.commands import WebpackServer, TestRunner, DropDB, MakePlayground
+from utils.commands import TestRunner, DropDB, MakePlayground
 
 from matcha.app import create_app
 from matcha.database import db

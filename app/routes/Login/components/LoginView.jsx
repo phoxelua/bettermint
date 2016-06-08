@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import * as store from 'store';
 
 import EmailSignInFormContainer from '../containers/EmailSignInFormContainer';
 import EmailSignUpFormContainer from '../containers/EmailSignUpFormContainer';
@@ -13,7 +12,7 @@ class LoginView extends Component {
 
   componentDidMount() {
     const redirectRoute = this.props.location.query.redirect || '/';
-    const token = store.get('token');
+    const token = localStorage.getItem('token');
 
     if (!!token) {
       this.props.actions.signInUserWithToken(token, redirectRoute);

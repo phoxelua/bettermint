@@ -14,9 +14,10 @@ const Header = ({ isAuthenticated, onLogOut }) => {
             <li><Link to="/transactions">Transactions</Link></li>
             <li><Link to="/goals">Goals</Link></li>
             <li><Link to="/profile">Profile</Link></li>
-            { isAuthenticated
-              ? logOutButton
-              : null
+            {
+              isAuthenticated
+                ? logOutButton
+                : null
             }
           </ul>
           <Dropdown className="CoreLayout__nav__mobile-dropdown">
@@ -28,9 +29,10 @@ const Header = ({ isAuthenticated, onLogOut }) => {
                 <li><Link to="transactions">Transactions</Link></li>
                 <li><Link to="goals">Goals</Link></li>
                 <li><Link to="profile">Profile</Link></li>
-                { isAuthenticated
-                  ? logOutButton
-                  : null
+                {
+                  isAuthenticated
+                    ? logOutButton
+                    : null
                 }
               </ul>
             </DropdownContent>
