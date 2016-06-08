@@ -1,8 +1,13 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Link } from 'react-router';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
-const Header = ({ isAuthenticated, onLogOut }) => {
+interface IHeaderProps extends React.Props<any> {
+  isAuthenticated: boolean,
+  onLogOut: () => void,
+};
+
+const Header = ({ isAuthenticated, onLogOut }: IHeaderProps) => {
   const logOutButton = <li onClick={onLogOut}>Log out</li>;
 
   return (
@@ -41,11 +46,6 @@ const Header = ({ isAuthenticated, onLogOut }) => {
       </nav>
     </header>
   );
-};
-
-Header.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  onLogOut: PropTypes.func.isRequired,
 };
 
 export default Header;
