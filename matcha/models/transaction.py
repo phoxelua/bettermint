@@ -33,5 +33,5 @@ class Transaction(TimestampBase):
             'name': self.name,
             'amount': self.amount,
             'pending': self.pending,
-            'post_date': self.post_date
+            'post_date': str(self.post_date)
         }
