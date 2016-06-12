@@ -1,4 +1,4 @@
-from matcha.models.user import User
+from matcha.models.user import User, UserProfile
 from matcha.factories.base import BaseFactory
 from matcha.lib.utils.security import PasswordManager
 
@@ -14,7 +14,8 @@ class UserFactory(BaseFactory):
             first_name=first_name,
             last_name=last_name,
             email=email,
-            password_hash=hashed
+            password_hash=hashed,
+            profile=UserProfile()
         )
 
         return user

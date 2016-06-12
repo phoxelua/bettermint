@@ -9,10 +9,10 @@ from matcha.lib.utils.web import snake_to_camel_case_dict
 from matcha.models import UserProfile
 
 
-profile_api = Blueprint('profile_api', __name__, url_prefix='/api/profile')
+profiles_api = Blueprint('profiles_api', __name__, url_prefix='/profiles')
 
 
-@profile_api.route('/', methods=['GET'])
+@profiles_api.route('/', methods=['GET'])
 @require_authentication
 def get_profile(user):
     """
@@ -31,7 +31,7 @@ def get_profile(user):
     }))
 
 
-@profile_api.route('/edit', methods=['PUT'])
+@profiles_api.route('/edit', methods=['PUT'])
 @use_converted_kwargs({
     'birthday': fields.Date(required=False),
     'email': fields.Str(required=False),

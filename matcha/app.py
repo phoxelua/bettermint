@@ -59,15 +59,23 @@ def _register_apis(app):
     """Register all of the separate api endpoints."""
 
     from matcha.api.auth import auth_api
-    from matcha.api.financial import financial_api
-    from matcha.api.profile import profile_api
+    from matcha.api.profiles import profiles_api
+    from matcha.api.users import users_api
+    from matcha.api.institutions import institutions_api
+    from matcha.api.transactions import transactions_api
+    from matcha.api.goals import goals_api
+    from matcha.api.access_tokens import access_tokens_api
 
     for blueprint in [
         auth_api,
-        financial_api,
-        profile_api,
+        profiles_api,
+        users_api,
+        institutions_api,
+        transactions_api,
+        goals_api,
+        access_tokens_api,
     ]:
-        app.register_blueprint(blueprint)
+        app.register_blueprint(blueprint, url_prefix='/api/v0.1' + blueprint.url_prefix)
 
 
 def _register_views(app):
