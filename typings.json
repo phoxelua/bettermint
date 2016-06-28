@@ -1,8 +1,12 @@
 {
   "globalDependencies": {
+    "bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
     "react": "registry:dt/react#0.14.0+20160602151522",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-router": "registry:dt/react-router#2.0.0+20160501155536",
-    "react-router/history": "registry:dt/react-router/history#2.0.0+20160602154905"
+    "react-router/history": "registry:dt/react-router/history#2.0.0+20160602154905",
+    "redux": "registry:dt/redux#3.3.1+20160326112656",
+    "redux-form": "registry:dt/redux-form#4.0.3+20160201090541",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
   }
 }

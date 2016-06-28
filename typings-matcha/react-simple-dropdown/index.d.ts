@@ -1,16 +1,16 @@
 declare module "react-simple-dropdown" {
-    import React = __React
+  import { Component } from 'react';
 
-    class Dropdown extends React.Component<any, any> {}
+  class Dropdown extends Component<any, any> {}
 
-    class DropdownTrigger extends React.Component<any, any> {}
+  class DropdownTrigger extends Component<any, any> {}
 
-    class DropdownContent extends React.Component<any, any> {}
+  class DropdownContent extends Component<any, any> {}
 
-    export {
-        DropdownTrigger,
-        DropdownContent
-    }
+  export {
+    DropdownTrigger,
+    DropdownContent
+  }
 
-    export default Dropdown
+  export default Dropdown
 }
