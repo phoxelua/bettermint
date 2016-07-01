@@ -1,7 +1,25 @@
-import React, { PropTypes } from 'react';
-import { Table, Tr, Td, Sort } from 'reactable';
+import * as React from 'react';
+import { PropTypes } from 'react';
+import { Table, Td, Tr, Sort } from 'reactable';
 
-const Accounts = ({ accounts }) => {
+interface IAccount {
+    _id: string;
+    meta: {
+      name: string,
+      number: string,
+    };
+    institutionType: string;
+    balance: {
+      available: number,
+      current: number,
+    };
+}
+
+interface IAccountProps extends React.Props<any> {
+  accounts: IAccount[],
+}
+
+const Accounts = ({ accounts }: IAccountProps) => {
   return (
     <div>
       <h1>Accounts</h1>
@@ -33,21 +51,6 @@ const Accounts = ({ accounts }) => {
       </Table>
     </div>
   );
-};
-
-Accounts.propTypes = {
-  accounts: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    meta: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired,
-    institutionType: PropTypes.string.isRequired,
-    balance: PropTypes.shape({
-      available: PropTypes.number.isRequired,
-      current: PropTypes.number.isRequired,
-    }).isRequired,
-  })).isRequired,
 };
 
 export default Accounts;
