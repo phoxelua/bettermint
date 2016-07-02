@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+
 import Transactions from './Transactions';
-import { simpleEquals } from 'utilities/equality';
+import { simpleEquals } from '../../../utilities/equality';
 
 export default class TransactionsView extends Component {
   static propTypes = {

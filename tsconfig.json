@@ -7,5 +7,45 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "react"
+  },
+  "filesGlob": [
+    "**/*.tsx",
+    "**/*.ts",
+    "!node_modules/**"
+  ],
+  "files": [
+    "app/components/Accounts/Accounts.tsx",
+    "app/components/Footer/Footer.tsx",
+    "app/components/Header/Header.tsx",
+    "app/components/PlaidLink/PlaidLink.tsx",
+    "app/actions/auth.ts",
+    "app/actions/financial/goals.ts",
+    "app/actions/financial/institutions.ts",
+    "app/actions/financial/transactions.ts",
+    "app/components/Accounts/index.ts",
+    "app/components/Footer/index.ts",
+    "app/components/Header/index.ts",
+    "app/components/PlaidLink/index.ts",
+    "app/constants/auth.ts",
+    "app/constants/financial.ts",
+    "app/utilities/api/index.ts",
+    "app/utilities/redux.ts",
+    "typings-matcha/index.d.ts",
+    "typings-matcha/react-async-script-loader/index.d.ts",
+    "typings-matcha/react-simple-dropdown/index.d.ts",
+    "typings-matcha/reactable/index.d.ts",
+    "typings/globals/bluebird/index.d.ts",
+    "typings/globals/react-dom/index.d.ts",
+    "typings/globals/react-router-redux/index.d.ts",
+    "typings/globals/react-router/history/index.d.ts",
+    "typings/globals/react-router/index.d.ts",
+    "typings/globals/react/index.d.ts",
+    "typings/globals/redux-form/index.d.ts",
+    "typings/globals/redux/index.d.ts",
+    "typings/globals/whatwg-fetch/index.d.ts",
+    "typings/index.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
   }
 }

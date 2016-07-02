@@ -1,4 +1,4 @@
-import { createReducer } from 'utilities/redux';
+import { createReducer } from '../../../utilities/redux';
 import {
   updateUserProfileConstants as updateConstants,
   fetchUserProfileConstants as fetchConstants,

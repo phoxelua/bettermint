@@ -1,7 +1,7 @@
 import * as path from 'path';
 
-import { institutionConstants } from 'constants/financial';
-import { get, del } from 'utilities/api';
+import { institutionConstants } from '../../constants/financial';
+import { get, del } from '../../utilities/api';
 
 export function requestInstitutions(token) {
   return async (dispatch) => {
@@ -11,7 +11,7 @@ export function requestInstitutions(token) {
 
     try {
       const endpoint = '/api/financial/institution';
-      const result = await get(endpoint, token);
+      const result = await get(endpoint);
 
       dispatch({
         type: institutionConstants.REQUEST_INSTITUTIONS_SUCCESS,
@@ -35,7 +35,7 @@ export function deleteInstitution(institution, token) {
 
     try {
       const endpoint = path.join('/api/financial/institution/', institution);
-      await del(endpoint, token);
+      await del(endpoint);
 
       dispatch({
         type: institutionConstants.DELETE_INSTITUTION_SUCCESS,

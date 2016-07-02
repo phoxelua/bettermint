@@ -1,5 +1,5 @@
-import { createReducer } from 'utilities/redux';
-import { institutionConstants, transactionConstants, goalConstants } from 'constants/financial';
+import { createReducer } from '../utilities/redux';
+import { institutionConstants, transactionConstants, goalConstants } from '../constants/financial';
 
 const initialState = {
   isRequesting: true,

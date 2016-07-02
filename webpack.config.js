@@ -67,7 +67,6 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js', '.jsx', '.scss'],
-    root: path.resolve(__dirname, 'app'),
   },
 
   plugins: plugins,

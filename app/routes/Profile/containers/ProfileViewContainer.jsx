@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as institutionActions from 'actions/financial/institutions';
+import * as institutionActions from '../../../actions/financial/institutions';
 import * as profileActions from '../actions';
 import ProfileView from '../components/ProfileView';
 

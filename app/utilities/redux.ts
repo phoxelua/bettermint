@@ -5,7 +5,7 @@ export function createConstants(...constants) {
   }, {});
 }
 
-export function createReducer(initialState, reducerMap) {
+export function createReducer(initialState: any, reducerMap: any) {
   return (state = initialState, action) => {
     const reducer = reducerMap[action.type];
 

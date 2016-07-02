@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as transactionActionCreators from 'actions/financial/transactions';
-import * as institutionActionCreators from 'actions/financial/institutions';
+import * as transactionActionCreators from '../../../actions/financial/transactions';
+import * as institutionActionCreators from '../../../actions/financial/institutions';
 import TransactionsView from '../components/TransactionsView';
 
 const mapStateToProps = (state) => {

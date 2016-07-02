@@ -1,4 +1,4 @@
-import { createConstants } from 'utilities/redux';
+import { createConstants } from '../../../utilities/redux';
 
 export const updateUserProfileConstants = createConstants(
   'UPDATE_USER_PROFILE_REQUEST',

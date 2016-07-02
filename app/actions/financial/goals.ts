@@ -1,5 +1,5 @@
-import { goalConstants } from 'constants/financial';
-import { get, post } from 'utilities/api';
+import { goalConstants } from '../../constants/financial';
+import { get, post } from '../../utilities/api';
 
 export function requestGoals(token) {
   return async (dispatch) => {
@@ -9,7 +9,7 @@ export function requestGoals(token) {
 
     try {
       const endpoint = '/api/financial/goals';
-      const result = await get(endpoint, token);
+      const result = await get(endpoint);
 
       dispatch({
         type: goalConstants.REQUEST_GOALS_SUCCESS,
@@ -34,7 +34,7 @@ export function createGoal(fields, token) {
 
     try {
       const endpoint = '/api/financial/goals';
-      const result = await post(endpoint, fields, token);
+      const result = await post(endpoint, fields);
 
       dispatch({
         type: goalConstants.CREATE_GOAL_SUCCESS,

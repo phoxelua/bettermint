@@ -1,6 +1,7 @@
-import { createReducer } from 'utilities/redux';
-import { authConstants } from 'constants/auth';
 import jwtDecode from 'jwt-decode';
+
+import { createReducer } from '../utilities/redux';
+import { authConstants } from '../constants/auth';
 
 const initialState = {
   token: null,

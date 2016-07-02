@@ -1,6 +1,6 @@
 import check from 'check-types';
 
-import { put } from 'utilities/api';
+import { put } from '../../../utilities/api';
 import { updateUserProfileConstants as constants } from '../constants';
 
 function updateUserProfileFailure(error) {

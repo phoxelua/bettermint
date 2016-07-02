@@ -1,4 +1,4 @@
-import { createConstants } from 'utilities/redux';
+import { createConstants } from '../utilities/redux';
 
 export const institutionConstants = createConstants(
   'REQUEST_INSTITUTIONS',

@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 
-import { authConstants as authConstants } from 'constants/auth';
+import { authConstants as authConstants } from '../constants/auth';
 
 function signOut() {
   localStorage.removeItem('token');

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from 'actions/financial/goals';
+import * as actionCreators from '../../../actions/financial/goals';
 import GoalView from '../components/GoalView';
 
 const mapStateToProps = (state) => {

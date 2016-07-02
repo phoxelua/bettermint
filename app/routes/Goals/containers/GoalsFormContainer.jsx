@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import * as actionCreators from 'actions/financial/goals';
+import * as actionCreators from '../../../actions/financial/goals';
 import GoalsForm from '../components/GoalsForm';
 
 const fields = ['name', 'amount', 'startDate', 'endDate'];

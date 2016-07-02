@@ -7,10 +7,10 @@ import createLogger from 'redux-logger';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 
-import Root from 'containers/Root';
-import makeRoutes from 'routes';
-import reducers from 'reducers';
-import 'styles/scss/main.scss';
+import Root from './containers/Root';
+import makeRoutes from './routes';
+import reducers from './reducers';
+import './styles/scss/main.scss';
 
 const routingMiddleware = routerMiddleware(browserHistory);
 

@@ -1,4 +1,4 @@
-import { get } from 'utilities/api';
+import { get } from '../../../utilities/api';
 import { fetchUserProfileConstants as constants } from '../constants';
 
 function fetchUserProfileFailure(error) {

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Institutions from '../containers/InstitutionsContainer';
 import ProfileInfoForm from '../containers/ProfileInfoFormContainer';
-import PlaidLink from 'components/PlaidLink';
+import PlaidLink from '../../../components/PlaidLink';
 
 class ProfileView extends Component {
   static propTypes = {

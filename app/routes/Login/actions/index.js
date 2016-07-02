@@ -1,8 +1,9 @@
-import { checkHttpStatus, parseResponse } from 'utilities/http';
-import { authConstants as authConstants } from 'constants/auth';
-import { post } from 'utilities/api';
 import { push } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
+
+import { checkHttpStatus, parseResponse } from '../../../utilities/http';
+import { authConstants as authConstants } from '../../../constants/auth';
+import { post } from '../../../utilities/api';
 
 function signInUserSuccess(token) {
   localStorage.setItem('token', token);

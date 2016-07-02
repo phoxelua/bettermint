@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import CoreLayout from 'layouts/CoreLayout';
+import CoreLayout from '../layouts/CoreLayout';
 
-import Home from 'routes/Home';
-import Login from 'routes/Login';
+import Home from './Home';
+import Login from './Login';
 import {
   GoalsView,
   GoalsListView,
   GoalView,
-} from 'routes/Goals';
-import Profile from 'routes/Profile';
-import Transactions from 'routes/Transactions';
+} from './Goals';
+import Profile from './Profile';
+import Transactions from './Transactions';
 
-import { requireAuthentication } from 'utilities/routes';
+import { requireAuthentication } from '../utilities/routes';
 
 export default () => {
   return (
