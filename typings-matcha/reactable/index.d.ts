@@ -11,5 +11,6 @@ declare module "reactable" {
 
   export namespace Sort {
     function Numeric(a, b): number;
+    function Date(a, b): number;
   }
 }

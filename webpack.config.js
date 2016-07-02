@@ -8,7 +8,7 @@ const loaders = require('./webpack/loaders');
 const SplitByPathPlugin = require('webpack-split-by-path');
 
 const baseAppEntries = [
-  './app/entry.jsx',
+  './app/entry.tsx',
 ];
 
 const devAppEntries = [
@@ -66,7 +66,7 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js', '.jsx', '.scss'],
+    extensions: ['', '.webpack.js', '.tsx', '.ts', '.js', '.scss'],
   },
 
   plugins: plugins,
@@ -79,10 +79,8 @@ module.exports = {
   module: {
     preLoaders: [
       loaders.tslint,
-      loaders.eslint,
     ],
     loaders: [
-      loaders.babel,
       loaders.tsx,
       loaders.html,
       loaders.css,

@@ -1,10 +1,8 @@
-import { createConstants } from '../utilities/redux';
+import { createConstants } from "../utilities/redux";
 
 export const authConstants = createConstants(
-  'SIGN_IN_USER_REQUEST',
-  'SIGN_IN_USER_FAILURE',
-  'SIGN_IN_USER_SUCCESS',
-  'SIGN_OUT_USER',
-  'FETCH_PROTECTED_DATA_REQUEST',
-  'RECEIVE_PROTECTED_DATA'
+  "SIGN_IN_USER_REQUEST",
+  "SIGN_IN_USER_FAILURE",
+  "SIGN_IN_USER_SUCCESS",
+  "SIGN_OUT_USER"
 );

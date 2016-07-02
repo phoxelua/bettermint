@@ -1,3 +1,3 @@
-import PlaidLink from './PlaidLink';
+import PlaidLink from "./PlaidLink";
 
 export default PlaidLink;

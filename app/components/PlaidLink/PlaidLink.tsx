@@ -1,16 +1,16 @@
-import * as React from 'react';
-import scriptLoader from 'react-async-script-loader';
+import * as React from "react";
+import scriptLoader from "react-async-script-loader";
 
-import { post } from '../../utilities/api';
+import { post } from "../../utilities/api";
 
-const plaidLinkUrl = 'https://cdn.plaid.com/link/stable/link-initialize.js';
+const plaidLinkUrl = "https://cdn.plaid.com/link/stable/link-initialize.js";
 
 interface IPlaidLinkProps extends React.Props<any> {
   // Displayed once a user has successfully linked their account
   clientName: string;
 
   // The Plaid API environment on which to create user accounts.
-  env: 'tartan' | 'production';
+  env: "tartan" | "production";
 
   // Open link to a specific institution, for a more custom solution
   institution?: string;
@@ -22,14 +22,14 @@ interface IPlaidLinkProps extends React.Props<any> {
   publicKey: string;
 
   // The Plaid product you wish to use, either auth or connect.
-  product: 'auth' | 'connect';
+  product: "auth" | "connect";
 
-  // Specify an existing user's public token to launch Link in update mode. This will cause Link to open directly
-  // to the authentication step for that user's institution.
+  // Specify an existing user"s public token to launch Link in update mode. This will cause Link to open directly
+  // to the authentication step for that user"s institution.
   token?: string;
 
-  // A boolean describing whether or not to launch Link with the 'Select Account' pane enabled. Allows users to
-  // select an individual account once they've authenticated
+  // A boolean describing whether or not to launch Link with the "Select Account" pane enabled. Allows users to
+  // select an individual account once they"ve authenticated
   selectAccount?: boolean;
 
   // Specify a webhook to associate with a user.
@@ -57,8 +57,8 @@ interface IPlaidLinkProps extends React.Props<any> {
 }
 
 interface IPlaidLinkState {
-  disabledButton?: boolean,
-  linkLoaded?: boolean,
+  disabledButton?: boolean;
+  linkLoaded?: boolean;
 }
 
 // TODO: Move this into somewhere which makes sense, maybe.
@@ -126,7 +126,7 @@ class PlaidLink extends React.Component<IPlaidLinkProps, IPlaidLinkState> {
     const institution = metadata.institution.type;
 
     try {
-      await post('/api/financial/token/convert', { token, institution });
+      await post("/api/financial/token/convert", { token, institution });
       this.props.onSuccess();
     } catch (e) {
       console.error(e);

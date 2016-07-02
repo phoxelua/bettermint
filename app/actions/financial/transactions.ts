@@ -1,16 +1,14 @@
-import * as path from 'path';
+import { transactionConstants } from "../../constants/financial";
+import { get } from "../../utilities/api";
 
-import { transactionConstants } from '../../constants/financial';
-import { get } from '../../utilities/api';
-
-export function requestTransactions(institution, token) {
+export function requestTransactions(institution) {
   return async (dispatch) => {
     dispatch({
       type: transactionConstants.REQUEST_TRANSACTIONS,
     });
 
     try {
-      const endpoint = path.join('/api/financial/transactions', institution);
+      const endpoint = "/api/financial/transactions" + institution;
       const result = await get(endpoint);
 
       dispatch({

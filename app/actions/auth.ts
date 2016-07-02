@@ -1,9 +1,9 @@
-import { push } from 'react-router-redux';
+import { push } from "react-router-redux";
 
-import { authConstants as authConstants } from '../constants/auth';
+import { authConstants as authConstants } from "../constants/auth";
 
 function signOut() {
-  localStorage.removeItem('token');
+  localStorage.removeItem("token");
   return {
     type: authConstants.SIGN_OUT_USER,
   };
@@ -12,6 +12,6 @@ function signOut() {
 export function signOutAndRedirect() {
   return (dispatch) => {
     dispatch(signOut());
-    dispatch(push('/login'));
+    dispatch(push("/login"));
   };
 }

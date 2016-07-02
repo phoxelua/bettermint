@@ -62,7 +62,7 @@
     "reactable": "^0.13.0",
     "redux": "3.x",
     "redux-auth-wrapper": "0.3.x",
-    "redux-form": "5.x",
+    "redux-form": "4.x",
     "redux-logger": "~2.6.1",
     "redux-promise": "~0.5.1",
     "redux-thunk": "~2.0.1",
@@ -81,5 +81,8 @@
     "webpack-split-by-path": "0.0.8",
     "whatwg-fetch": "~0.11.0",
     "zxcvbn": "~4.2.0"
+  },
+  "dependencies": {
+    "tslint": "^3.13.0-dev.0"
   }
 }

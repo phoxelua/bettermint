@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { PropTypes } from 'react';
-import { Table, Td, Tr, Sort } from 'reactable';
+import * as React from "react";
+import { PropTypes } from "react";
+import { Table, Td, Tr, Sort } from "reactable";
 
 interface IAccount {
     _id: string;
@@ -25,18 +25,18 @@ const Accounts = ({ accounts }: IAccountProps) => {
       <h1>Accounts</h1>
       <Table
         columns={[
-          { key: 'institution', label: 'Institution' },
-          { key: 'name', label: 'Name' },
-          { key: 'number', label: 'Number' },
-          { key: 'available', label: 'Available Balance' },
-          { key: 'current', label: 'Current Balance' },
+          { key: "institution", label: "Institution" },
+          { key: "name", label: "Name" },
+          { key: "number", label: "Number" },
+          { key: "available", label: "Available Balance" },
+          { key: "current", label: "Current Balance" },
         ]}
         sortable={[
-          'institution',
-          'name',
-          'number',
-          { column: 'available', sortFunction: Sort.Numeric },
-          { column: 'current', sortFunction: Sort.Numeric },
+          "institution",
+          "name",
+          "number",
+          { column: "available", sortFunction: Sort.Numeric },
+          { column: "current", sortFunction: Sort.Numeric },
         ]}
       >
         {accounts.map((account) => (
