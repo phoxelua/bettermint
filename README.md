@@ -33,5 +33,6 @@ Unify all finance related accounts into a flexible dashboard.
 - (optional) Use nvm to manage the node versions, any recent node version should work
 - `pip install -r requirements.txt`
 - `npm install`
-- Run the Webpack server which runs the frontend with `./manage.py webpack`
+- `npm run typings`
+- Run the Webpack server with `npm run dev`
 - Run the API server with `./manage.py runserver`
