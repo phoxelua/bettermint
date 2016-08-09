@@ -36,3 +36,5 @@ Unify all finance related accounts into a flexible dashboard.
 - `npm run typings`
 - Run the Webpack server with `npm run dev`
 - Run the API server with `./manage.py runserver`
+
+Testo
